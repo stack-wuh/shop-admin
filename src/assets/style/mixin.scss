@@ -1,0 +1,13 @@
+$dir: column;
+$justify: flex-start;
+$align: flex-start;
+$wrap: nowrap;
+
+
+@mixin flex($dir: $dir, $justify: $justify, $align: $align, $wrap: $wrap){
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
