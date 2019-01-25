@@ -7,6 +7,8 @@
       class="list-item"
       :class="[currIndex === index ? 'list-item__active' : 'list-item__default']">
     {{item.name}}</div>
+    <span class="flex-empty"></span>
+    <div><slot name="right" ></slot></div>
   </section>
 </template>
 <script>

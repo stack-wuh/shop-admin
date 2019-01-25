@@ -8,12 +8,13 @@ export const menu = [
         name: '平台总览',
         icon: '',
         path: '/index/dashboard',
+        query: {l: '首页', f: '平台总览'},
       },
       {
         name: '营收统计',
         icon: '',
         path: '/index/statistic',
-        query: {f: '营收统计'}
+        query: {l: '首页', f: '营收统计'}
       },
     ]
   },
@@ -23,29 +24,52 @@ export const menu = [
     path: '',
     child: [
       {
-        name: '广告位管理',
+        name: '图片管理',
         icon: '',
-        path: '1',
+        path: '/website/banner',
+        query: {l: '网站管理', f: '图片管理'},
       },
       {
         name: '底部导航管理',
         icon: '',
-        path: '2',
+        path: '/website/bottom',
+        query: {l: '网站管理', f: '底部导航管理'},
       },
       {
         name: '公告管理',
         icon: '',
-        path: '3',
+        path: '/website/notice',
+        query: {l: '网站管理', f: '公告管理'},
       },
       {
         name: '分类管理',
         icon: '',
-        path: '4',
+        path: '/website/classify',
+        query: {l: '网站管理', f: '分类管理'},
       },
       {
         name: '积分管理',
         icon: '',
-        path: '5',
+        path: '/website/integral',
+        query: {l: '网站管理', f: '积分管理'},
+      },
+      {
+        name: '协议管理',
+        icon: '',
+        path: '/website/agreement',
+        query:{l: '网站管理', f: '协议管理'}
+      },
+      {
+        name: '商家信息管理',
+        icon: '',
+        path: '/website/partner',
+        query: {l: '网站管理', f: '商家信息管理'},
+      },
+      {
+        name: '新闻中心',
+        icon: '',
+        path: '/website/news',
+        query: {l: '网站管理', f: '新闻中心'},
       },
     ]
   },

@@ -24,6 +24,27 @@ export default new Router({
         {
           path: '/index/statistic',
           component: () => import('@/views/indexManage/statistic')
+        },
+        {
+          path: '/website/banner',
+          component: () => import('@/views/websiteManage/banner/banner')
+        },
+        {
+          path: '/website/bottom',
+          alias: ['/website/news', '/website/notice', '/website/integral'],
+          component: () => import('@/views/websiteManage/bottom/index')
+        },
+        {
+          path: '/website/agreement',
+          component: () => import('@/views/websiteManage/agreement')
+        },
+        {
+          path: '/website/classify',
+          component: () => import('@/views/websiteManage/classify')
+        },
+        {
+          path: '/website/partner',
+          component: () => import('@/views/websiteManage/partner')
         }
       ]
     },

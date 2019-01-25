@@ -1,7 +1,8 @@
 <template>
   <section class="wrapper">
     <my-schema search :panelList="panelList" :searchList="searchList">
-      <my-table :data="tableList" :list="List"></my-table>
+      <my-table :list="List"></my-table>
+      <my-pagination :total="10" ></my-pagination>
     </my-schema>
   </section>
 </template>
@@ -9,6 +10,7 @@
 import {mapState, mapActions, mapGetters, mapMutations} from 'vuex'
 import MySchema from '@/components/schema/schema'
 import MyTable from '@/components/schema/table'
+import MyPagination from '@/components/schema/pagination'
 
 const panelList = [
   {
@@ -44,18 +46,29 @@ const searchList = [
   }
 ]
 
-const tableList = [
-  {
-    label: 'AAA',
-    type: 'default',
-    field: 'name',
-  }
-]
 
 const List = [
   {
     name: 'Shadow'
-  }
+  },
+  {
+    name: 'Shadow'
+  },
+  {
+    name: 'Shadow'
+  },
+  {
+    name: 'Shadow'
+  },
+  {
+    name: 'Shadow'
+  },
+  {
+    name: 'Shadow'
+  },
+  {
+    name: 'Shadow'
+  },
 ]
 export default {
   props: {},
@@ -63,6 +76,7 @@ export default {
   components: {
     MySchema,
     MyTable,
+    MyPagination,
   },
   computed: {},
   filters: {},
@@ -70,7 +84,6 @@ export default {
     return {
       panelList,
       searchList,
-      tableList,
       List,
     }
   },

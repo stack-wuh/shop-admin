@@ -19,6 +19,8 @@ import {
   MenuItem,
   Submenu,
   DatePicker,
+  Upload,
+  Switch
 } from 'element-ui'
 
 Vue.use(Button)
@@ -35,6 +37,8 @@ Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Submenu)
 Vue.use(DatePicker)
+Vue.use(Upload)
+Vue.use(Switch)
 Vue.prototype.$ELEMENT = {size: 'small', zIndex: 999999}
 Vue.prototype.$message = Message
 

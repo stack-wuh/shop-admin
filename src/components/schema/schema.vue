@@ -1,15 +1,19 @@
 <template>
   <section class="wrapper schema-wrapper">
-    <my-schema-header @click="handleClick" :data="panelList"></my-schema-header>
+    <my-schema-header @click="handleClick" :data="panelList">
+        <div slot="right"><slot name="right"></slot></div>
+    </my-schema-header>
     <my-search @change="handleChange" v-if="search" :data="searchList"></my-search>
-
-    <slot></slot>
+    <section class="schema-default">
+      <slot></slot>
+    </section>
   </section>
 </template>
 <script>
 import {mapState, mapActions, mapGetters, mapMutations} from 'vuex'
 import MySchemaHeader from './header'
 import MySearch from './search'
+
 export default {
   props: {
     panelList: {
@@ -36,7 +40,7 @@ export default {
   },
   methods: {
     handleClick(e){
-      console.log(e)
+      this.$emit('panel-click', e)
     },
     handleChange(e){
       console.log(e)
@@ -54,6 +58,17 @@ export default {
 .schema-wrapper{
   width: inherit;
   height: inherit;
+  overflow-y: scroll;
   background-color: #fff;
+  &::-webkit-scrollbar{
+    width: 4px;
+    height: 3px;
+  }
+  &::-webkit-scrollbar-thumn{
+    box-shadow: 0 0 inset 2px #000;
+  }
+  .schema-default{
+    padding: 20px;
+  }
 }
 </style>

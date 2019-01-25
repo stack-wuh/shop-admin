@@ -19,7 +19,7 @@
         <el-menu-item
           v-for="(sub, sid) in item.child"
           :key="sid" :index="sub.path"
-          :route="sub.query"
+          :route="{path: sub.path, query: sub.query}"
         >{{sub.name}}</el-menu-item>
       </el-submenu>
       <el-menu-item
