@@ -14,6 +14,10 @@ export default new Router({
       redirect: '/index/dashboard',
     },
     {
+      path: '/signin',
+      component: () => import('@/views/signin')
+    },
+    {
       path: '/',
       component: Home,
       children: [
@@ -45,6 +49,15 @@ export default new Router({
         {
           path: '/website/partner',
           component: () => import('@/views/websiteManage/partner')
+        },
+        {
+          path: '/user/person',
+          alias: ['/user/business', '/shop/index', '/shop/search', '/order/self', '/order/other', '/manage/travis'],
+          component: () => import('@/views/focusManage/index')
+        },
+        {
+          path: '/manage/account',
+          component: () => import('@/views/account')
         }
       ]
     },

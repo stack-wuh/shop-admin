@@ -1,19 +1,17 @@
 <template>
   <section class="wrapper">
-    <my-schema search :panelList="panelList" :searchList="searchList">
-      <my-table :list="[{}, {}, {}]" :info="{name: 'shadow'}"></my-table>
-      <my-pagination :total="10" ></my-pagination>
+    <my-schema :panelList="panelList" :searchList="searchList" search>
+      <my-table :list="[{}, {}, {}]"></my-table>
     </my-schema>
   </section>
 </template>
 <script>
 import {mapState, mapActions, mapGetters, mapMutations} from 'vuex'
 import MySchema from '@/components/schema/schema'
+import MySearch from '@/components/schema/search'
 import MyTable from '@/components/schema/table'
-import MyPagination from '@/components/schema/pagination'
-
 import {
-  _getSearchList, _getPanelList
+  _getPanelList, _getSearchList
 } from '@/utils/mixin'
 
 export default {
@@ -21,8 +19,8 @@ export default {
   name: '',
   components: {
     MySchema,
+    MySearch,
     MyTable,
-    MyPagination,
   },
   computed: {},
   filters: {},
@@ -31,11 +29,12 @@ export default {
   },
   methods: {},
   created(){},
-  mixins:[_getSearchList, _getPanelList]
+  mixins:[_getPanelList, _getSearchList]
 }
 </script>
 <style lang="scss" scoped>
 .wrapper{
+  width: inherit;
   height: inherit;
 }
 </style>

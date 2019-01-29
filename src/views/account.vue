@@ -1,28 +1,24 @@
 <template>
   <section class="wrapper">
-    <my-schema search :panelList="panelList" :searchList="searchList">
-      <my-table :list="[{}, {}, {}]" :info="{name: 'shadow'}"></my-table>
-      <my-pagination :total="10" ></my-pagination>
+    <my-schema :panelList="panelList">
+      <el-button type="primary" slot="right">新增管理员</el-button>
+      <my-table :list='[{}, {}, {}]'></my-table>
     </my-schema>
   </section>
 </template>
 <script>
 import {mapState, mapActions, mapGetters, mapMutations} from 'vuex'
-import MySchema from '@/components/schema/schema'
-import MyTable from '@/components/schema/table'
-import MyPagination from '@/components/schema/pagination'
-
+import MySchema from '@/components/schema/schema';
+import MyTable from '@/components/schema/table';
 import {
-  _getSearchList, _getPanelList
+  _getPanelList
 } from '@/utils/mixin'
-
 export default {
   props: {},
   name: '',
   components: {
     MySchema,
     MyTable,
-    MyPagination,
   },
   computed: {},
   filters: {},
@@ -31,11 +27,13 @@ export default {
   },
   methods: {},
   created(){},
-  mixins:[_getSearchList, _getPanelList]
+  mixins:[_getPanelList]
 }
 </script>
 <style lang="scss" scoped>
 .wrapper{
+  width: inherit;
   height: inherit;
+
 }
 </style>

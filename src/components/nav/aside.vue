@@ -25,7 +25,8 @@
       <el-menu-item
         v-for="(item, index) in menu" :key="index"
         :index="item.path"
-        v-if="!item.child">
+        v-if="!item.child"
+        :route="{path: item.path, query: item.query}">
         <i :class="item.icon" class="icon-menu-item"></i>
         <span>{{item.name}}</span>
       </el-menu-item>

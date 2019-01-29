@@ -81,12 +81,14 @@ export const menu = [
       {
         name: '个人管理',
         icon: '',
-        path: '7',
+        path: '/user/person',
+        query: {l: '用户管理', f: '个人管理'},
       },
       {
         name: '企业认证',
         icon: '',
-        path: '8',
+        path: '/user/business',
+        query: {l: '用户管理', f: '企业认证'}
       },
     ]
   },
@@ -98,12 +100,14 @@ export const menu = [
       {
         name: '店铺管理',
         icon: '',
-        path: '11',
+        path: '/shop/index',
+        query: {l: '店铺管理', f: '店铺管理'},
       },
       {
         name: '商品查询',
         icon: '',
-        path: '12',
+        path: '/shop/search',
+        query: {l: '店铺管理', f: '商品查询'}
       },
     ]
   },
@@ -115,23 +119,27 @@ export const menu = [
       {
         name: '自营订单',
         icon: '',
-        path: '14',
+        path: '/order/self',
+        query: {l: '订单管理', f: '自营订单'},
       },
       {
         name: '第三方订单',
         icon: '',
-        path: '15',
+        path: '/order/other',
+        query: {l: '订单管理', f: '第三方订单'},
       },
     ]
   },
   {
     name: '物流管理',
     icon: 'icon-wuliu',
-    path: '/manage/travis'
+    path: '/manage/travis',
+    query: {l: '物流管理', f: '物流管理'}
   },
   {
     name: '账号管理',
     icon: 'icon-shezhi',
-    path: '/manage/account'
+    path: '/manage/account',
+    query: {l: '账号管理', f: '账号管理'}
   }
 ]

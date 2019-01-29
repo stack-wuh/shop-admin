@@ -2,6 +2,7 @@ import Vue from 'vue'
 import '@/assets/style/base.scss'
 import '@/assets/style/element/index.css'
 import '@/assets/style/font/iconfont.css'
+import '@/assets/style/elreset.scss';
 
 import {
   Button,

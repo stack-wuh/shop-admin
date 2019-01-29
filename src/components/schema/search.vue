@@ -2,10 +2,20 @@
   <section class="wrapper search-wrapper">
     <section class="search-box">
       <section class="date-box">
-        <span @click="handleChoose({dateCurr: 0})" class="date-item" :class="currPicker === 0 ? 'date-item__active' : ''">今天</span>
-        <span @click="handleChoose({dateCurr: 1})" class="date-item" :class="currPicker === 1 ? 'date-item__active' : ''">本周</span>
-        <span @click="handleChoose({dateCurr: 2})" class="date-item" :class="currPicker === 2 ? 'date-item__active' : ''">本月</span>
-        <span @click="handleChoose({dateCurr: 3})" class="date-item" :class="currPicker === 3 ? 'date-item__active' : ''">本年</span>
+        <template>
+          <span @click="handleChoose({dateCurr: 0})" class="date-item" :class="currPicker === 0 ? 'date-item__active' : ''">今天</span>
+          <span @click="handleChoose({dateCurr: 1})" class="date-item" :class="currPicker === 1 ? 'date-item__active' : ''">本周</span>
+          <span @click="handleChoose({dateCurr: 2})" class="date-item" :class="currPicker === 2 ? 'date-item__active' : ''">本月</span>
+          <span @click="handleChoose({dateCurr: 3})" class="date-item" :class="currPicker === 3 ? 'date-item__active' : ''">本年</span>
+        </template>
+        <span
+          v-for="(item, index) in data" :key="index"
+          v-if="item.type === 'button'"
+          class="date-item"
+          :class="item.value ? 'date-item__active' : ''"
+          @click="__handleChooseItem(item)">
+          {{item.label}}
+        </span>
       </section>
       <section class="flex-box">
         <template v-for="(item, index) in data">
@@ -13,7 +23,7 @@
             clearable
             @change="(e) => {return handleClick(setObjAttr(item.field, e))}"
             class="my-input"
-            v-if="item.type == 'input'"
+            v-if="['input', 'default', ''].includes(item.type)"
             :placeholder="'请编辑' + item.label"
             v-model="item.value"
           ></el-input>
@@ -25,6 +35,17 @@
             :placeholder="'请选择' + item.label"
             v-model="item.value"
           ></el-date-picker>
+          <el-date-picker
+            value-format="yyyy-MM-dd"
+            @change="e => {return handleClick(setObjAttr(item.field, e))}"
+            class="my-daterange-picker"
+            v-if="item.type === 'daterange'"
+            v-model="item.value"
+            range-separator="-"
+            type="daterange"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          ></el-date-picker>
         </template>
       </section>
     </section>
@@ -33,6 +54,9 @@
 </template>
 <script>
 import {mapState, mapActions, mapGetters, mapMutations} from 'vuex'
+import {
+  _getSearchList, _getPanelList
+} from '@/utils/mixin'
 export default {
   props: {
     data: {
@@ -86,7 +110,7 @@ export default {
     }
   },
   created(){},
-  mixins:[]
+  mixins:[_getSearchList, _getPanelList]
 }
 </script>
 <style lang="scss" scoped>
@@ -113,9 +137,12 @@ export default {
   }
   .flex-box{
     @include flex($dir: row, $justify:space-between, $align: center);
-    .my-input, .my-date-picker{
+    .my-input, .my-date-picker, .my-daterange-picker{
       flex: 1;
       margin-right: 15px;
+    }
+    .my-daterange-picker{
+      min-width: 240px;
     }
   }
 }

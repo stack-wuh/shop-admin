@@ -1,5 +1,5 @@
 <template>
-  <section class="wrapper header-wrapper">
+  <section class="wrapper header-wrapper" :key="Math.random()">
     <div
       @click="handleClick({data, item, index, $route, $router})"
       v-for="(item, index) in data"
@@ -28,6 +28,11 @@ export default {
   data(){
     return {
       currIndex: 0,
+    }
+  },
+  watch: {
+    $route(){
+      this.currIndex = 0
     }
   },
   methods: {
