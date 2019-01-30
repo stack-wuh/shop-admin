@@ -475,3 +475,149 @@ export const _getSearchList = {
     this.__getSearchList()
   }
 }
+
+
+/**
+ * [detail info 详情页的全部列表信息]
+ */
+const InfoList = [
+  {
+    l: '物流管理',
+    f: '物流管理',
+    list: [
+      {
+        title: '订单信息',
+        list: [
+          {
+            label: '订单编号'
+          },
+          {
+            label: '订单状态'
+          },
+          {
+            label: '商家名称'
+          },
+          {
+            label: '商家账号'
+          },
+          {
+            label: '发货时间'
+          }
+        ],
+        slots: [],
+      },
+      {
+        title: '物流信息',
+        list: [
+          {
+            label: '物流公司'
+          },
+          {
+            label: '物流单号'
+          }
+        ],
+        slots: ['MyTravisInfo'],
+      }
+    ],
+    crumbsList: [
+      {
+        name: '用户管理'
+      },
+      {
+        name: '企业认证'
+      },
+      {
+        name: '待审核1'
+      },
+      {
+        name: '详情'
+      }
+    ],
+  },
+  {
+    l: '订单管理',
+    f: '自营订单',
+    list: [
+      {
+        title: '订单信息',
+        list: [
+          {
+            label: '订单编号'
+          },
+          {
+            label: '订单状态'
+          },
+          {
+            label: '付款时间'
+          },
+          {
+            label: '发货时间'
+          },
+          {
+            label: '发票'
+          },
+          {
+            label: '运费'
+          },
+          {
+            label: '税点'
+          },
+          {
+            label: '税费'
+          }
+        ],
+        slots: [],
+      },
+      {
+        title: '商品信息',
+        list: [
+          {
+            label: '买家信息'
+          },
+          {
+            label: '合计金额'
+          },
+          {
+            label: '订单内容'
+          },
+          {
+            label: '备注'
+          }
+        ],
+        slots: [],
+      }
+    ],
+    crumbsList: [
+      {
+        name: '订单管理'
+      },
+      {
+        name: '已发货'
+      },
+      {
+        name: '订单详情'
+      }
+    ],
+  },
+]
+export const _getInfoList = {
+  data(){
+    return {
+      infoObj: {},
+      InfoList,
+    }
+  },
+  methods: {
+    query(){
+      return this.$route.query
+    },
+    __getInfoList(){
+      let _obj = this.InfoList.find(k => k.l === this.query().l && k.f === this.query().f)
+      this.infoObj = _obj
+      return _obj
+    }
+  },
+  created(){
+    this.__getInfoList()
+  }
+}

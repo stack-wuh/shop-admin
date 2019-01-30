@@ -1,10 +1,7 @@
 <template>
   <section class="crumbs-wrapper">
     <nav class="crumbs-list">
-      <span class="crumbs-item">用户管理</span>
-      <span class="crumbs-item">企业认证</span>
-      <span class="crumbs-item">待审核</span>
-      <span class="crumbs-item">详情</span>
+      <span v-for="(item, index) in $attrs.list" :keys="index" class="crumbs-item">{{item.name}}</span>
     </nav>
     <section class="crunmbs-right">
       <slot name="right"></slot>

@@ -1,3 +1,8 @@
+import {
+  handleJump2other,
+} from '@/utils/handleTable'
+
+
 export const table = [
   {
     name: '营收统计',
@@ -412,6 +417,7 @@ export const table = [
         list: [
           {
             text: '查看详情',
+            click: handleJump2other
           },
         ]
       }
@@ -506,6 +512,7 @@ export const table = [
         list: [
           {
             text: '查看详情',
+            click: handleJump2other
           },
         ]
       }

@@ -4,7 +4,8 @@
     <ul class="list-box">
       <li v-for="(item, index) in list" :key="index" class="list-item">
         <span class="list-item__label">{{item.label}}</span>
-        <span class="list-item__value">{{item.value || '暂无信息'}}</span>
+        <span v-if="item.type === 'default'" class="list-item__value">{{item.value || '暂无信息'}}</span>
+        <slot v-if="item.type === 'slot'" name="right"></slot>
       </li>
       <li>
         <slot name="self"></slot>

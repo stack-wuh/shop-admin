@@ -1,13 +1,20 @@
 <template>
   <section class="wrapper detail-wrapper">
-    <my-crumbs></my-crumbs>
-    <my-info-list :title="'基础信息'" :list="List[0]['list']" ></my-info-list>
+    <my-crumbs :list="infoObj.crumbsList" ></my-crumbs>
+    <my-info-list v-for="(item, index) in infoObj.list" :key="index" :title="item.title" :list="item.list">
+      <component v-for="(ss, si) in item.slots" :key="si" :is="ss" slot="self" ></component>
+    </my-info-list>
   </section>
 </template>
 <script>
 import {mapState, mapActions, mapGetters, mapMutations} from 'vuex'
 import MyCrumbs from '@/components/schema/crumbs'
 import MyInfoList from './child/list'
+import {
+  _getInfoList
+} from '@/utils/mixin'
+import MyTravisInfo from '@/views/details/child/travis'
+
 const List = [
   {
     title: '基础信息',
@@ -40,6 +47,7 @@ export default {
   components: {
     MyCrumbs,
     MyInfoList,
+    MyTravisInfo,
   },
   computed: {},
   filters: {},
@@ -50,7 +58,7 @@ export default {
   },
   methods: {},
   created(){},
-  mixins:[]
+  mixins:[_getInfoList]
 }
 </script>
 <style lang="scss" scoped>

@@ -3,7 +3,6 @@ import '@/assets/style/base.scss'
 import '@/assets/style/element/index.css'
 import '@/assets/style/font/iconfont.css'
 import '@/assets/style/elreset.scss';
-
 import {
   Button,
   Table,
@@ -21,7 +20,9 @@ import {
   Submenu,
   DatePicker,
   Upload,
-  Switch
+  Switch,
+  Steps,
+  Step
 } from 'element-ui'
 
 Vue.use(Button)
@@ -40,6 +41,8 @@ Vue.use(Submenu)
 Vue.use(DatePicker)
 Vue.use(Upload)
 Vue.use(Switch)
+Vue.use(Steps)
+Vue.use(Step)
 Vue.prototype.$ELEMENT = {size: 'small', zIndex: 999999}
 Vue.prototype.$message = Message
 
