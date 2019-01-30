@@ -1,6 +1,6 @@
 <template>
   <section class="wrapper schema-wrapper">
-    <my-schema-header @click="handleClick" :data="panelList">
+    <my-schema-header v-if="isShowHeader" @click="handleClick" :data="panelList">
         <div slot="right"><slot name="right"></slot></div>
     </my-schema-header>
     <my-search @change="handleChange" v-if="search" :data="searchList"></my-search>
@@ -26,6 +26,10 @@ export default {
     },
     searchList: {
       type: Array,
+    },
+    isShowHeader: {
+      type: Boolean,
+      default: true
     }
   },
   name: '',
