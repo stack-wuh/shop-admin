@@ -64,7 +64,7 @@ const PanelList = [
         name: '待审核'
       },
       {
-        name: '审核未通过'
+        name: `审核未通过`
       },
       {
         name: '审核已通过'
