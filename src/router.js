@@ -58,6 +58,10 @@ export default new Router({
         {
           path: '/manage/account',
           component: () => import('@/views/account')
+        },
+        {
+          path: '/index/detail',
+          component: () => import('@/views/details/index')
         }
       ]
     },
