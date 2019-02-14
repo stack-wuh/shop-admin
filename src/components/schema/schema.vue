@@ -32,7 +32,7 @@ export default {
       default: true
     }
   },
-  name: '',
+  name: 'schema',
   components: {
     MySchemaHeader,
     MySearch,
