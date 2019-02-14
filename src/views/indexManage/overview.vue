@@ -3,6 +3,10 @@
     <section class="card-list">
       <my-card v-for="(item, index) in CardList" :key="index" :cardClassName="item.className" :data="item"  />
     </section>
+
+    <section class="chart-area">
+      <ve-line area :data="data"></ve-line>
+    </section>
   </section>
 </template>
 <script>
@@ -45,15 +49,22 @@ export default {
   name: '',
   components: {
     MyCard,
+    VeLine,
   },
   computed: {},
   data(){
     return {
       CardList,
+      data: {
+        columns: ['日期', '销售额'],
+        rows: []
+      }
     }
   },
   methods: {},
-  created(){}
+  created(){
+    this.data.rows = Array(10).fill({'日期': '1.1', '销售额': 123, '其他': 0})
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -65,6 +76,17 @@ export default {
     .wrapper{
       flex: 1;
       margin-right: 20px;
+    }
+  }
+  .chart-area{
+    width: calc(100% - 40px);
+    margin-top: 15px;
+    margin-left: 20px;
+    padding: 20px;
+    background-color: #fff;
+
+    div.ve-line{
+        width: calc(100% - 20px);
     }
   }
 }

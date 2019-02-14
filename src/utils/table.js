@@ -1,6 +1,6 @@
 import {
   handleJump2other,
-} from '@/utils/handleTable'
+} from '@/utils/table.click.js'
 
 
 export const table = [
@@ -47,6 +47,7 @@ export const table = [
           {
             type: 0,
             text: '查看订单详情',
+            click: handleJump2other
           }
         ]
       },
@@ -106,7 +107,8 @@ export const table = [
         type: 'setting',
         list: [
           {
-            text: '查看详情'
+            text: '查看详情',
+            click: handleJump2other
           },
           {
             text: '关闭'
@@ -164,6 +166,7 @@ export const table = [
         list: [
           {
             text: '查看详情',
+            click: handleJump2other
           },
           {
             text: '删除',
@@ -465,8 +468,57 @@ export const table = [
         list: [
           {
             text: '查看详情',
+            click: handleJump2other
           },
         ]
+      }
+    ]
+  },
+  {
+    name: '订单管理',
+    params: ['自营订单详情', '第三方订单详情'],
+    type: 'index',
+    label: '序号',
+    list: [
+      {
+        label: '分类',
+        field: '',
+        type: 'default'
+      },
+      {
+        label: '商品名称',
+        field: '',
+        type: 'default'
+      },
+      {
+        label: '品名',
+        field: '',
+        type: 'default'
+      },
+      {
+        label: '材质',
+        field: '',
+        type: 'default'
+      },
+      {
+        label: '特性',
+        field: '',
+        type: 'default'
+      },
+      {
+        label: '数量/单位',
+        field: '',
+        type: 'default'
+      },
+      {
+        label: '地区',
+        field: '',
+        type: 'default'
+      },
+      {
+        label: '价格',
+        field: '',
+        type: 'default'
       }
     ]
   },

@@ -1,8 +1,11 @@
 <template>
   <section class="wrapper detail-wrapper">
     <my-crumbs :list="infoObj.crumbsList" ></my-crumbs>
-    <my-info-list v-for="(item, index) in infoObj.list" :key="index" :title="item.title" :list="item.list">
-      <component v-for="(ss, si) in item.slots" :key="si" :is="ss" slot="self" ></component>
+    <my-info-list
+      v-for="(item, index) in infoObj.list"
+      :key="index"
+      :title="item.title"
+      :list="item.list">
     </my-info-list>
   </section>
 </template>
@@ -13,33 +16,7 @@ import MyInfoList from './child/list'
 import {
   _getInfoList
 } from '@/utils/mixin'
-import MyTravisInfo from '@/views/details/child/travis'
 
-const List = [
-  {
-    title: '基础信息',
-    list: [
-      {
-        label: '商品名称'
-      },
-      {
-        label: '商品类目'
-      },
-      {
-        label: '商品品牌'
-      },
-      {
-        label: '商品类型'
-      },
-      {
-        label: '商品材料'
-      },
-      {
-        label: '商品用途'
-      }
-    ],
-  }
-]
 
 export default {
   props: {},
@@ -47,13 +24,11 @@ export default {
   components: {
     MyCrumbs,
     MyInfoList,
-    MyTravisInfo,
   },
   computed: {},
   filters: {},
   data(){
     return {
-      List,
     }
   },
   methods: {},
@@ -66,5 +41,13 @@ export default {
   width: inherit;
   height: inherit;
   background-color: #fff;
+  overflow-y: scroll;
+  &::-webkit-scrollbar{
+    width: 4px;
+    height: 3px;
+  }
+  &::-webkit-scrollbar-thumn{
+    box-shadow: 0 0 inset 2px #000;
+  }
 }
 </style>

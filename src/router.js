@@ -61,8 +61,13 @@ export default new Router({
         },
         {
           path: '/index/detail',
-          alias: ['/travis/detail', '/order/self/detail'],
+          alias: ['/travis/detail', '/order/self/detail', '/order/other/detail'],
           component: () => import('@/views/details/index')
+        },
+        {
+          path: '/web/article/detail',
+          alias: ['/web/news/detail'],
+          component: () => import('@/views/websiteManage/detail')
         }
       ]
     },

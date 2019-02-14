@@ -513,7 +513,10 @@ const InfoList = [
             label: '物流公司'
           },
           {
-            label: '物流单号'
+            label: '物流单号',
+            slot: 'MyTravisInfo',
+            name: 'self',
+            type: 'solt'
           }
         ],
         slots: ['MyTravisInfo'],
@@ -572,16 +575,28 @@ const InfoList = [
         title: '商品信息',
         list: [
           {
-            label: '买家信息'
+            label: '买家信息',
+            slot: 'MyBuyer',
+            type: 'slot',
+            name: 'right'
           },
           {
-            label: '合计金额'
+            label: '合计金额',
+            slot: 'MyMoney',
+            type: 'slot',
+            name: 'right',
           },
           {
-            label: '订单内容'
+            label: '订单内容',
+            type: 'solt',
+            name: 'right',
+            slot: 'MyMiniTable'
           },
           {
-            label: '备注'
+            label: '备注',
+            type: 'solt',
+            name: 'right',
+            slot: 'MyPaper'
           }
         ],
         slots: [],
@@ -598,6 +613,131 @@ const InfoList = [
         name: '订单详情'
       }
     ],
+  },
+  {
+    l: '订单管理',
+    f: '第三方订单',
+    list: [
+      {
+        title: '卖家信息',
+        list: [
+          {
+            label: '卖家信息',
+            slot: 'MyBuyer',
+            name: 'right',
+            type: 'slot'
+          }
+        ],
+      },
+      {
+        title: '买家信息',
+        list: [
+          {
+            label: '买家信息',
+            slot: 'MyBuyer',
+            name: 'right',
+            type: 'slot'
+          }
+        ]
+      },
+      {
+        title: '订单信息',
+        list: [
+          {
+            label: '订单编号'
+          },
+          {
+            label: '订单状态'
+          },
+          {
+            label: '付款方式'
+          },
+          {
+            label: '付款时间'
+          },
+          {
+            label: '发货时间'
+          },
+          {
+            label: '发票'
+          },
+          {
+            label: '运费'
+          },
+          {
+            label: '税点'
+          },
+          {
+            label: '税费'
+          },
+          {
+            label: '合计金额',
+            slot: 'MyMoney',
+            type: 'slot',
+            name: 'right',
+          },
+          {
+            label: '订单内容',
+            type: 'solt',
+            name: 'right',
+            slot: 'MyMiniTable'
+          },
+          {
+            label: '备注',
+            type: 'solt',
+            name: 'right',
+            slot: 'MyPaper'
+          }
+        ],
+      }
+    ],
+    crumbsList: [
+      {
+        name: '订单管理'
+      },
+      {
+        name: '已发货'
+      },
+      {
+        name: '订单详情'
+      }
+    ],
+  },
+  {
+    l: '网站管理',
+    f: '底部导航管理',
+    crumbsList: [
+      {
+        name: '网站管理'
+      },
+      {
+        name: '底部导航管理'
+      },
+      {
+        name: '买家服务'
+      },
+      {
+        name: '详情'
+      }
+    ]
+  },
+  {
+    l: '网站管理',
+    f: '新闻中心',
+    crumbsList: [
+      {
+        name: '网站管理'
+      },
+      {
+        name: '新闻中心'
+      },
+      {
+        name: '风类新闻'
+      },
+      {
+        name: '详情'
+      }
+    ]
   },
 ]
 export const _getInfoList = {
