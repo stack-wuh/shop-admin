@@ -1,6 +1,7 @@
 $color-stack:
   (group: blue, id: normal, color: #f8a878),
-  (group: blue, id: dark, color: #426682);
+  (group: blue, id: dark, color: #426682),
+  (group: gray, id: normal, color: #f2f2f2);
 
 @function color($group, $shade: normal, $transparency: 1){
   @each $color in $color-stack {
