@@ -2,8 +2,8 @@
   <section class="list-wrapper">
     <p v-if="title" class="list-title">{{title}}</p>
     <ul class="list-box">
-      <li v-for="(item, index) in list" :key="index" class="list-item">
-        <span class="list-item__label">{{item.label}}</span>
+      <li v-if="!item.isShowLabel" v-for="(item, index) in list" :key="index" class="list-item">
+        <span  class="list-item__label">{{item.label}}</span>
         <span v-if="item.type === 'default' || item.type === undefined" class="list-item__value">{{item.value || '暂无信息'}}</span>
         <div class="list-item__right" :class="item.class">
           <slot v-if="item.type === 'slot'" name="right"></slot>
