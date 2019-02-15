@@ -68,6 +68,10 @@ export default new Router({
           path: '/web/article/detail',
           alias: ['/web/news/detail'],
           component: () => import('@/views/websiteManage/detail')
+        },
+        {
+          path: '/user/corporation/detail',
+          component: () => import('@/views/userManage/detail') 
         }
       ]
     },
