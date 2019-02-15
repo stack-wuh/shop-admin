@@ -7,7 +7,7 @@
         <span v-if="item.type === 'default' || item.type === undefined" class="list-item__value">{{item.value || '暂无信息'}}</span>
         <div class="list-item__right" :class="item.class">
           <slot v-if="item.type === 'slot'" name="right"></slot>
-          <component :is="item.slot" v-if="item.name == 'right'"></component>
+          <component :is="item.slot" v-if="item.name == 'right'" v-bind="{name: 'shadow'}"></component>
         </div>
       </li>
       <li v-for="(item, index) in list" :key="index + 'i'"  >
