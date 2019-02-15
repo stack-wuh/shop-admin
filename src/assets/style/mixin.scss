@@ -3,11 +3,48 @@ $justify: flex-start;
 $align: flex-start;
 $wrap: nowrap;
 
-
+/*
+ flex box wrap
+ */
 @mixin flex($dir: $dir, $justify: $justify, $align: $align, $wrap: $wrap){
   display: flex;
   flex-direction: $dir;
   justify-content: $justify;
   align-items: $align;
   flex-wrap: $wrap;
+}
+
+/*
+ * scroll-bar
+ */
+
+@mixin scroll-bar{
+  $--scrollbar-thumb-background: #b4bccc;
+  $--scrollbar-track-background: #fff;
+
+  &::-webkit-scrollbar {
+    z-index: 11;
+    width: 6px;
+
+    &:horizontal {
+      height: 6px;
+    }
+
+    &-thumb {
+      border-radius: 5px;
+      width: 6px;
+      background: $--scrollbar-thumb-background;
+    }
+    &-corner {
+      background: $--scrollbar-track-background;
+    }
+    &-track {
+      background: $--scrollbar-track-background;
+
+      &-piece {
+        background: $--scrollbar-track-background;
+        width: 6px;
+      }
+    }
+  }
 }

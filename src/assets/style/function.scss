@@ -1,0 +1,13 @@
+$color-stack:
+  (group: blue, id: normal, color: #f8a878),
+  (group: blue, id: dark, color: #426682);
+
+@function color($group, $shade: normal, $transparency: 1){
+  @each $color in $color-stack {
+    $c-group: map-get($color, group);
+    $c-shade: map-get($color, id);
+    @if($group == $c-group and $shade == $c-shade){
+      @return rgba(map-get($color, color), $transparency)
+    }
+  }
+}
