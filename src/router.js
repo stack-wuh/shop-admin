@@ -61,7 +61,7 @@ export default new Router({
         },
         {
           path: '/index/detail',
-          alias: ['/travis/detail', '/order/self/detail', '/order/other/detail'],
+          alias: ['/travis/detail', '/order/self/detail', '/order/other/detail', '/store/shop/detail', '/store/goods/detail'],
           component: () => import('@/views/details/index')
         },
         {
@@ -71,7 +71,7 @@ export default new Router({
         },
         {
           path: '/user/corporation/detail',
-          component: () => import('@/views/userManage/detail') 
+          component: () => import('@/views/userManage/detail')
         }
       ]
     },

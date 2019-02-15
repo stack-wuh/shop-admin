@@ -739,6 +739,170 @@ const InfoList = [
       }
     ]
   },
+  {
+    l: '用户管理',
+    f: '企业认证',
+    crumbsList: [
+      {
+        name: '用户管理'
+      },
+      {
+        name: '企业认证'
+      },
+      {
+        name: '详情'
+      }
+    ]
+  },
+  {
+    l: '店铺管理',
+    f: '店铺管理',
+    crumbsList: [
+      {
+        name: '店铺管理'
+      },
+      {
+        name: '店铺管理'
+      },
+      {
+        name: '详情'
+      }
+    ],
+    list: [
+      {
+        title: '店铺佣金',
+        list: [
+          {
+            label: '店铺佣金',
+          },
+          {
+            label: '店铺年费',
+          }
+        ]
+      },
+      {
+        title: '关于店铺',
+        list: [
+          {
+            label: '店铺logo',
+          },
+          {
+            label: '店铺名称',
+          },
+          {
+            label: '店铺地址',
+          },
+          {
+            label: '详细地址',
+          },
+          {
+            label: '经营范围',
+          },
+          {
+            label: '仓储加工',
+          },
+          {
+            label: '现货商家',
+          }
+        ]
+      },
+      {
+        title: '视频接口',
+        list: [
+          {
+            label: '视频接口',
+          }
+        ]
+      }
+    ],
+  },
+  {
+    l: '店铺管理',
+    f: '商品查询',
+    crumbsList: [
+      {
+        name: '店铺管理'
+      },
+      {
+        name: '商品查询'
+      },
+      {
+        name: '详情'
+      }
+    ],
+    list: [
+      {
+        title: '基础信息',
+        list: [
+          {
+            label: '商品名称',
+          },
+          {
+            label: '商品类目',
+          },
+          {
+            label: '商品品牌',
+          },
+          {
+            label: '商品类型',
+          },
+          {
+            label: '商品材料',
+          },
+          {
+            label: '商品用途',
+          }
+        ]
+      },
+      {
+        title: '商品信息',
+        list: [
+          {
+            label: '商品图片',
+          },
+          {
+            label: '商品简介',
+          },
+        ]
+      },
+      {
+        title: '商品型号',
+        list: [
+          {
+            label: '商品型号',
+            name: 'self',
+            type: 'slot',
+            slot: 'MyTravisInfo',
+            isShowLabel: true,
+          }
+        ]
+      },
+      {
+        title: '商品介绍',
+        list: [
+          {
+            label: '商品介绍',
+            name: 'self',
+            type: 'slot',
+            slot: 'MyTravisInfo',
+            isShowLabel: true,
+          }
+        ]
+      },
+      {
+        title: '商品参数',
+        list: [
+          {
+            label: '商品参数',
+            name: 'self',
+            type: 'slot',
+            slot: 'MyTravisInfo',
+            isShowLabel: true,
+          }
+        ]
+      }
+    ],
+  },
 ]
 export const _getInfoList = {
   data(){

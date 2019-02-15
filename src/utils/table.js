@@ -332,6 +332,7 @@ export const table = [
         list: [
           {
             text: '查看详情',
+            click: handleJump2other
           },
         ]
       }
@@ -374,6 +375,7 @@ export const table = [
         list: [
           {
             text: '查看详情',
+            click: handleJump2other
           },
         ]
       }
