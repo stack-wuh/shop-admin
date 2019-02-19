@@ -22,7 +22,9 @@ import {
   Upload,
   Switch,
   Steps,
-  Step
+  Step,
+  Tabs,
+  TabPane
 } from 'element-ui'
 
 Vue.use(Button)
@@ -43,6 +45,8 @@ Vue.use(Upload)
 Vue.use(Switch)
 Vue.use(Steps)
 Vue.use(Step)
+Vue.use(Tabs)
+Vue.use(TabPane)
 Vue.prototype.$ELEMENT = {size: 'small', zIndex: 999999}
 Vue.prototype.$message = Message
 

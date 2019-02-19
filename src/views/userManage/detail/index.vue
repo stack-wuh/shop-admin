@@ -1,6 +1,6 @@
 <template>
   <section class="user-corpor-wrapper">
-    <my-crumbs :list="infoObj.crumbsList">
+    <my-crumbs v-if="crumbs" :list="infoObj.crumbsList">
       <section slot="right">
         <el-button type="success">通过</el-button>
         <el-button type="danger">不通过</el-button>
@@ -61,7 +61,12 @@ import {
 } from '@/utils/mixin'
 
 export default {
-  props: {},
+  props: {
+    crumbs: {
+      type: [Boolean, String],
+      default: true
+    }
+  },
   name: '',
   components: {
     MyCrumbs,

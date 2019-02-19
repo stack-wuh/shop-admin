@@ -903,6 +903,24 @@ const InfoList = [
       }
     ],
   },
+  {
+    l: '用户管理',
+    f: '个人管理',
+    crumbsList: [
+      {
+        name: '用户管理'
+      },
+      {
+        name: '个人管理'
+      },
+      {
+        name: '未通过'
+      },
+      {
+        name: '详情'
+      }
+    ]
+  }
 ]
 export const _getInfoList = {
   data(){

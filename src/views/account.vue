@@ -26,7 +26,10 @@ export default {
     return {}
   },
   methods: {},
-  created(){},
+  created(){
+    console.log(process.env)
+    console.log(process.env.VUE_APP_HTTP)
+  },
   mixins:[_getPanelList]
 }
 </script>

@@ -252,8 +252,47 @@ export const table = [
         list: [
           {
             text: '查看详情',
+            click: handleJump2other
           },
         ]
+      }
+    ]
+  },
+  {
+    name: '用户管理',
+    params: ['未通过', '已通过'],
+    type: 'index',
+    label: '序号',
+    list: [
+      {
+        label: '省',
+        field: '',
+        type: 'default'
+      },
+      {
+        label: '市',
+        field: '',
+        type: 'default'
+      },
+      {
+        label: '区',
+        field: '',
+        type: 'default'
+      },
+      {
+        label: '详细地址',
+        field: '',
+        type: 'default'
+      },
+      {
+        label: '联系人',
+        field: '',
+        type: 'default'
+      },
+      {
+        label: '联系电话',
+        field: '',
+        type: 'default'
       }
     ]
   },

@@ -9,8 +9,9 @@ export const handleJump2other = (args) => {
     [{l: '网站管理', f: '底部导航管理'}, {...args, path: '/web/article/detail', query: {...args.query, c: '买家服务', s: '详情'}}],
     [{l: '网站管理', f: '新闻中心'}, {...args, path: '/web/news/detail', query: {...args.query, c: '买家服务', s: '详情'}}],
     [{l: '用户管理', f: '企业认证'}, {...args, path: '/user/corporation/detail', query: {...args.query, c: '未通过', s: '详情'}}],
+    [{l: '用户管理', f: '个人管理'}, {...args, path: '/user/user/detail', query: {...args.query, c: '未通过', s: '详情'}}],
     [{l: '店铺管理', f: '店铺管理'}, {...args, path: '/store/shop/detail', query: {...args.query, c: '未通过', s: '详情'}}],
-    [{l: '店铺管理', f: '商品查询'}, {...args, path: '/store/goods/detail', query: {...args.query, c: '未通过', s: '详情'}}],    
+    [{l: '店铺管理', f: '商品查询'}, {...args, path: '/store/goods/detail', query: {...args.query, c: '未通过', s: '详情'}}],
   ])
   let action = [...map].filter(([k, v]) => k.l === args.query.l && k.f === args.query.f)
   action.forEach(([k, i]) => {
