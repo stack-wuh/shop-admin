@@ -72,6 +72,10 @@ export default new Router({
         {
           path: '/user/corporation/detail',
           component: () => import('@/views/userManage/detail')
+        },
+        {
+          path: '/user/user/detail',
+          component: () => import('@/views/userManage/detail/user')
         }
       ]
     },
