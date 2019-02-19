@@ -13,12 +13,12 @@ module.exports = {
     host: '0.0.0.0',
     port: '19020',
     proxy: {
-      '/api': {
-        target: 'www.baidu.com',
+      '/geomantic': {
+        target: process.env.VUE_APP_TARGET,
         changeOrigin: true,
         pathRewrite: {
-          '^/api': ''
-        }
+          '^/geomantic': '/'
+        },
       }
     }
   },

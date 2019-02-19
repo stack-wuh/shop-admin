@@ -3,6 +3,8 @@ import '@/assets/style/base.scss'
 import '@/assets/style/element/index.css'
 import '@/assets/style/font/iconfont.css'
 import '@/assets/style/elreset.scss';
+import _g from './global'
+
 import {
   Button,
   Table,
@@ -53,3 +55,5 @@ Vue.prototype.$message = Message
 
 var $bus = new Vue()
 Vue.prototype.$bus = $bus
+
+window._g = _g

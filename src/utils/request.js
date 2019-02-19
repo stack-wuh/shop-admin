@@ -4,15 +4,17 @@ import {Message} from 'element-ui'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.BASE_URL,
-  timeout: 5000
+  baseURL: process.env.VUE_APP_BASE_URL,
+  timeout: 5 * 1000
 })
 
 
 // request interceptor
-service.interceptor.request.use(
+service.interceptors.request.use(
   config => {
     // do something before request is sent
+    let {data } = config
+    config.data = qs.stringify(data)
     return config
   },
   error => {
@@ -23,14 +25,14 @@ service.interceptor.request.use(
 )
 
 // response interceptor
-service.interceptor.response.use(
+service.interceptors.response.use(
   response => {
     const res = response.data
     if(res.code !== 200){
       Message({
         message: res.msg,
         type: 'error',
-        duration: 5 * 1000
+        duration: 3 * 1000
       })
       return Promise.reject('http request is error, please try again!')
     }else {
@@ -38,11 +40,11 @@ service.interceptor.response.use(
     }
   },
   error => {
-    console.error(error),
+    console.error(error)
     Message({
       message: error,
       type: 'error',
-      duration: 5 * 1000
+      duration: 3 * 1000
     })
     return Promise.reject(error)
   }

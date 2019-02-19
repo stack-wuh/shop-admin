@@ -5,9 +5,19 @@
   "author": "shadow <https://www.github.com/stack-wuh>",
   "scripts": {
     "serve": "vue-cli-service serve",
+    "dev-serve": "vue-cli-service serve --mode dev-serve",
     "build": "vue-cli-service build",
     "dev-build": "vue-cli-service build --mode test",
     "lint": "vue-cli-service lint"
+  },
+  "keywords": [
+    "vue",
+    "template",
+    "elementUI"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/stack-wuh/vue-cli-template"
   },
   "dependencies": {
     "axios": "^0.18.0",
