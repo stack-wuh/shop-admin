@@ -2,7 +2,7 @@
   <section class="wrapper aside-wrapper">
     <section class="user-wrapper">
       <img :src="AvatarImg" alt="avatar">
-      <span class="margin-tp__10">管理员A</span>
+      <span class="margin-tp__10">{{name}}</span>
     </section>
     <el-menu class="my-leftmenu"
       :unique-opened="true"
@@ -41,6 +41,9 @@ export default {
   name: '',
   components: {},
   computed: {
+    ...mapState({
+      name: state => state.User.userInfo.userName || '管理员'
+    }),
     routerPath(){
       return this.$route.path
     }

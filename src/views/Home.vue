@@ -1,11 +1,13 @@
 <template>
   <div class="home">
     <MyHeader />
-    <section class="body-wrapper">
+    <section class="body-wrapper">  
       <MyAside />
-      <section class="router-wrapper">
-        <router-view />
-      </section>
+      <transition name="fade">
+        <section class="router-wrapper">
+            <router-view />
+        </section>
+      </transition>
     </section>
   </div>
 </template>
@@ -20,6 +22,11 @@ export default {
     MyHeader,
     MyAside,
     MyFooter,
+  },
+  data() {
+    return {
+      isShowLoading: false
+    }
   }
 }
 </script>

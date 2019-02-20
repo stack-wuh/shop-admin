@@ -9,7 +9,7 @@
             <el-input clearable v-model="userInfo.username" class="my-form__item" placeholder="请编辑账号"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input clearable v-model="userInfo.password" class="my-form__item" placeholder="请编辑密码"></el-input>
+            <el-input clearable type="password" v-model="userInfo.password" class="my-form__item" placeholder="请编辑密码"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button @click="submit" type="primary" class="my-form__item">
@@ -53,7 +53,9 @@ export default {
     submit(){
       this.$refs.myForm.validate(valid => {
         if(valid){
-          this.signin(this.userInfo)
+          this.signin(this.userInfo).then(res => {
+
+          })
         }else {
           _g._toast({msg: '请填写必填项后提交', type: 'error'})
         }
