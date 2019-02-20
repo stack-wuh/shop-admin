@@ -1,7 +1,7 @@
 <template>
   <section class="mini-table-wrapper">
     <section class="mini-table-area">
-      <my-table :list="[{}, {}, {}]" ></my-table>
+      <my-table :list="[{}, {}, {}]" :params="tableParams"></my-table>
     </section>
   </section>
 </template>
@@ -14,7 +14,11 @@ export default {
   components: {
     MyTable,
   },
-  computed: {},
+  computed: {
+    tableParams(){
+      return this.$route.query.f + this.$route.query.s
+    }
+  },
   filters: {},
   data(){
     return {

@@ -29,8 +29,12 @@ export default {
   data(){
     return {}
   },
-  methods: {},
-  created(){},
+  methods: {
+    ...mapActions(['GetIndexStatistic'])
+  },
+  created(){
+    this.GetIndexStatistic({})
+  },
   mixins:[_getSearchList, _getPanelList]
 }
 </script>

@@ -5,11 +5,11 @@
         <span>{{data.name}}</span>
       </p>
       <p class="card-item__tips">
-        <strong :class="[cardClassName]" class="card-item__number ">{{data.value | formatMoney}}</strong>
+        <strong :class="[cardClassName]" class="card-item__number ">{{$attrs[data.value.trim()]}}</strong>
       </p>
       <p class="card-item__tips card-item__bottom">
         <span>{{data.tips}}: </span>
-        <span :class="[cardClassName]">{{data.upgrade}}</span>
+        <span :class="[cardClassName]">{{$attrs[data.upgrade.trim()]}}</span>
       </p>
     </section>
   </section>
@@ -33,15 +33,7 @@ export default {
   computed: {},
   filters: {
     formatMoney(val){
-      let str = [...val].reverse()
-      let arr = []
-
-      for(var i = 0; i< str.length; i++){
-        if(i % 3 === 0)  arr.push(', ')
-        arr.push(str[i])
-      }
-
-      return arr.reverse().join('').slice(0, -2)
+      return val
     }
   },
   data(){

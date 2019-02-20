@@ -4,15 +4,18 @@
     <ul class="list-box">
       <li v-if="!item.isShowLabel" v-for="(item, index) in list" :key="index" class="list-item">
         <span  class="list-item__label">{{item.label}}</span>
-        <span v-if="item.type === 'default' || item.type === undefined" class="list-item__value">{{item.value || '暂无信息'}}</span>
+        <span v-if="item.type === 'default' || item.type === undefined"
+          class="list-item__value"
+          :class="[{'list-item__value--active' : $attrs[item.value]}]"
+          >{{$attrs[item.value] || '暂无信息'}}</span>
         <div class="list-item__right" :class="item.class">
           <slot v-if="item.type === 'slot'" name="right"></slot>
-          <component :is="item.slot" v-if="item.name == 'right'" v-bind="{name: 'shadow'}"></component>
+          <component :is="item.slot" v-if="item.name == 'right'" v-bind="{...$attrs, item}"></component>
         </div>
       </li>
       <li v-for="(item, index) in list" :key="index + 'i'"  >
         <slot name="self"></slot>
-        <component :is="item.slot" v-if="item.name == 'self'"></component>
+        <component :is="item.slot" v-if="item.name == 'self'" v-bind="{...$attrs, item}" ></component>
       </li>
     </ul>
   </section>
@@ -24,6 +27,7 @@ import MyBuyer from '@/views/details/child/buyer'
 import MyMiniTable from '@/views/details/child/mini.table'
 import MyPaper from '@/views/details/child/paper'
 import MyMoney from '@/views/details/child/money'
+import MyAvatar from '@/views/details/child/avatarView'
 
 export default {
   props: {
@@ -42,6 +46,7 @@ export default {
     MyMiniTable,
     MyPaper,
     MyMoney,
+    MyAvatar,
   },
   computed: {},
   filters: {},
@@ -83,6 +88,9 @@ export default {
     }
     .list-item__value{
       color: #999;
+      &--active{
+        color: #666;
+      }
     }
     .list-item__right{
       display: inline-block;

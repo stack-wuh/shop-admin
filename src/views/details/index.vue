@@ -5,7 +5,8 @@
       v-for="(item, index) in infoObj.list"
       :key="index"
       :title="item.title"
-      :list="item.list">
+      :list="item.list"
+      v-bind="info">
     </my-info-list>
   </section>
 </template>
@@ -25,14 +26,40 @@ export default {
     MyCrumbs,
     MyInfoList,
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      info: state => state.info
+    })
+  },
   filters: {},
   data(){
     return {
     }
   },
-  methods: {},
-  created(){},
+  methods: {
+    ...mapActions(['GetShopOneById', 'GetShopSearchOneById']),
+    fetchData(){
+      const _obj = {
+        '店铺管理_店铺管理': {
+          action: 'GetShopOneById',
+          params: {
+            id: this.$route.query.id
+          }
+        },
+        '店铺管理_商品查询': {
+          action: 'GetShopSearchOneById',
+          params: {
+            id: this.$route.query.id
+          }
+        }
+      }
+      const obj = _obj[`${this.$route.query.l}_${this.$route.query.f}`]
+      this[obj.action].call(this, {...obj.params})
+    }
+  },
+  created(){
+    this.fetchData()
+  },
   mixins:[_getInfoList]
 }
 </script>

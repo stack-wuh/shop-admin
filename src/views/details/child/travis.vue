@@ -39,7 +39,9 @@ export default {
     return {}
   },
   methods: {},
-  created(){},
+  created(){
+    console.log(this.$attrs)
+  },
   mixins:[]
 }
 </script>

@@ -1,11 +1,11 @@
 <template>
   <section class="wrapper">
     <section class="card-list">
-      <my-card v-for="(item, index) in CardList" :key="index" :cardClassName="item.className" :data="item"  />
+      <my-card v-for="(item, index) in CardList" :key="index" :cardClassName="item.className" :data="item" v-bind="info"  />
     </section>
 
     <section class="chart-area">
-      <ve-line area :data="data"></ve-line>
+      <ve-line :colors="['#2979ff', '#00998d']" :settings="charSetting" :data="data" :toolbox="toolbox"></ve-line>
     </section>
   </section>
 </template>
@@ -16,33 +16,44 @@ import MyCard  from './card/card'
 const CardList = [
   {
     name: '当前用户总量',
-    value: '100000',
+    value: 'userNumber',
     tips: '本周新增商户',
-    upgrade: '200',
+    upgrade: 'userNumberWeek',
     className: 'card-item__base',
   },
   {
     name: '当前商家总量',
-    value: '20000',
+    value: 'merchantNumber',
     tips: '本月新增商户',
-    upgrade: '300',
+    upgrade: 'merchantNumberMon',
     className: 'card-item__warning',
   },
   {
     name: '总订单数',
-    value: '200000',
+    value: 'orderNum',
     tips: '今日成交订单',
-    upgrade: '200',
+    upgrade: 'orderNumByDay',
     className: 'card-item__danger',
   },
   {
     name: '总营收(元)',
-    value: '201002',
+    value: 'allMoney',
     tips: '本月新增营收',
-    upgrade: '122',
+    upgrade: 'moneyByMon',
     className: 'card-item__success',
   }
 ]
+
+const charSetting = {
+  area: true,
+  stack: {},
+}
+const toolbox = {
+  feature: {
+    saveAsImage: {},
+    right: 20,
+  }
+}
 
 export default {
   props: {},
@@ -51,19 +62,34 @@ export default {
     MyCard,
     VeLine,
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      info: state => state.Index.info
+    }),
+  },
   data(){
     return {
       CardList,
       data: {
-        columns: ['日期', '销售额'],
+        columns: ['月份', '销售额'],
         rows: []
-      }
+      },
+      charSetting,
+      toolbox,
     }
   },
-  methods: {},
+  methods: {
+    ...mapActions([
+      'GetIndexView'
+    ])
+  },
   created(){
-    this.data.rows = Array(10).fill({'日期': '1.1', '销售额': 123, '其他': 0})
+    setTimeout(() => {
+      this.data.rows = this.info.monthReport.map((k, i) => {
+        return {'月份': i + 1 + '月份' , '销售额': k}
+      })
+    }, 1000)
+    this.GetIndexView()
   }
 }
 </script>
