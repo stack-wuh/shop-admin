@@ -4,6 +4,9 @@
       :page-size="pageSize"
       :total="total"
       layout="total, prev, pager, next, jumper"
+      :background="background"
+      :current-page="currPageNo"
+      :current-change="handleClickPage"
       ></el-pagination>
   </section>
 </template>
@@ -20,6 +23,14 @@ export default {
       type: Number,
       default: 10,
       required: false
+    },
+    currPageNo: {
+      type: Number,
+      default: 1
+    },
+    background: {
+      type: Boolean,
+      default: false
     }
   },
   name: '',
@@ -29,7 +40,11 @@ export default {
   data(){
     return {}
   },
-  methods: {},
+  methods: {
+    handleClickPage(e){
+      this.$emit('handleChangePage', e)
+    }
+  },
   created(){},
   mixins:[]
 }

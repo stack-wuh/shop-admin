@@ -2,7 +2,7 @@
   <section class="wrapper search-wrapper">
     <section class="search-box">
       <section class="date-box">
-        <template>
+        <template v-if="canShowDateRange.includes($route.path)" >
           <span @click="handleChoose({dateCurr: 0})" class="date-item" :class="currPicker === 0 ? 'date-item__active' : ''">今天</span>
           <span @click="handleChoose({dateCurr: 1})" class="date-item" :class="currPicker === 1 ? 'date-item__active' : ''">本周</span>
           <span @click="handleChoose({dateCurr: 2})" class="date-item" :class="currPicker === 2 ? 'date-item__active' : ''">本月</span>
@@ -67,7 +67,11 @@ export default {
   },
   name: '',
   components: {},
-  computed: {},
+  computed: {
+    canShowDateRange(){
+      return []
+    }
+  },
   filters: {},
   data(){
     return {
