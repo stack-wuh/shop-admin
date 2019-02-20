@@ -28,6 +28,7 @@ import MyMiniTable from '@/views/details/child/mini.table'
 import MyPaper from '@/views/details/child/paper'
 import MyMoney from '@/views/details/child/money'
 import MyAvatar from '@/views/details/child/avatarView'
+import MyRowTable from '@/views/details/child/row.table'
 
 export default {
   props: {
@@ -47,6 +48,7 @@ export default {
     MyPaper,
     MyMoney,
     MyAvatar,
+    MyRowTable,
   },
   computed: {},
   filters: {},

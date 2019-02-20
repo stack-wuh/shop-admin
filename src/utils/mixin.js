@@ -908,7 +908,7 @@ const InfoList = [
             label: '商品参数',
             name: 'self',
             type: 'slot',
-            slot: 'MyTravisInfo',
+            slot: 'MyRowTable',
             isShowLabel: true,
           }
         ]
