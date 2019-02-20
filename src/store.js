@@ -7,11 +7,15 @@ import {
   state, mutations, actions, getters
 } from '@/store/index'
 
-import Use from '@/store/module/use'
+import User from '@/store/module/use'
+import Index from '@/store/module/index'
+import Shop from '@/store/module/shop'
 
 export default new Vuex.Store({
   state, mutations, actions, getters,
   modules: {
-    Use
+    User,
+    Index,
+    Shop,
   }
 })
