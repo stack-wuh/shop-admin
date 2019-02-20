@@ -191,19 +191,19 @@ const SearchList = [
       {
         label: '时间',
         type: 'daterange',
-        field: '',
+        field: 'daterange',
         value: '',
       },
       {
         label: '订单编号',
         type: 'default',
-        field: '',
+        field: 'orderCode',
         value: '',
       },
       {
         label: '商家名称',
         type: 'default',
-        field: '',
+        field: 'merchantName',
         value: '',
       }
     ],
@@ -469,6 +469,7 @@ export const _getSearchList = {
     },
     __handleChooseItem(item){
       item.value = !item.value
+      console.log(item)
     }
   },
   created(){
@@ -774,9 +775,11 @@ const InfoList = [
         list: [
           {
             label: '店铺佣金',
+            value: ''
           },
           {
             label: '店铺年费',
+            value: ''
           }
         ]
       },
@@ -785,18 +788,26 @@ const InfoList = [
         list: [
           {
             label: '店铺logo',
+            slot: 'MyAvatar',
+            name: 'right',
+            type: 'slot',
+            value: 'logo'
           },
           {
             label: '店铺名称',
+            value: 'name'
           },
           {
             label: '店铺地址',
+            value: 'address'
           },
           {
             label: '详细地址',
+            value: 'addressInfo'
           },
           {
             label: '经营范围',
+            value: 'businessScope'
           },
           {
             label: '仓储加工',
@@ -811,6 +822,7 @@ const InfoList = [
         list: [
           {
             label: '视频接口',
+            value: 'videoInterface'
           }
         ]
       }
@@ -872,7 +884,7 @@ const InfoList = [
             label: '商品型号',
             name: 'self',
             type: 'slot',
-            slot: 'MyTravisInfo',
+            slot: 'MyMiniTable',
             isShowLabel: true,
           }
         ]
@@ -884,7 +896,7 @@ const InfoList = [
             label: '商品介绍',
             name: 'self',
             type: 'slot',
-            slot: 'MyTravisInfo',
+            slot: 'MyPaper',
             isShowLabel: true,
           }
         ]

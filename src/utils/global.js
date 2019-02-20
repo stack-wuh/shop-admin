@@ -1,6 +1,7 @@
 import {
   Message
 } from 'element-ui';
+import router from '@/router';
 
 /**
  * [_toast description]
@@ -18,7 +19,15 @@ export const _toast = ({msg = '这是一条提示信息哦!', type = 'success', 
   })
 }
 
+export const $to = ({method = 'push', name, params, path, query}, deply = 1) => {
+  setTimeout(() => {
+    router[method]({name, params, path, query})
+  }, deply * 1000)
+}
+
+
 
 export default  {
-  _toast
+  _toast,
+  $to,
 }

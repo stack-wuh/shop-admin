@@ -342,27 +342,27 @@ export const table = [
     list: [
       {
         label: '账号',
-        field: '',
+        field: 'userName',
         type: 'default'
       },
       {
         label: '店铺名称',
-        field: '',
+        field: 'name',
         type: 'default'
       },
       {
         label: '经营范围',
-        field: '',
+        field: 'businessScope',
         type: 'default'
       },
       {
         label: '状态',
-        field: '',
+        field: 'status',
         type: 'default'
       },
       {
         label: '提交时间',
-        field: '',
+        field: 'commitTime',
         type: 'default'
       },
       {
@@ -385,27 +385,27 @@ export const table = [
     list: [
       {
         label: '店铺名称',
-        field: '',
+        field: 'merchantName',
         type: 'default'
       },
       {
         label: '商品名',
-        field: '',
+        field: 'productName',
         type: 'default'
       },
       {
         label: '商品编号',
-        field: '',
+        field: 'productCode',
         type: 'default'
       },
       {
         label: '状态',
-        field: '',
+        field: 'status',
         type: 'default'
       },
       {
         label: '上传时间',
-        field: '',
+        field: 'creatTime',
         type: 'default'
       },
       {
@@ -418,6 +418,29 @@ export const table = [
           },
         ]
       }
+    ]
+  },
+  {
+    name: '店铺管理',
+    params: ['商品查询详情'],
+    type: 'index',
+    label: '序号',
+    list: [
+      {
+        label: '型号',
+        field: 'merchantName',
+        type: 'default'
+      },
+      {
+        label: '颜色',
+        field: 'productName',
+        type: 'default'
+      },
+      {
+        label: '价格',
+        field: 'productCode',
+        type: 'default'
+      },
     ]
   },
   {
