@@ -31,11 +31,7 @@ export default {
   name: '',
   components: {},
   computed: {},
-  filters: {
-    formatMoney(val){
-      return val
-    }
-  },
+  filters: {},
   data(){
     return {}
   },

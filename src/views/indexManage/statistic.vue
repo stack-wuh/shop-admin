@@ -32,8 +32,10 @@ export default {
   methods: {
     ...mapActions(['GetIndexStatistic'])
   },
+
   created(){
     this.GetIndexStatistic({})
+    console.log(this.$store)
   },
   mixins:[_getSearchList, _getPanelList]
 }

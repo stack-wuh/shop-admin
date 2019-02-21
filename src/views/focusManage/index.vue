@@ -1,6 +1,6 @@
 <template>
   <section class="wrapper">
-    <my-schema :panelList="panelList" :searchList="searchList" search>
+    <my-schema @panel-click="handlePanelChange" :panelList="panelList" :searchList="searchList" search>
       <my-table :list="list"></my-table>
       <my-pagination :total="total" :currPageNo="currPageNo" />
     </my-schema>
@@ -46,8 +46,10 @@ export default {
   },
   methods: {
     ...mapActions(['GetShopInfo', 'GetShopSearchInfo', 'GetUserIndex', 'GetCorporationIndex']),
-
-    fetchData(){
+    handlePanelChange(e){
+      this.fetchData(e)
+    },
+    fetchData(params = {}){
       let search = {
         currPageNo: 1,
         pageSize: 10
@@ -56,25 +58,25 @@ export default {
         '店铺管理_店铺管理': {
             action: 'GetShopInfo',
             params: {
-              status: 0
+              status: params.index - 1  >= 0 ? params.index - 1 : ''
             }
           },
         '店铺管理_商品查询': {
           action: 'GetShopSearchInfo',
           params: {
-            status: 0
+            status: params.index - 1  >= 0 ? params.index - 1 : ''
           }
         },
         '用户管理_个人管理': {
           action: 'GetUserIndex',
           params: {
-            status: 0
+            status: params.index - 1  >= 0 ? params.index - 1 : ''
           }
         },
         '用户管理_企业认证': {
           action: 'GetCorporationIndex',
           params: {
-            status: 0
+            status: params.index - 1  >= 0 ? params.index - 1 : ''
           }
         }
       }
