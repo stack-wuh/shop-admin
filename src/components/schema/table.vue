@@ -9,13 +9,30 @@
             <img :src="scope.row[item.field]" alt="logo">
           </template>
         </el-table-column>
+        <el-table-column :width="item.width" align="center" v-if="item.type === 'switch'" :label="item.label" :prop="item.field">
+          <template slot-scope="scope">
+            <el-switch
+              @change="item.change({$router, $route, params: scope.row})"
+              :value="scope.row[item.field]"
+              :active-text="item.activeText"
+              :inactive-text="item.inactiveText"
+              :active-value="item.activeValue"
+              :inactive-value="item.inactiveValue"
+               ></el-switch>
+          </template>
+        </el-table-column>
+        <el-table-column :width="item.width" align="center" v-if="item.type === 'statusrange'" :label="item.label" :prop="item.field">
+          <template slot-scope="scope">
+            <el-tag :type="item.state[scope.row.status]" >{{item.order[scope.row.status]}}</el-tag>
+          </template>
+        </el-table-column>
         <el-table-column :width="item.width" fixed="right" align="center" v-if="item.type === 'setting'" :label="item.label" :prop="item.field">
           <template slot-scope="scope">
             <el-button
               v-if="item && item.list"
               v-for="(btn, bid) in item.list"
               type="text"
-              @click="btn.click({$router: $router, $route: $route, query: $route.query, btn, params: scope.row})"
+              @click="btn.click({$router, $route, query: $route.query, btn, params: scope.row, infoObj})"
               >{{btn.text}}</el-button>
           </template>
         </el-table-column>
@@ -26,6 +43,10 @@
 <script>
 import {mapState, mapActions, mapGetters, mapMutations} from 'vuex'
 import {table} from '@/utils/table'
+import {
+  _getInfoList, _getPanelList
+} from '@/utils/mixin'
+
 export default {
   props: {
     tableType: {
@@ -50,11 +71,11 @@ export default {
   name: '',
   components: {},
   computed: {
-    query(){
+    _query(){
       return this.$route.query.c || this.$route.query.f || this.$route.query.l
     },
     tableList(){
-      return table.find(kk => kk.params.includes(this.params || this.query))
+      return table.find(kk => kk.params.includes(this.params || this._query))
     }
   },
   filters: {},
@@ -63,11 +84,9 @@ export default {
   },
   methods: {},
   created(){},
-  mixins:[]
+  mixins:[_getInfoList]
 }
 </script>
 <style lang="scss" scoped>
-.table-wrapper{
-  // padding: 20px;
-}
+
 </style>

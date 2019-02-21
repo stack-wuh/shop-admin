@@ -5,7 +5,7 @@
       v-for="(item, index) in data"
       :key="index"
       class="list-item"
-      :class="[currIndex === index ? 'list-item__active' : 'list-item__default']">
+      :class="[currentIndex === index ? 'list-item__active' : 'list-item__default']">
     {{item.name}}</div>
     <span class="flex-empty"></span>
     <div><slot name="right" ></slot></div>
@@ -22,22 +22,26 @@ export default {
   computed: {
     routePath(){
       return this.$route.path
-    }
+    },
+    ...mapState({
+      currentIndex: state => state.schemaHeaderCurrent.index,
+      currentName: state => state.schemaHeaderCurrent.item.name
+    })
   },
   filters: {},
   data(){
-    return {
-      currIndex: 0,
-    }
+    return {}
   },
   watch: {
-    $route(){
-      this.currIndex = 0
+    routePath(){
+      this.SET_SCHEMA_HEADER_CURRENT({index: 0})
     }
   },
   methods: {
+    ...mapMutations(['SET_SCHEMA_HEADER_CURRENT', 'CLEAR_SEARCH_FORM']),
     handleClick(...argus){
       this.currIndex = argus[0].index
+      this.SET_SCHEMA_HEADER_CURRENT({...argus[0], crumbs: [...this.data]})
       this.$emit('click', argus[0])
     }
   },

@@ -37,7 +37,12 @@ export default {
     MySchemaHeader,
     MySearch,
   },
-  computed: {},
+  computed: {
+    routePath(){
+      return this.$route.path
+    }
+  },
+  watch: {},
   filters: {},
   data(){
     return {}

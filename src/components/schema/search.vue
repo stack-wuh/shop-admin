@@ -1,55 +1,58 @@
 <template>
   <section class="wrapper search-wrapper">
-    <section class="search-box">
-      <section class="date-box">
-        <template v-if="canShowDateRange.includes($route.path)" >
-          <span @click="handleChoose({dateCurr: 0})" class="date-item" :class="currPicker === 0 ? 'date-item__active' : ''">今天</span>
-          <span @click="handleChoose({dateCurr: 1})" class="date-item" :class="currPicker === 1 ? 'date-item__active' : ''">本周</span>
-          <span @click="handleChoose({dateCurr: 2})" class="date-item" :class="currPicker === 2 ? 'date-item__active' : ''">本月</span>
-          <span @click="handleChoose({dateCurr: 3})" class="date-item" :class="currPicker === 3 ? 'date-item__active' : ''">本年</span>
-        </template>
-        <span
-          v-for="(item, index) in data" :key="index"
-          v-if="item.type === 'button'"
-          class="date-item"
-          :class="item.value ? 'date-item__active' : ''"
-          @click="__handleChooseItem(item)">
-          {{item.label}}
-        </span>
-      </section>
-      <section class="flex-box">
-        <template v-for="(item, index) in data">
+    <section class="search-wrapper--box">
+      <ul class="search-wrapper--list">
+        <li
+          class="search-wrapper--item"
+          v-for="(item, index) in searchList" :key="index">
+          <span v-if="item.label" class="search-wrapper--item__label">{{item.label}}</span>
           <el-input
-            clearable
-            @change="(e) => {return handleClick(setObjAttr(item.field, e))}"
-            class="my-input"
-            v-if="['input', 'default', ''].includes(item.type)"
+            class="search-wrapper--item__input"
+            v-if="item.type == 'default' || item.type == undefined"
             :placeholder="'请编辑' + item.label"
             v-model="item.value"
-          ></el-input>
+            clearable/>
           <el-date-picker
             value-format="yyyy-MM-dd"
-            @change="(e) => {return handleClick(setObjAttr(item.field, e))}"
-            class="my-date-picker"
+            class="search-wrapper--item__date-picker"
             v-if="item.type == 'date'"
             :placeholder="'请选择' + item.label"
             v-model="item.value"
+            clearable
           ></el-date-picker>
           <el-date-picker
             value-format="yyyy-MM-dd"
-            @change="e => {return handleClick(setObjAttr(item.field, e))}"
-            class="my-daterange-picker"
-            v-if="item.type === 'daterange'"
-            v-model="item.value"
-            range-separator="-"
+            class="search-wrapper--item__date-picker"
+            v-if="item.type == 'daterange'"
             type="daterange"
+            range-separator="-"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
+            :placeholder="'请选择' + item.label"
+            v-model="item.value"
+            clearable
           ></el-date-picker>
-        </template>
-      </section>
+          <span
+            @click="__handleChooseItem(item)"
+            v-if="item.type == 'button'"
+            class="search-wrapper--item__button"
+            :class="[{'search-wrapper--item__button-is--action': item.value}]"
+          >{{item.text}}</span>
+          <div
+            v-if="item.type == 'buttongroup'"
+            class="search-wrapper--item__button-group">
+            <span
+              v-for="(btn, bid) in item.list"
+              :key="bid"
+              class="search-wrapper--item__button"
+              :class="[btn.class, {'search-wrapper--item__button-is--action': item.value == btn.value}]"
+              @click="handleClickSub(item, btn)"
+            >{{btn.text}}</span>
+          </div>
+        </li>
+      </ul>
+      <el-button @click="handleConfirm" type="primary" size="small" >搜索</el-button>
     </section>
-    <el-button @click="handleConfirm" type="primary">搜索</el-button>
   </section>
 </template>
 <script>
@@ -68,8 +71,14 @@ export default {
   name: '',
   components: {},
   computed: {
+    ...mapState({
+      status: state => state.schemaHeaderCurrent.index
+    }),
     canShowDateRange(){
       return []
+    },
+    changePath(){
+      return this.$route.query
     }
   },
   filters: {},
@@ -78,20 +87,14 @@ export default {
       currPicker: 0,
     }
   },
+  watch: {
+    changePath(){
+      this.CLEAR_SEARCH_FORM()
+    }
+  },
   methods: {
-    /**
-     * [handleClick 年月日按钮组的点击事件， 向上传递表单]
-     * @method handleClick
-     * @param  {[type]}    argus [description]
-     * @return {[type]}          [description]
-     */
-    handleChoose(argus){
-      this.currPicker = argus.dateCurr
-      return this.$emit('change', argus)
-    },
-    handleClick(argus){
-      return this.$emit('change', argus)
-    },
+    ...mapActions(['GetShopInfo', 'GetShopSearchInfo', 'GetUserIndex']),
+    ...mapMutations(['SET_SEARCH_FORM', 'CLEAR_SEARCH_FORM']),
     /**
      * [setObjAttr 设置参数为键值对的对象]
      * @method setObjAttr
@@ -109,8 +112,64 @@ export default {
      * @return {[type]}      [description]
      */
     handleConfirm(){
-      this.$emit('confirm', [...this.data.map(kk => {return this.setObjAttr(kk.field, kk.value)}), {currPicker: this.currPicker}])
-      this.$bus.$emit('confirm', [...this.data.map(kk => {return this.setObjAttr(kk.field, kk.value)}), {currPicker: this.currPicker}])
+      let data = this.data.map(kk => {return this.setObjAttr(kk.field, kk.value)})
+      this.$emit('confirm', data)
+      this.$bus.$emit('confirm', data)
+      this.fetchData(data)
+    },
+    /**
+     * [handleClickSub type为buttongroup的点击事件]
+     * @method handleClickSub
+     * @param  {[type]}       item [description]
+     * @param  {[type]}       btn  [description]
+     * @return {[type]}            [description]
+     */
+    handleClickSub(item, btn){
+      item.value = btn.value
+    },
+    fetchData (data){
+      let params = {}
+      data.map(k => {
+        Object.assign(params, k)
+      })
+      const initForm = {
+        currPageNo: 1,
+        pageSize: 10
+      }
+      const _obj = {
+        '店铺管理_店铺管理': {
+          action: 'GetShopInfo',
+          params: {
+            ...params,
+            commitStartDate: params.commitDate && params.commitDate[0],
+            commitEndDate: params.commitDate && params.commitDate[1],
+            authenticationStartTime: params.checkDate && params.checkDate[0],
+            authenticationEndTime: params.checkDate && params.checkDate[1],
+            status: this.status
+          }
+        },
+        '店铺管理_商品查询': {
+          action: 'GetShopSearchInfo',
+          params: {
+            ...params,
+            startDate: params.createTime && params.createTime[0],
+            endDate: params.createTime && params.createTime[1],
+          }
+        },
+        '用户管理_个人管理': {
+          action: 'GetUserIndex',
+          params: {
+            ...params,
+            startDate: params.commitTime && params.commitTime[0],
+            endDate: params.commitTime && params.commitTime[1],
+            status: this.status
+          }
+        }
+      }
+      let query = this.$route.query
+      let action = _obj[`${query.l}_${query.f}`]
+      this.SET_SEARCH_FORM(action.params)
+      this[action.action].call(this, initForm)
     }
   },
   created(){},
@@ -121,32 +180,60 @@ export default {
 @import '@/assets/style/mixin.scss';
 @import '@/assets/style/color.scss';
 .search-wrapper{
-  @include flex($dir: row, $justify: space-between, $align: flex-start);
   padding: 15px 20px;
-  .date-box{
+  padding-bottom: 0;
+  &--box {
+    @include flex($dir: row, $justify: space-between, $align: flex-start);
+  }
+  &--list {
+    @include flex($dir: row, $wrap: wrap, $align: center);
+    flex: 1;
+    padding-left: 10px;
+    margin-right: 10px;
+  }
+  &--item {
     margin-bottom: 15px;
-    .date-item{
-      padding: 4px 10px;
-      margin-right: 20px;
-      border:1px solid $b-base;
-
-      &:hover{
-        cursor: pointer;
-        border: 1px solid $base;
+    &__label {
+      display: inline-block;
+      width: 90px;
+      text-align: right;
+      color: $t-999;
+      &:after {
+        content: ' : ';
+        padding-right: 10px;
       }
     }
-    .date-item__active{
-      border: 1px solid $base;
+    &__input {
+      width: 240px;
     }
-  }
-  .flex-box{
-    @include flex($dir: row, $justify:space-between, $align: center);
-    .my-input, .my-date-picker, .my-daterange-picker{
-      flex: 1;
-      margin-right: 15px;
+    &__date-picker {
+      width: 240px;
     }
-    .my-daterange-picker{
-      min-width: 240px;
+    &__button {
+      max-height: 40px;
+      padding: 5px 5px;
+      margin-right: 10px;
+      border: 1px solid $b-base;
+      border-radius: 4px;
+      font-size: 15px;
+      user-select: none;
+      &:hover {
+        cursor: pointer;
+        color: $base;
+        border-color: $base;
+      }
+      &:first-of-type{
+        margin-left: 10px;
+      }
+      &-is--action {
+        border: 1px solid $base;
+        color: $base;
+      }
+      &-middle {
+        display: inline-block;
+        min-width: 80px;
+        text-align: center;
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <section class="crumbs-wrapper">
     <nav class="crumbs-list">
-      <span v-for="(item, index) in $attrs.list" :keys="index" class="crumbs-item">{{item.name}}</span>
+      <span v-for="(item, index) in list" :keys="index" class="crumbs-item">{{item.name}}</span>
     </nav>
     <section class="crunmbs-right">
       <slot name="right"></slot>
@@ -17,10 +17,26 @@ export default {
   computed: {},
   filters: {},
   data(){
-    return {}
+    return {
+      list: [],
+    }
   },
-  methods: {},
-  created(){},
+  methods: {
+    /**
+     * [getCrumbsList 重新生成crumbs列表]
+     * 依据路由query值
+     * @method getCrumbsList
+     * @return {[type]}      [description]
+     */
+    getCrumbsList(){
+      let query = this.$route.query
+      let _order = ['l', 'f', 'c', 's'] // 获取顺序, 即主导航 -> 副导航 -> 模块 -> 详情
+      this.list = _order.map(k => { return  {name: query[k]}})
+    }
+  },
+  created(){
+    this.getCrumbsList()
+  },
   mixins:[]
 }
 </script>
