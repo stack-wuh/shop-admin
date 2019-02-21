@@ -1,10 +1,32 @@
 import request from '@/utils/request';
 
-export function getShopInfo(data){
+export function getShopInfo({
+  status,
+  commitStartDate,
+  commitEndDate,
+  authenticationStartTime,
+  authenticationEndTime,
+  userName,
+  name,
+  processStatus,
+  spotGoodsStatus,
+  currPageNo = 1
+}){
   return request({
     method: 'post',
     url: '/backendMerchant/checkBackendMerchant.do?',
-    data
+    data: {
+      status,
+      commitStartDate,
+      commitEndDate,
+      authenticationStartTime,
+      authenticationEndTime,
+      userName,
+      name,
+      processStatus,
+      spotGoodsStatus,
+      currPageNo
+    }
   })
 }
 
@@ -16,11 +38,31 @@ export function getShopSearchOneById(data){
   })
 }
 
-export function getShopSearchInfo(data){
+export function getShopSearchInfo({
+  status,
+  startDate,
+  endDate,
+  productCode,
+  merchantName,
+  topName,
+  goodName,
+  materials,
+  currPageNo = 1
+}){
   return request({
     method: 'post',
     url: '/backendMerchant/checkGoods.do',
-    data
+    data: {
+      status,
+      startDate,
+      endDate,
+      productCode,
+      merchantName,
+      topName,
+      goodName,
+      materials,
+      currPageNo
+    }
   })
 }
 

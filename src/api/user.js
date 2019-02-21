@@ -13,11 +13,23 @@ export function signinByUsername(username, password) {
 }
 
 
-export function getUserIndex(data){
+export function getUserIndex({
+  startDate,
+  endDate,
+  username,
+  status,
+  currPageNo = 1
+}){
   return request({
     url: '/BackendUser/checkUser.do',
     method: 'post',
-    data
+    data: {
+      startDate,
+      endDate,
+      username,
+      status,
+      currPageNo
+    }
   })
 }
 
