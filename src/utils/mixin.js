@@ -46,7 +46,7 @@ const PanelList = [
         name: '待审核',
       },
       {
-        name: '审核为通过',
+        name: '审核未通过',
       },
       {
         name: '审核已通过',
@@ -76,13 +76,13 @@ const PanelList = [
     f: '店铺管理',
     list: [
       {
-        name: '全部'
+        name: '全部',
       },
       {
         name: '待审核'
       },
       {
-        name: '审核为通过',
+        name: '审核未通过',
       },
       {
         name: '审核已通过',
@@ -205,7 +205,42 @@ const SearchList = [
         type: 'default',
         field: 'merchantName',
         value: '',
-      }
+      },
+      {
+        label: '',
+        type: 'buttongroup',
+        value: -1,
+        list: [
+          {
+            text: '今天',
+            type: 'button',
+            value: 0,
+            class: 'search-wrapper--item__button-middle margin-lf__20 ',
+            field: '',
+          },
+          {
+            text: '本周',
+            type: 'button',
+            value: 1,
+            field: '',
+            class: 'search-wrapper--item__button-middle margin-lf__20 ',
+          },
+          {
+            text: '本月',
+            type: 'button',
+            value: 2,
+            field: '',
+            class: 'search-wrapper--item__button-middle margin-lf__20 ',
+          },
+          {
+            text: '本年',
+            type: 'button',
+            value: 3,
+            field: '',
+            class: 'search-wrapper--item__button-middle margin-lf__20 ',
+          },
+        ]
+      },
     ],
   },
   {
@@ -215,13 +250,13 @@ const SearchList = [
       {
         label: '提交时间',
         type: 'daterange',
-        field: '',
+        field: 'commitTime',
         value: '',
       },
       {
         label: '账号',
         type: 'default',
-        field: '',
+        field: 'username',
         value: '',
       }
     ],
@@ -257,37 +292,37 @@ const SearchList = [
       {
         label: '提交时间',
         type: 'daterange',
-        field: '',
+        field: 'commitDate',
         value: '',
       },
       {
         label: '审核时间',
         type: 'daterange',
-        field: '',
+        field: 'checkDate',
         value: '',
       },
       {
         label: '账号',
         type: 'default',
-        field: '',
+        field: 'userName',
         value: '',
       },
       {
         label: '店铺名称',
         type: 'default',
-        field: '',
+        field: 'name',
         value: '',
       },
       {
-        label: '现货商家',
+        text: '现货商家',
         type: 'button',
-        field: 'a1',
+        field: 'processStatus',
         value: false,
       },
       {
-        label: '仓储加工',
+        text: '仓储加工',
         type: 'button',
-        field: 'q2',
+        field: 'spotGoodsStatus',
         value: false,
       }
     ],
@@ -299,37 +334,37 @@ const SearchList = [
       {
         label: '上架时间',
         type: 'daterange',
-        field: '',
+        field: 'createTime',
         value: '',
       },
       {
         label: '商品编号',
         type: 'default',
-        field: '',
+        field: 'productCode',
         value: '',
       },
       {
         label: '店铺名称',
         type: 'default',
-        field: '',
+        field: 'merchantName',
         value: '',
       },
       {
         label: '品名',
         type: 'default',
-        field: '',
+        field: 'topName',
+        value: '',
+      },
+      {
+        label: '商品名称',
+        type: 'default',
+        field: 'goodName',
         value: '',
       },
       {
         label: '材质',
         type: 'default',
-        field: '',
-        value: '',
-      },
-      {
-        label: '类目',
-        type: 'default',
-        field: '',
+        field: 'materials',
         value: '',
       }
     ],
@@ -399,13 +434,13 @@ const SearchList = [
         value: '',
       },
       {
-        label: '现货商家',
+        text: '现货商家',
         type: 'button',
         field: '',
         value: false,
       },
       {
-        label: '仓储加工',
+        text: '仓储加工',
         type: 'button',
         field: '',
         value: false,
@@ -469,7 +504,6 @@ export const _getSearchList = {
     },
     __handleChooseItem(item){
       item.value = !item.value
-      console.log(item)
     }
   },
   created(){

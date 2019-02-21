@@ -1,5 +1,6 @@
 import {
   handleJump2other,
+  handleSwitchChange,
 } from '@/utils/table.click.js'
 
 
@@ -218,7 +219,7 @@ export const table = [
     list: [
       {
         label: '账号',
-        field: '',
+        field: 'username',
         type: 'default'
       },
       {
@@ -233,8 +234,10 @@ export const table = [
       },
       {
         label: '状态',
-        field: '',
-        type: 'default'
+        field: 'status',
+        order: ['待审核', '审核未通过', '审核已通过'],
+        state: ['', 'danger', 'success'],
+        type: 'statusrange'
       },
       {
         label: '积分',
@@ -243,7 +246,7 @@ export const table = [
       },
       {
         label: '注册时间',
-        field: '',
+        field: 'createTime',
         type: 'default'
       },
       {
@@ -358,7 +361,14 @@ export const table = [
       {
         label: '状态',
         field: 'status',
-        type: 'default'
+        type: 'switch',
+        activeText: '通过',
+        inactiveText: '不通过',
+        activeColor: '',
+        inactiveColor: '',
+        activeValue: 1,
+        inactiveValue: 0,
+        change: handleSwitchChange
       },
       {
         label: '提交时间',

@@ -25,7 +25,17 @@ export const $to = ({method = 'push', name, params, path, query}, deply = 1) => 
   }, deply * 1000)
 }
 
-
+export const ObjNotNull = obj => {
+  let _obj = {}
+  if(typeof obj !== 'object') return new Error('argus expect Object! please try again after validate params.')
+  for (var k in obj) {
+    if(obj[k] !== undefined && obj[k] !== '' && obj[k] !== null){
+      _obj[k] = typeof obj[k] === 'boolean' ? ( obj[k] === true ? 1 : 0 ) : obj[k]
+    }
+  }
+  console.log(_obj)
+  return _obj
+}
 
 export default  {
   _toast,

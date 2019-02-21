@@ -2,6 +2,9 @@ import axios from 'axios'
 import qs from 'qs'
 import {Message, Loading} from 'element-ui'
 import _g from '@/utils/global'
+import {
+  ObjNotNull,
+} from '@/utils/global'
 
 // create an axios instance
 const service = axios.create({
@@ -21,7 +24,7 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
     let {data } = config
-    config.data = qs.stringify(data)
+    config.data = qs.stringify(ObjNotNull(data))
     loadingInstance = Loading.service(options)
     return config
   },

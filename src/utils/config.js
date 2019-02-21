@@ -26,7 +26,8 @@ import {
   Steps,
   Step,
   Tabs,
-  TabPane
+  TabPane,
+  Tag
 } from 'element-ui'
 
 Vue.use(Button)
@@ -49,6 +50,7 @@ Vue.use(Steps)
 Vue.use(Step)
 Vue.use(Tabs)
 Vue.use(TabPane)
+Vue.use(Tag)
 Vue.prototype.$ELEMENT = {size: 'small', zIndex: 999999}
 Vue.prototype.$message = Message
 
