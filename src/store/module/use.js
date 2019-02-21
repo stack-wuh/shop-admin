@@ -47,8 +47,9 @@ const actions = {
    * @param  {[type]}     params [description]
    * @return {Promise}           [description]
    */
-  async GetUserIndex({commit}, params){
-    const response = await getUserIndex(params)
+  async GetUserIndex({commit, rootState}, params){
+    const response = await getUserIndex({...params, ...rootState.search})
+    commit('SET_SHOP_STORE', response.data)
     return response
   },
 

@@ -22,9 +22,10 @@ const actions = {
    * @param  {[type]}    params    [description]
    * @return {Promise}             [description]
    */
-  async GetShopInfo({commit}, params){
-    const response = await getShopInfo(params)
+  async GetShopInfo({commit, rootState}, params){
+    const response = await getShopInfo({...params, ...rootState.search})
     commit('SET_SHOP_STORE', response.data)
+    Promise.resolve(response)
     return response
   },
 
@@ -49,8 +50,8 @@ const actions = {
    * @param  {[type]}          params [description]
    * @return {Promise}                [description]
    */
-  async GetShopSearchInfo({commit}, params){
-    const response = await getShopSearchInfo(params)
+  async GetShopSearchInfo({commit, rootState}, params){
+    const response = await getShopSearchInfo({...params, ...rootState.search})
     commit('SET_SHOP_STORE', response.data)
     return response
   },
