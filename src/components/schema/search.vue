@@ -93,7 +93,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['GetShopInfo', 'GetShopSearchInfo', 'GetUserIndex']),
+    ...mapActions(['GetShopInfo', 'GetShopSearchInfo', 'GetUserIndex', 'GetCorporationIndex', 'GetIndexStatistic']),
     ...mapMutations(['SET_SEARCH_FORM', 'CLEAR_SEARCH_FORM']),
     /**
      * [setObjAttr 设置参数为键值对的对象]
@@ -163,6 +163,23 @@ export default {
             startDate: params.commitTime && params.commitTime[0],
             endDate: params.commitTime && params.commitTime[1],
             status: this.status
+          }
+        },
+        '用户管理_企业认证': {
+          action: 'GetCorporationIndex',
+          params: {
+            ...params,
+            startDate: params.commitTime && params.commitTime[0],
+            endDate: params.commitTime && params.commitTime[1],
+            status: this.status
+          }
+        },
+        '首页_营收统计': {
+          action: 'GetIndexStatistic',
+          params: {
+            ...params,
+            startTime: params.daterange && params.daterange[0],
+            endTime: params.daterange && params.daterange[1]
           }
         }
       }

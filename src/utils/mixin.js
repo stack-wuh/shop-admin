@@ -210,6 +210,7 @@ const SearchList = [
         label: '',
         type: 'buttongroup',
         value: -1,
+        field: 'timeState',
         list: [
           {
             text: '今天',
@@ -268,19 +269,19 @@ const SearchList = [
       {
         label: '提交时间',
         type: 'daterange',
-        field: '',
+        field: 'commitTime',
         value: '',
       },
       {
         label: '账号',
         type: 'default',
-        field: '',
+        field: 'username',
         value: '',
       },
       {
         label: '公司名称',
         type: 'default',
-        field: '',
+        field: 'companyName',
         value: '',
       }
     ],

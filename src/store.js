@@ -10,6 +10,7 @@ import {
 import User from '@/store/module/use'
 import Index from '@/store/module/index'
 import Shop from '@/store/module/shop'
+import Website from '@/store/module/website'
 
 export default new Vuex.Store({
   state, mutations, actions, getters,
@@ -17,5 +18,6 @@ export default new Vuex.Store({
     User,
     Index,
     Shop,
+    Website
   }
 })

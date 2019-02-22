@@ -33,10 +33,24 @@ export function getUserIndex({
   })
 }
 
-export function getCorporationIndex(data){
+export function getCorporationIndex({
+  startDate,
+  endDate,
+  status,
+  userName,
+  companyName,
+  currPageNo = 1
+}){
   return request({
-    url: '/BackendUser/checkCompanyCert.do?',
+    url: '/BackendUser/checkCompanyCert.do',
     method: 'post',
-    data
+    data: {
+      startDate,
+      endDate,
+      status,
+      userName,
+      companyName,
+      currPageNo
+    }
   })
 }

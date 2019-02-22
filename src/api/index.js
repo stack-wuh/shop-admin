@@ -8,10 +8,24 @@ export function getIndexView(){
 }
 
 
-export function getIndexStatistic(data){
+export function getIndexStatistic({
+  timeState,
+  startTime,
+  endTime,
+  orderCode,
+  merchantName,
+  currPageNo = 1
+}){
   return request({
     method: 'post',
     url: '/home/revenueStatistics.do',
-    data
+    data: {
+      timeState,
+      startTime,
+      endTime,
+      orderCode,
+      merchantName,
+      currPageNo
+    }
   })
 }

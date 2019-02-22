@@ -1,8 +1,6 @@
 import $router from 'vue-router'
 import $store from '@/store'
 
-
-
 /**
  * [handleJump2other 点击跳转事件]
  * @method handleJump2other
@@ -60,7 +58,30 @@ export const handleSwitchChange = (argus) => {
   })
 }
 
+/**
+ * [handleSwitchChangeWeb 网站管理 -- 底部导航栏的状态切换]
+ * @method handleSwitchChangeWeb
+ * @param  {[type]}              argus [description]
+ * @return {[type]}                    [description]
+ */
+export const handleSwitchChangeWebBottom = (argus) => {
+  let {params: {id }} = argus
+  $store.dispatch('SetBottomItemStatusById', id)
+}
+
+/**
+ * [handleSwitchChangeWebIntegral 网站管理 -- 积分管理的状态切换]
+ * @method handleSwitchChangeWebIntegral
+ * @param  {[type]}                      argus [description]
+ * @return {[type]}                            [description]
+ */
+export const handleSwitchChangeWebIntegral = argus => {
+  let {params: {id }} = argus
+  $store.dispatch('SetIntegralStatusById', id)
+}
+
 export default {
   handleJump2other,
-  handleSwitchChange
+  handleSwitchChange,
+  handleSwitchChangeWebBottom
 }

@@ -1,6 +1,8 @@
 import {
   handleJump2other,
   handleSwitchChange,
+  handleSwitchChangeWebBottom,
+  handleSwitchChangeWebIntegral,
 } from '@/utils/table.click.js'
 
 
@@ -14,12 +16,12 @@ export const table = [
       {
         label: '订单编号',
         type: 'default',
-        field: '',
+        field: 'orderCode',
       },
       {
         label: '商家名称',
         type: 'default',
-        field: '',
+        field: 'merchantName',
       },
       {
         label: '商家账号',
@@ -29,17 +31,17 @@ export const table = [
       {
         label: '时间',
         type: 'default',
-        field: '',
+        field: 'time',
       },
       {
         label: '订单金额',
         type: 'default',
-        field: '',
+        field: 'money',
       },
       {
         label: '佣金',
         type: 'default',
-        field: '',
+        field: 'brokerage',
       },
       {
         label: '操作',
@@ -62,12 +64,12 @@ export const table = [
     list: [
       {
         label: '位置',
-        field: '',
+        field: 'adName',
         type: 'default'
       },
       {
         label: 'banner',
-        field: '',
+        field: 'pic',
         type: 'image',
         width: 600
       },
@@ -90,18 +92,24 @@ export const table = [
     list: [
       {
         label: '标题',
-        field: '',
+        field: 'title',
         type: 'default'
       },
       {
         label: '上传时间',
-        field: '',
+        field: 'createTime',
         type: 'default'
       },
       {
         label: '状态',
-        field: '',
-        type: 'default'
+        field: 'status',
+        type: 'switch',
+        activeText: '已开启',
+        inactiveText: '已关闭',
+        activeValue: 0,
+        inactiveValue: 1,
+        inactiveColor: '#ccc',
+        change: handleSwitchChangeWebBottom
       },
       {
         label: '操作',
@@ -111,9 +119,9 @@ export const table = [
             text: '查看详情',
             click: handleJump2other
           },
-          {
-            text: '关闭'
-          }
+          // {
+          //   text: '关闭'
+          // }
         ]
       }
     ]
@@ -184,18 +192,23 @@ export const table = [
     list: [
       {
         label: '积分来源/消耗名称',
-        field: '',
+        field: 'name',
         type: 'default'
       },
       {
         label: '积分详情',
-        field: '',
+        field: 'socer',
         type: 'default'
       },
       {
         label: '状态',
-        field: '',
-        type: 'default'
+        field: 'status',
+        type: 'switch',
+        activeText: '已开启',
+        inactiveText: '已关闭',
+        activeValue: 1,
+        inactiveValue: 0,
+        change: handleSwitchChangeWebIntegral
       },
       {
         label: '操作',
@@ -203,9 +216,6 @@ export const table = [
         list: [
           {
             text: '编辑',
-          },
-          {
-            text: '关闭',
           }
         ]
       }
@@ -223,13 +233,13 @@ export const table = [
         type: 'default'
       },
       {
-        label: '用户名',
-        field: '',
+        label: '用户姓名',
+        field: 'realName',
         type: 'default'
       },
       {
         label: '身份证号',
-        field: '',
+        field: 'idno',
         type: 'default'
       },
       {
@@ -241,7 +251,7 @@ export const table = [
       },
       {
         label: '积分',
-        field: '',
+        field: 'score',
         type: 'default'
       },
       {
@@ -307,22 +317,24 @@ export const table = [
     list: [
       {
         label: '账号',
-        field: '',
+        field: 'userName',
         type: 'default'
       },
       {
         label: '公司名称',
-        field: '',
+        field: 'companyName',
         type: 'default'
       },
       {
         label: '状态',
-        field: '',
-        type: 'default'
+        field: 'status',
+        type: 'statusrange',
+        order: ['待审核', '审核未通过', '审核已通过'],
+        state: ['', 'danger', 'success']
       },
       {
         label: '提交时间',
-        field: '',
+        field: 'authenticationTime',
         type: 'default'
       },
       {

@@ -1,8 +1,10 @@
 <template>
   <section class="wrapper">
     <my-schema :panelList="[{name: '协议管理'}]" >
-      <el-button @click="handleClick" slot="right" type="primary">{{type == 'paper' ? '编辑' : '保存'}}</el-button>
-      <my-paper :type="type"></my-paper>
+      <el-button @click="handleClick" slot="right" v-if="type == 'paper'" type="primary">编辑</el-button>
+      <el-button @click="handleClickBtnSubmit" slot="right" v-if="type == 'editor'" type="primary">保存</el-button>
+      <article id="editor" v-if="type == 'editor' && this.info.content"></article>
+      <span v-else>暂无详情</span>
     </my-schema>
   </section>
 </template>
@@ -22,18 +24,50 @@ export default {
   filters: {},
   data(){
     return {
-      type: 'paper'
+      type: 'paper',
+      form: {
+        content: ''
+      },
+      info: {
+        content: 'Hello world'
+      }
     }
   },
   methods: {
+    ...mapActions(['SetAgreementByContent', ]),
+    handleClickBtnSubmit(){
+      this.SetAgreementByContent(this.form.content).then(res => {
+        this.type = 'paper'
+        this.form.content = ''
+      })
+    },
     editorInit(){
       let E = window.wangEditor
       let editor = new E('#editor')
-      editor.create()
+
+      setTimeout(() => {
+        editor.customConfig = {
+          uploadImgServer: window.uploadPath,
+          uploadImgMaxSize: 3 * 1024 * 1024,
+          uploadImgMaxLength: 5,
+          uploadFileName: 'file',
+          uploadImgHooks: {
+            customInsert: function (insertImg, result, editor) {
+              let {url} = result
+              insertImg(url)
+            }
+          },
+          onchange: e => {
+            this.form.content = e
+          }
+        }
+        editor.create()
+        editor.txt.html(this.info.content)
+      }, 200)
     },
     handleClick(){
       this.type = this.type == 'paper' ? 'editor' : 'paper'
-      this.type == 'editor' && setTimeout(this.editorInit, 200)
+      this.type == 'editor' && this.editorInit()
     }
   },
   created(){},

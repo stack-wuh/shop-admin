@@ -1,6 +1,6 @@
 <template>
   <section class="wrapper">
-    <my-table params="banner" :list="[{},{}]" :border="false"></my-table>
+    <my-table params="banner" :list="list" border></my-table>
   </section>
 </template>
 <script>
@@ -16,10 +16,21 @@ export default {
   computed: {},
   filters: {},
   data(){
-    return {}
+    return {
+      list: [],
+    }
   },
-  methods: {},
-  created(){},
+  methods: {
+    ...mapActions(['GetWebBannerOrAd']),
+    fetchData(){
+      this.GetWebBannerOrAd(1).then(res => {
+        this.list = res.data
+      })
+    }
+  },
+  created(){
+    this.fetchData()
+  },
   mixins:[]
 }
 </script>

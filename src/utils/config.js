@@ -59,3 +59,4 @@ var $bus = new Vue()
 Vue.prototype.$bus = $bus
 
 window._g = _g
+window.uploadPath = process.env.VUE_APP_BASE_URL + 'web/updateAd.do'

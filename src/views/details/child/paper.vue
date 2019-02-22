@@ -1,11 +1,8 @@
 <template>
-  <section class="art-wrapper">
-    <article v-if="type == 'paper'" class="art-paper">
-      党和国家机关通用公文的种类国务院办公厅曾发布的《国家行政机关公文处理办法》，经过多年的实践，修订后的《办法》从1994年1月1日起施行。把公文种类调整为十二类十三种，删去“指令”、“决议”、“布告”三个文种，将“议案”作为一个新文种列入主要公文种类。即：命令（令），议案，决定，指示，公告，通告，通知，通报，报告，请示，批复，函，会议纪要。此外，中共中央办公厅于1989年4月25日发布的《中国共产党各级领导机关文件处理条例（试行）》中，正式文件的种类里还列有公报、条例、规定三个文种。这样，现在常用的公文种类总共有十六种。
-
-     在选择词语的过程中应注意： 认真辨析词语的确切含义，使词语的意义符合客观实际；注意分辨词语的感情色彩，以正确表达作者的立场观点；注意词语声音和语调对语义的影响，以提高表达效果；注意词语间的正确搭配，遵循语言法则；注意公文具体使用场合对词语风格的要求，维护公文的严肃性及强制执行性；注意针对公文具体收受对象的特点选词，以“有的放矢”便于理解和执行；注意根据公文中所涉及的人和事物的特殊性质选词，以获得更加鲜明直接的表达效果；注意根据上下文的需要选词，以维护公文的完整有效性；注意根据文种的不同特点选词，以保证语言得体而有力；注意词语的规范性，以提高公文沟通的效果，扩展沟通的范围。
-
-     由于表意和表现特殊色彩的需要，公文中有一些出现频率较高的词语。这些词语词形确定，词义精确特定，用途稳定专门，并为从事公文工作的人们所熟悉，它们就是公文专用词语。正确地使用公文专用词语可使写者顺手，读者便当，保证表意精当得体，理解精确周严，可提高制发和处理公文的质量与效率。
+  <section class="art-wrapper" :key='"111ads"'>
+    <article v-if="type == 'paper' && info.content" class="art-paper" v-html="info.content"></article>
+    <article v-if="type == 'paper' && !info.content" class="art-paper">
+      <span>暂无详情</span>
     </article>
     <section v-else id="editor"></section>
   </section>
@@ -17,24 +14,54 @@ export default {
     type: {
         type: String,
         default: 'paper'
+    },
+    info: {
+      type: Object,
+      required: true,
     }
   },
   name: 'paper',
   components: {},
-  computed: {},
+  computed: {
+    changeType(){
+      return
+    }
+  },
   filters: {},
   data(){
     return {}
   },
+  watch: {
+
+  },
   methods: {
     editorInit(){
-      let E = window.wangEditor
-      let editor = new E('#editor')
-      editor.create()
+      if(this.type == 'editor'){
+        let E = window.wangEditor
+        let editor = new E('#editor')
+        editor.customConfig = {
+          uploadImgServer: window.uploadPath,
+          uploadImgMaxSize: 3 * 1024 * 1024,
+          uploadImgMaxLength: 5,
+          uploadFileName: 'file',
+          uploadImgHooks: {
+            customInsert: function (insertImg, result, editor) {
+              let {url} = result
+              insertImg(url)
+            }
+          },
+        }
+        editor.customConfig.onchange = e => {
+          console.log(e)
+        }
+        editor.create()
+        editor.txt.html('asd')
+      }
     }
   },
-  created(){
-    this.type !== 'paper' && setTimeout(this.editorInit, 1000)
+  mounted(){
+      this.editorInit()
+      console.log('is init')
   },
   mixins:[]
 }

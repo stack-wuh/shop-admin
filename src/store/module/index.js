@@ -28,7 +28,19 @@ const actions = {
     return Promise.resolve(response)
   },
 
-  async GetIndexStatistic({commit}, {
+  /**
+   * [GetIndexStatistic 首页 -- 营收统计]
+   * @method GetIndexStatistic
+   * @param  {[type]}          commit        [description]
+   * @param  {Number}          [page=1]      [description]
+   * @param  {Number}          [timeState=0] [description]
+   * @param  {[type]}          startTime     [description]
+   * @param  {[type]}          endTime       [description]
+   * @param  {[type]}          orderCode     [description]
+   * @param  {[type]}          merchantName  [description]
+   * @return {Promise}                       [description]
+   */
+  async GetIndexStatistic({commit, rootState}, {
     page = 1,
     timeState = 0,
     startTime,
@@ -42,10 +54,12 @@ const actions = {
       startTime,
       endTime,
       orderCode,
-      merchantName
+      merchantName,
+      ...rootState.search
     })
-
-
+    commit('SET_SHOP_STORE', response.data)
+    Promise.resolve(response)
+    return response
   }
 }
 

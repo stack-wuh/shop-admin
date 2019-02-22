@@ -1,28 +1,30 @@
 <template>
   <section class="web-detail__wrapper">
     <my-crumbs :list="infoObj.crumbsList" >
-      <el-button slot="right" type="success" @click="handleBtnClick" >{{type === 'paper' ? '修改' : '保存'}}</el-button>
+      <el-button v-if="type == 'paper'" slot="right" type="success" @click="handleBtnClick">修改</el-button>
+      <el-button v-if="type == 'editor'" slot="right" type="success" @click="handleBtnSubmit">保存</el-button>
     </my-crumbs>
 
     <section class="web-art__area">
       <section v-if="type == 'paper'">
         <div class="web-art__line">
           <span class="web-art__label">标题</span>
-          <span>买家服务</span>
+          <span>{{info.title}}</span>
         </div>
         <div class="web-art__line">
           <span class="web-art__label">详情</span>
-          <article class="web-art__paper">
-            党和国家机关通用公文的种类国务院办公厅曾发布的《国家行政机关公文处理办法》，经过多年的实践，修订后的《办法》从1994年1月1日起施行。把公文种类调整为十二类十三种，删去“指令”、“决议”、“布告”三个文种，将“议案”作为一个新文种列入主要公文种类。即：命令（令），议案，决定，指示，公告，通告，通知，通报，报告，请示，批复，函，会议纪要。此外，中共中央办公厅于1989年4月25日发布的《中国共产党各级领导机关文件处理条例（试行）》中，正式文件的种类里还列有公报、条例、规定三个文种。这样，现在常用的公文种类总共有十六种。
-
-       在选择词语的过程中应注意： 认真辨析词语的确切含义，使词语的意义符合客观实际；注意分辨词语的感情色彩，以正确表达作者的立场观点；注意词语声音和语调对语义的影响，以提高表达效果；注意词语间的正确搭配，遵循语言法则；注意公文具体使用场合对词语风格的要求，维护公文的严肃性及强制执行性；注意针对公文具体收受对象的特点选词，以“有的放矢”便于理解和执行；注意根据公文中所涉及的人和事物的特殊性质选词，以获得更加鲜明直接的表达效果；注意根据上下文的需要选词，以维护公文的完整有效性；注意根据文种的不同特点选词，以保证语言得体而有力；注意词语的规范性，以提高公文沟通的效果，扩展沟通的范围。
+          <article
+            class="web-art__paper"
+            v-html="info.content"
+            v-if="info.content">
           </article>
+          <span v-else >暂无详情</span>
         </div>
       </section>
       <section v-else>
         <div class="web-art__line flex-align__center">
           <span class="web-art__label">标题</span>
-          <el-input placeholder="请编辑标题" class="my-input__220" />
+          <el-input v-model="form.title" placeholder="请编辑标题" class="my-input__220" />
         </div>
         <div class="web-art__line">
           <span class="web-art__label">详情</span>
@@ -50,24 +52,69 @@ export default {
   filters: {},
   data(){
     return {
-      type: 'paper'
+      type: 'paper',
+      info: {},
+      form: {}
     }
   },
   methods: {
+    ...mapActions(['GetBottomItemById', 'SetBottomItemInfoByParams']),
     handleBtnClick(){
+      let {id, title, content} = this.info
+      this.form = {
+        id, title, content
+      }
       this.type = this.type == 'paper' ? 'editor' : 'paper'
-      this.type !== 'paper' && this.editorInit()
+      setTimeout(() => {
+        this.type !== 'paper' && this.editorInit()
+        this.fetchData()
+      }, 200)
     },
+    handleBtnSubmit(){
+      this.SetBottomItemInfoByParams(this.form).then(res => {
+        setTimeout(() => {
+          this.type = 'paper'
+          this.form = {}
+          this.fetchData()
+        }, 500)
+      })
+    },
+    /*
+     * 初始化 富文本编辑器
+     */
     editorInit(){
       let E = window.wangEditor
       let editor = new E('#editor')
+
       setTimeout(() => {
+        editor.customConfig = {
+          uploadImgServer: window.uploadPath,
+          uploadImgMaxSize: 3 * 1024 * 1024,
+          uploadImgMaxLength: 5,
+          uploadFileName: 'file',
+          uploadImgHooks: {
+            customInsert: function (insertImg, result, editor) {
+              let {url} = result
+              insertImg(url)
+            }
+          },
+          onchange: e => {
+            this.form.content = e
+          }
+        }
         editor.create()
+        editor.txt.html(this.info.content)
       }, 200)
+    },
+    
+    fetchData(){
+      this.GetBottomItemById(this.$route.query.id).then(res => {
+        this.info = res.data
+      })
     }
   },
   created(){
-
+    this.fetchData()
   },
   mixins:[_getInfoList]
 }

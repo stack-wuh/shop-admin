@@ -18,6 +18,8 @@
               :inactive-text="item.inactiveText"
               :active-value="item.activeValue"
               :inactive-value="item.inactiveValue"
+              :active-color="item.activeColor"
+              :inactive-color="item.inactiveColor"
                ></el-switch>
           </template>
         </el-table-column>

@@ -1,8 +1,8 @@
 <template>
   <section class="wrapper">
     <my-schema search :panelList="panelList" :searchList="searchList">
-      <my-table :list="[{}, {}, {}]" :info="{name: 'shadow'}"></my-table>
-      <my-pagination :total="10" ></my-pagination>
+      <my-table :list="list"></my-table>
+      <my-pagination :total="total" :currPageNo="currPageNo"></my-pagination>
     </my-schema>
   </section>
 </template>
@@ -24,7 +24,13 @@ export default {
     MyTable,
     MyPagination,
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      list: state => state.list,
+      total: state => state.total,
+      currPageNo: state => state.currPageNo
+    })
+  },
   filters: {},
   data(){
     return {}
@@ -35,7 +41,6 @@ export default {
 
   created(){
     this.GetIndexStatistic({})
-    console.log(this.$store)
   },
   mixins:[_getSearchList, _getPanelList]
 }

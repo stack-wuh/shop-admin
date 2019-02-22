@@ -25,6 +25,11 @@ export const $to = ({method = 'push', name, params, path, query}, deply = 1) => 
   }, deply * 1000)
 }
 
+/**
+ * [ObjNotNull 排除对象中的空值, 除false与0 之外]
+ * @method ObjNotNull
+ * @param  {[type]}   obj [description]
+ */
 export const ObjNotNull = obj => {
   let _obj = {}
   if(typeof obj !== 'object') return new Error('argus expect Object! please try again after validate params.')
@@ -33,7 +38,6 @@ export const ObjNotNull = obj => {
       _obj[k] = typeof obj[k] === 'boolean' ? ( obj[k] === true ? 1 : 0 ) : obj[k]
     }
   }
-  console.log(_obj)
   return _obj
 }
 

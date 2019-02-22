@@ -37,7 +37,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['GetShopOneById', 'GetShopSearchOneById']),
+    ...mapActions(['GetShopOneById', 'GetShopSearchOneById', 'GetBottomItemById']),
     fetchData(){
       const _obj = {
         '店铺管理_店铺管理': {
@@ -51,9 +51,9 @@ export default {
           params: {
             id: this.$route.query.id
           }
-        }
+        },
       }
-      const obj = _obj[`${this.$route.query.l}_${this.$route.query.f}`]
+      const obj = this.$route.query.c ? _obj[`${this.$route.query.l}_${this.$route.query.f}_${this.$route.query.c}`] : _obj[`${this.$route.query.l}_${this.$route.query.f}`]
       this[obj.action].call(this, {...obj.params})
     }
   },

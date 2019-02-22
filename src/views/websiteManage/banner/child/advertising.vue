@@ -8,6 +8,8 @@
           <el-upload
             :limit="1"
             :action="uploadPath"
+            name="file"
+            :on-success="(e) => {return handleSuccessImg(e, item)}"
             >
             <el-button type="primary" size="small">点击上传</el-button>
           </el-upload>
@@ -26,7 +28,7 @@ export default {
   filters: {},
   data(){
     return {
-      uploadPath: '',
+      uploadPath: window.uploadPath,
       forms: [
         {
           label: '顶部导航广告位',
@@ -46,8 +48,28 @@ export default {
       ]
     }
   },
-  methods: {},
-  created(){},
+  methods: {
+    ...mapActions(['GetWebBannerOrAd']),
+    handleSuccessImg(argus){
+
+    },
+
+    /**
+     * [fetchData fetch]
+     * @method fetchData
+     * @return {[type]}  [description]
+     */
+    fetchData(){
+      this.GetWebBannerOrAd(0).then(res => {
+        res.data.map((k, i) => {
+          this.forms[i].img = k.pic
+        })
+      })
+    }
+  },
+  created(){
+    this.fetchData()
+  },
   mixins:[]
 }
 </script>
