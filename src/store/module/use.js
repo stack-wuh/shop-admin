@@ -2,6 +2,7 @@ import {
   signinByUsername,
   getUserIndex,
   getCorporationIndex,
+  getUserManagerList,
 } from '@/api/user'
 import {
   $to,
@@ -10,11 +11,16 @@ import {
 
 const state = {
   userInfo: {}, // 缓存用户信息
+
+  list: [],
 }
 
 const mutations = {
     SET_USERINFO: (state, params) => {
       state.userInfo = params
+    },
+    SET_USER_LIST: (state, params) => {
+      state.list = params
     }
 }
 
@@ -65,6 +71,17 @@ const actions = {
     const response = await getCorporationIndex({...params, ...rootState.search})
     commit('SET_SHOP_STORE', response.data)
     return response
+  },
+
+  /**
+   * [getUserManagerList 账号管理 -- 获取全部的管理员账号]
+   * @method getUserManagerList
+   * @param  {[type]}           commit [description]
+   * @return {Promise}                 [description]
+   */
+  async getUserManagerList({commit}) {
+    const response  = await getUserManagerList()
+    commit('SET_USER_LIST', response.data)
   }
 }
 

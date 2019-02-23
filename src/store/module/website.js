@@ -9,7 +9,10 @@ import {
   getIntegralListByStatus,
   setAgreementByContent,
   setIntegralStatusById,
-  getNewsListByClassify
+  getNewsListByClassify,
+  getConsumerInfo,
+  getNewsList,
+  setConsumerStatus
 } from '@/api/website'
 
 const state = {
@@ -155,7 +158,41 @@ const actions = {
     }, 3000)
   },
 
-  
+  /**
+   * [GetConsumerInfo 网站管理 -- 商家信息管理]
+   * @method GetConsumerInfo
+   * @param  {[type]}        commit [description]
+   * @return {Promise}              [description]
+   */
+  async GetConsumerInfo({commit}) {
+    const response = await getConsumerInfo()
+    commit('SET_WEB_INFO', response.data)
+  },
+
+  /**
+   * [GetNewsList 网站管理 -- 新闻中心 -- 根据belongId获取新闻列表]
+   * @method GetNewsList
+   * @param  {[type]}    commit   [description]
+   * @param  {[type]}    belongId [description]
+   * @return {Promise}            [description]
+   */
+  async GetNewsList({commit}, belongId = 0) {
+    const response = await getNewsList(belongId)
+    commit('SET_WEB_LIST', response)
+  },
+
+  /**
+   * [SetConsumerStatus 网站管理 -- 商家信息管理 -- 状态切换]
+   * @method SetConsumerStatus
+   * @param  {[type]}          dispatch [description]
+   * @return {Promise}                  [description]
+   */
+  async SetConsumerStatus({dispatch}) {
+    const response = await setConsumerStatus()
+    setTimeout(() => {
+      dispatch('GetConsumerInfo')
+    }, 1000)
+  }
 }
 
 const getters = {}
