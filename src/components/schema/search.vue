@@ -93,7 +93,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['GetShopInfo', 'GetShopSearchInfo', 'GetUserIndex', 'GetCorporationIndex', 'GetIndexStatistic']),
+    ...mapActions(['GetShopInfo', 'GetShopSearchInfo', 'GetUserIndex', 'GetCorporationIndex', 'GetIndexStatistic', 'GetOrderListByParams']),
     ...mapMutations(['SET_SEARCH_FORM', 'CLEAR_SEARCH_FORM']),
     /**
      * [setObjAttr 设置参数为键值对的对象]
@@ -180,6 +180,24 @@ export default {
             ...params,
             startTime: params.daterange && params.daterange[0],
             endTime: params.daterange && params.daterange[1]
+          }
+        },
+        '订单管理_自营订单': {
+          action: 'GetOrderListByParams',
+          params: {
+            ...params,
+            startDate: params.orderTime && params.orderTime[0],
+            endDate: params.orderTime && params.orderTime[1],
+            status: this.status
+          }
+        },
+        '订单管理_第三方订单': {
+          action: 'GetOrderListByParams',
+          params: {
+            ...params,
+            startDate: params.orderTime && params.orderTime[0],
+            endDate: params.orderTime && params.orderTime[1],
+            status: this.status
           }
         }
       }

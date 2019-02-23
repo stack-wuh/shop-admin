@@ -25,7 +25,7 @@
         </el-table-column>
         <el-table-column :width="item.width" align="center" v-if="item.type === 'statusrange'" :label="item.label" :prop="item.field">
           <template slot-scope="scope">
-            <el-tag :type="item.state[scope.row.status]" >{{item.order[scope.row.status]}}</el-tag>
+            <el-tag :type="item.state[scope.row[item.field]]" >{{item.order[scope.row[item.field]]}}</el-tag>
           </template>
         </el-table-column>
         <el-table-column :width="item.width" fixed="right" align="center" v-if="item.type === 'setting'" :label="item.label" :prop="item.field">
