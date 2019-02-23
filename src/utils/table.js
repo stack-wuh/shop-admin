@@ -161,12 +161,12 @@ export const table = [
     list: [
       {
         label: '标题',
-        field: '',
+        field: 'name',
         type: 'default'
       },
       {
         label: '发布时间',
-        field: '',
+        field: 'createTime',
         type: 'default'
       },
       {
@@ -473,33 +473,35 @@ export const table = [
     list: [
       {
         label: '订单编号',
-        field: '',
+        field: 'orderCode',
         type: 'default'
       },
       {
         label: '买家名称',
-        field: '',
+        field: 'realName',
         type: 'default'
       },
       {
         label: '买家账号',
-        field: '',
+        field: 'userName',
         type: 'default'
       },
       {
         label: '下单时间',
-        field: '',
+        field: 'creatTime',
         type: 'default'
       },
       {
         label: '合计',
-        field: '',
+        field: 'money',
         type: 'default'
       },
       {
         label: '订单状态',
-        field: '',
-        type: 'default'
+        field: 'reStatus',
+        type: 'statusrange',
+        order: ['已取消', '已删除', '未付款', '已付款', '已发货', '交易成功', '交易关闭'],
+        state: ['danger', 'danger', 'info', '', 'success', 'success', 'danger'],
       },
       {
         label: '操作',
@@ -521,7 +523,7 @@ export const table = [
     list: [
       {
         label: '订单编号',
-        field: '',
+        field: 'orderCode',
         type: 'default'
       },
       {
@@ -536,18 +538,20 @@ export const table = [
       },
       {
         label: '下单时间',
-        field: '',
+        field: 'creatTime',
         type: 'default'
       },
       {
         label: '合计',
-        field: '',
+        field: 'money',
         type: 'default'
       },
       {
         label: '订单状态',
-        field: '',
-        type: 'default'
+        field: 'reStatus',
+        type: 'statusrange',
+        order: ['已取消', '已删除', '未付款', '已付款', '已发货', '交易成功', '交易关闭'],
+        state: ['danger', 'danger', 'info', '', 'success', 'success', 'danger'],
       },
       {
         label: '操作',
