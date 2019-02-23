@@ -8,10 +8,11 @@
             inactive-text="关闭"
             :active-value="1"
             :inactive-value="0"
-            v-model="isOpen"></el-switch>
+            :value="info.status"
+            @change="SetConsumerStatus"></el-switch>
         </el-form-item>
         <el-form-item label="管理说明">
-          <el-input type="textarea" rows="3"></el-input>
+          <el-input v-model="info.content" disabled type="textarea" rows="3"></el-input>
         </el-form-item>
       </el-form>
     </my-schema>
@@ -33,7 +34,11 @@ export default {
   components: {
     MySchema,
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      info: state => state.Website.info
+    })
+  },
   filters: {},
   data(){
     return {
@@ -41,8 +46,15 @@ export default {
       isOpen: 0,
     }
   },
-  methods: {},
-  created(){},
+  methods: {
+    ...mapActions(['GetConsumerInfo', 'SetConsumerStatus']),
+    fetchData(){
+      this.GetConsumerInfo()
+    }
+  },
+  created(){
+    this.fetchData()
+  },
   mixins:[]
 }
 </script>

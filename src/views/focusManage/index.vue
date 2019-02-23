@@ -45,7 +45,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['GetShopInfo', 'GetShopSearchInfo', 'GetUserIndex', 'GetCorporationIndex']),
+    ...mapActions(['GetShopInfo', 'GetShopSearchInfo', 'GetUserIndex', 'GetCorporationIndex', 'GetOrderListByParams']),
     handlePanelChange(e){
       this.fetchData(e)
     },
@@ -77,6 +77,20 @@ export default {
           action: 'GetCorporationIndex',
           params: {
             status: params.index - 1  >= 0 ? params.index - 1 : ''
+          }
+        },
+        '订单管理_自营订单': {
+          action: 'GetOrderListByParams',
+          params: {
+            gooodsStatus: params.index - 1 >= 0 ? params.index - 1 : '',
+            orderStates: 1
+          }
+        },
+        '订单管理_第三方订单': {
+          action: 'GetOrderListByParams',
+          params: {
+            gooodsStatus: params.index - 1 >= 0 ? params.index - 1 : '',
+            orderStates: 0
           }
         }
       }

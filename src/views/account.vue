@@ -2,7 +2,7 @@
   <section class="wrapper">
     <my-schema :panelList="panelList">
       <el-button type="primary" slot="right">新增管理员</el-button>
-      <my-table :list='[{}, {}, {}]'></my-table>
+      <my-table :list='list'></my-table>
     </my-schema>
   </section>
 </template>
@@ -20,15 +20,23 @@ export default {
     MySchema,
     MyTable,
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      list: state => state.User.list
+    })
+  },
   filters: {},
   data(){
     return {}
   },
-  methods: {},
+  methods: {
+    ...mapActions(['getUserManagerList']),
+    fetchData(){
+      this.getUserManagerList()
+    }
+  },
   created(){
-    console.log(process.env)
-    console.log(process.env.VUE_APP_HTTP)
+    this.fetchData()
   },
   mixins:[_getPanelList]
 }

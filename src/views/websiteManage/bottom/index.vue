@@ -71,13 +71,14 @@ export default {
   },
   methods: {
     ...mapMutations(['SET_SCHEMA_HEADER_CURRENT']),
-    ...mapActions(['GetBottomListByStatus', 'GetNoticeListByStatus', 'GetIntegralListByStatus']),
+    ...mapActions(['GetBottomListByStatus', 'GetNoticeListByStatus', 'GetIntegralListByStatus', 'GetNewsList']),
     fetchData(params = {}){
       let {index} = params
       switch(this.$route.query.f){
         case '底部导航栏管理': return this.GetBottomListByStatus(index)
         case '公告管理': return  this.GetNoticeListByStatus(index)
         case '积分管理': return this.GetIntegralListByStatus()
+        case '新闻中心': return this.GetNewsList(index)
         default: return this.GetBottomListByStatus(index)
       }
 
