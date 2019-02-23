@@ -99,3 +99,24 @@ export const getNewsListByClassify = id =>
       belongId: id
     }
   })
+
+export const getConsumerInfo = () =>
+  request({
+    method: 'post',
+    url: '/web/checkConsumerNews.do',
+  })
+
+export const setConsumerStatus = () =>
+  request({
+    method: 'post',
+    url: '/web/updateConsumerNews.do'
+  })
+
+export const getNewsList = (belongId) =>
+  request({
+    method: 'post',
+    url: '/web/checkNewsManager.do',
+    data: {
+      belongId
+    }
+  })

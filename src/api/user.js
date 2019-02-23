@@ -54,3 +54,9 @@ export function getCorporationIndex({
     }
   })
 }
+
+export const getUserManagerList = () =>
+  request({
+    method: 'post',
+    url: '/BackendLoginerController/getbackendLoginerList.do',
+  })
