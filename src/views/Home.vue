@@ -1,13 +1,12 @@
 <template>
   <div class="home">
     <MyHeader />
-    <section class="body-wrapper">  
+    <section class="body-wrapper">
       <MyAside />
-      <transition name="fade">
+      <my-dialog></my-dialog>
         <section class="router-wrapper">
             <router-view />
         </section>
-      </transition>
     </section>
   </div>
 </template>
@@ -16,17 +15,18 @@
 import MyHeader from '@/components/nav/header'
 import MyAside from '@/components/nav/aside'
 import MyFooter from '@/components/nav/footer'
+import MyDialog from '@/components/schema/dialog'
+
 export default {
   name: 'home',
   components: {
     MyHeader,
     MyAside,
     MyFooter,
+    MyDialog,
   },
   data() {
-    return {
-      isShowLoading: false
-    }
+    return {}
   }
 }
 </script>

@@ -9,6 +9,8 @@
             :limit="1"
             :action="uploadPath"
             name="file"
+            class="avatar-uploader"
+            :show-file-list="false"
             :on-success="(e) => {return handleSuccessImg(e, item)}"
             >
             <el-button type="primary" size="small">点击上传</el-button>

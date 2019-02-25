@@ -4,6 +4,9 @@
       :panelList="getPanelList"
       @panel-click="handlePanelClick"
       >
+        <div v-if="canShowEditBtnPath.includes($route.path)" slot="right">
+          <el-button @click="SET_DIALOG_INFO({isShowDialog: true, title: changePath})" type="primary" size="small">新增</el-button>
+        </div>
         <my-table :list="list" border></my-table>
     </my-schema>
   </section>
@@ -33,6 +36,7 @@ const PanelList = [
     name: '关于我们'
   }
 ]
+const canShowEditBtnPath = ['/website/news', '/website/notice']
 
 export default {
   props: {},
@@ -53,6 +57,7 @@ export default {
       switch(f){
         case '积分管理': return [{name: '积分管理'}]
         case '新闻中心': return [{name: '风类新闻'}, {name: '水类新闻'}, {name: '电类新闻'}, {name: '消防类新闻'}]
+        case '公告管理': return [{name: '公告管理'}]
         default: return  PanelList
       }
     }
@@ -61,7 +66,8 @@ export default {
   data(){
     return {
       PanelList,
-      isRefresh: true
+      isRefresh: true,
+      canShowEditBtnPath,
     }
   },
   watch: {
@@ -70,7 +76,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['SET_SCHEMA_HEADER_CURRENT']),
+    ...mapMutations(['SET_SCHEMA_HEADER_CURRENT', 'SET_DIALOG_INFO']),
     ...mapActions(['GetBottomListByStatus', 'GetNoticeListByStatus', 'GetIntegralListByStatus', 'GetNewsList']),
     fetchData(params = {}){
       let {index} = params

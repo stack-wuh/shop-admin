@@ -25,7 +25,7 @@
                 </el-table-column>
                 <el-table-column align="center" label="操作">
                   <template slot-scope="scope">
-                    <el-button type="danger" size="mini">编辑</el-button>
+                    <el-button type="danger" size="mini" @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, form: scope.row})">编辑</el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -50,8 +50,8 @@
           </el-table-column>
           <el-table-column align="center" label="操作">
             <template slot-scope="scope">
-              <el-button size="small" type="success">编辑</el-button>
-              <el-button>添加</el-button>
+              <el-button size="small" type="primary" @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, form: scope.row})">添加</el-button>
+              <el-button size="small" type="success" @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, form: scope.row})">编辑</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -82,7 +82,11 @@ export default {
   components: {
     MySchema,
   },
-  computed: {},
+  computed: {
+    getTitle(){
+      return this.panelList[this.currPanelIndex]['name']
+    }
+  },
   filters: {},
   data(){
     return {
@@ -93,6 +97,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['SET_DIALOG_INFO']),
     ...mapActions(['GetClassifyByParentId']),
     panelClick(e){
       this.currPanelIndex = e.index

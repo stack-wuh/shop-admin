@@ -1,7 +1,7 @@
 <template>
   <section class="wrapper">
     <my-schema :panelList="panelList">
-      <el-button type="primary" slot="right">新增管理员</el-button>
+      <el-button type="primary" slot="right" @click="SET_DIALOG_INFO({isShowDialog: true, title: '账号管理'})">新增管理员</el-button>
       <my-table :list='list'></my-table>
     </my-schema>
   </section>
@@ -30,9 +30,10 @@ export default {
     return {}
   },
   methods: {
-    ...mapActions(['getUserManagerList']),
+    ...mapActions(['GetUserManagerList', 'UpdateUserByParams']),
+    ...mapMutations(['SET_DIALOG_INFO']),
     fetchData(){
-      this.getUserManagerList()
+      this.GetUserManagerList()
     }
   },
   created(){
