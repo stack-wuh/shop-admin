@@ -12,6 +12,13 @@ export const state = {
   },
 
   search: {}, // 搜索条件缓存
+
+  dialogInfo: { // 对话框内存对象
+    title: '编辑内容', // dialog -- title
+    isShowDialog: false, // dialog -- visible
+
+    form: {}
+  }
 }
 
 export const mutations = {
@@ -48,12 +55,52 @@ export const mutations = {
   SET_SEARCH_FORM: (state, params) => {
     state.search = params
   },
-
+  /**
+   * [CLEAR_SEARCH_FORM 清空search搜索表单]
+   * @method CLEAR_SEARCH_FORM
+   * @param  {[type]}          state [description]
+   */
   CLEAR_SEARCH_FORM: state => {
     state.search = {}
+  },
+
+  /**
+   * [SET_DIALOG_INFO 设置dialog对话框内对象]
+   * @method SET_DIALOG_INFO
+   * @param  {[type]}        state  [description]
+   * @param  {[type]}        params [description]
+   */
+  SET_DIALOG_INFO: (state, params) => {
+    let {isShowDialog} = params
+    state.dialogInfo = {
+      ...state.dialogInfo,
+      ...params
+    }
+    if(!isShowDialog) {
+      state.dialogInfo.form = {}
+    }
+  },
+
+  /**
+   * [CLEAR_DIALOG_INFO 清空dialog中的表单内容]
+   * @method CLEAR_DIALOG_INFO
+   * @param  {[type]}          state [description]
+   */
+  CLEAR_DIALOG_INFO: state => {
+    state.dialogInfo.form = {}
+    state.dialogInfo.isShowDialog = false
   }
 }
 
-export const actions = {}
+export const actions = {
+  /**
+   * [ClearDialogInfo 异步清空dialog中的表单]
+   * @method ClearDialogInfo
+   * @param  {[type]}        commit [description]
+   */
+  ClearDialogInfoAsync({commit}){
+    commit('CLEAR_DIALOG_INFO')
+  }
+}
 
 export const getters = {}

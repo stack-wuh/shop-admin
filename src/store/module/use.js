@@ -3,6 +3,8 @@ import {
   getUserIndex,
   getCorporationIndex,
   getUserManagerList,
+  updateUserByParams,
+  deleteUserById
 } from '@/api/user'
 import {
   $to,
@@ -79,9 +81,34 @@ const actions = {
    * @param  {[type]}           commit [description]
    * @return {Promise}                 [description]
    */
-  async getUserManagerList({commit}) {
+  async GetUserManagerList({commit}) {
     const response  = await getUserManagerList()
     commit('SET_USER_LIST', response.data)
+  },
+
+  /**
+   * [UpdateUserByParams 更新用户列表]
+   * @method UpdateUserByParams
+   * @param  {[type]}           commit [description]
+   * @param  {[type]}           params [description]
+   * @return {Promise}                 [description]
+   */
+  async UpdateUserByParams({commit, dispatch}, params) {
+    const response = await updateUserByParams(params)
+    dispatch('GetUserManagerList')
+    dispatch('ClearDialogInfoAsync')
+  },
+
+  /**
+   * [DeleteUserById 根据id删除用户管理的列表项]
+   * @method DeleteUserById
+   * @param  {[type]}       commit [description]
+   * @param  {[type]}       id     [description]
+   * @return {Promise}             [description]
+   */
+  async DeleteUserById({dispatch}, id) {
+    const response  = await deleteUserById(id)
+    dispatch('GetUserManagerList')
   }
 }
 
