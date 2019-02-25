@@ -1,6 +1,6 @@
 import $router from 'vue-router'
 import $store from '@/store'
-
+import {MessageBox} from 'element-ui'
 /**
  * [handleJump2other 点击跳转事件]
  * @method handleJump2other
@@ -80,8 +80,48 @@ export const handleSwitchChangeWebIntegral = argus => {
   $store.dispatch('SetIntegralStatusById', id)
 }
 
+/**
+ * [handleOpenDialogWithRows 在dialog中编辑表单内容]
+ * @method handleOpenDialogWithRows
+ * @param  {[type]}                 argus [description]
+ * @return {[type]}                       [description]
+ */
+export const handleOpenDialogWithRows = argus => {
+  $store.commit('SET_DIALOG_INFO', {isShowDialog: true, form: argus.params, title: argus.query.c || argus.query.f || argus.query.l})
+}
+
+/**
+ * [handleDelById 表格的删除事件]
+ * @method handleDelById
+ * @param  {[type]}      argus [description]
+ * @return {[type]}            [description]
+ */
+export const handleClickDelById = argus => {
+  let {$route: {query: {l, f, c}}, params: {id}} = argus
+  let actions = {
+    '账号管理_账号管理': {
+      action: 'DeleteUserById',
+    }
+  }
+  let action = c ? actions[`${l}_${f}_${c}`] : actions[`${l}_${f}`]
+  MessageBox.confirm('此操作将删除该条内容, 继续操作?', 'tips', {
+    confirmButtonText: 'submit',
+    cancelButtonText: 'cancel',
+    type: 'warning'
+  }).then(() => {
+    $store.dispatch(action.action, id)
+  }).catch(err => {
+    _g._toast({
+      type: 'warning',
+      msg: '该操作错误或已取消!',
+      duration: 2
+    })
+  })
+}
+
 export default {
   handleJump2other,
   handleSwitchChange,
-  handleSwitchChangeWebBottom
+  handleSwitchChangeWebBottom,
+  handleOpenDialogWithRows
 }

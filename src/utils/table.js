@@ -3,6 +3,8 @@ import {
   handleSwitchChange,
   handleSwitchChangeWebBottom,
   handleSwitchChangeWebIntegral,
+  handleOpenDialogWithRows,
+  handleClickDelById
 } from '@/utils/table.click.js'
 
 
@@ -78,7 +80,8 @@ export const table = [
         type: 'setting',
         list: [
           {
-            text: '修改'
+            text: '修改',
+            click: handleOpenDialogWithRows
           }
         ]
       }
@@ -216,6 +219,7 @@ export const table = [
         list: [
           {
             text: '编辑',
+            click: handleOpenDialogWithRows
           }
         ]
       }
@@ -669,17 +673,17 @@ export const table = [
     list: [
       {
         label: '身份',
-        field: '',
+        field: 'realName',
         type: 'default'
       },
       {
         label: '姓名',
-        field: '',
+        field: 'realName',
         type: 'default'
       },
       {
         label: '账号',
-        field: '',
+        field: 'userName',
         type: 'default'
       },
       {
@@ -688,9 +692,11 @@ export const table = [
         list: [
           {
             text: '修改',
+            click: handleOpenDialogWithRows
           },
           {
             text: '删除',
+            click: handleClickDelById
           }
         ]
       }

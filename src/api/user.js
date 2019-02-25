@@ -60,3 +60,30 @@ export const getUserManagerList = () =>
     method: 'post',
     url: '/BackendLoginerController/getbackendLoginerList.do',
   })
+
+
+export const updateUserByParams = ({
+  id,
+  realName,
+  userName,
+  password
+}) =>
+  request({
+    method: 'post',
+    url: '/BackendLoginerController/addLoginer.do',
+    data: {
+      id,
+      realName,
+      userName,
+      password
+    }
+  })
+
+export const deleteUserById = (id) =>
+  request({
+    method: 'post',
+    url: '/BackendLoginerController/deleteLoginer.do',
+    params: {
+      id
+    }
+  })
