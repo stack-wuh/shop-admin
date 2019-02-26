@@ -69,7 +69,6 @@ const actions = {
    * @return {Promise}                  [description]
    */
   async GetCorporationIndex({commit, rootState}, params){
-    console.log(params, rootState.search)
     const response = await getCorporationIndex({...params, ...rootState.search})
     commit('SET_SHOP_STORE', response.data)
     return response
