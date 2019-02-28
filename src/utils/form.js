@@ -92,22 +92,6 @@ export const myForms = [
             trigger: 'blur'
           }
         ]
-      },
-      {
-        label: '状态',
-        type: 'switch',
-        field: 'status',
-        activeValue: 1,
-        inactiveValue: 0,
-        activeText: '已开启',
-        inactiveText: '已关闭',
-        rules: [
-          {
-            required: true,
-            message: '请选择状态',
-            trigger: 'change'
-          }
-        ]
       }
     ],
     form: {
@@ -166,7 +150,7 @@ export const myForms = [
       },
       {
         label: '密码',
-        type: 'input',
+        type: 'password',
         field: 'password',
         rules: [
           {

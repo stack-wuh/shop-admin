@@ -810,11 +810,21 @@ const InfoList = [
         list: [
           {
             label: '店铺佣金',
-            value: ''
+            type: 'input',
+            field: 'commission',
+            value: '',
+            style: {
+              width: '220px',
+            }
           },
           {
             label: '店铺年费',
-            value: ''
+            field: 'annualFee',
+            value: '',
+            type: 'input',
+            style: {
+              width: '220px',
+            }
           }
         ]
       },

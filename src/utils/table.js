@@ -137,12 +137,12 @@ export const table = [
     list: [
       {
         label: '公告',
-        field: '',
+        field: 'content',
         type: 'default'
       },
       {
         label: '发布时间',
-        field: '',
+        field: 'createTime',
         type: 'default'
       },
       {
@@ -151,6 +151,7 @@ export const table = [
         list: [
           {
             text: '删除',
+            click: handleClickDelById
           }
         ]
       }
@@ -673,13 +674,15 @@ export const table = [
     list: [
       {
         label: '身份',
-        field: 'realName',
-        type: 'default'
+        field: 'role',
+        type: 'statusrange',
+        order: ['超级管理员', '管理员'],
+        state: ['danger', 'success'],
       },
       {
         label: '姓名',
-        field: 'realName',
-        type: 'default'
+        // field: 'realName',
+        type: 'default',
       },
       {
         label: '账号',

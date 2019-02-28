@@ -101,6 +101,9 @@ export const handleClickDelById = argus => {
   let actions = {
     '账号管理_账号管理': {
       action: 'DeleteUserById',
+    },
+    '网站管理_公告管理': {
+      action: 'DelNoticeById'
     }
   }
   let action = c ? actions[`${l}_${f}_${c}`] : actions[`${l}_${f}`]
@@ -119,9 +122,11 @@ export const handleClickDelById = argus => {
   })
 }
 
+
+
 export default {
   handleJump2other,
   handleSwitchChange,
   handleSwitchChangeWebBottom,
-  handleOpenDialogWithRows
+  handleOpenDialogWithRows,
 }
