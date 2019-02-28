@@ -1,6 +1,11 @@
 <template>
   <section class="wrapper detail-wrapper">
-    <my-crumbs :list="infoObj.crumbsList" ></my-crumbs>
+    <my-crumbs :list="infoObj.crumbsList">
+      <div slot="right" v-if="canShowBtnGroup.includes(this.$route.path)" >
+        <el-button @click="handleClickSubmit(0)" type="success">通过</el-button>
+        <el-button @click="handleClickSubmit(1)" type="danger">不通过</el-button>
+      </div>
+    </my-crumbs>
     <my-info-list
       v-for="(item, index) in infoObj.list"
       :key="index"
@@ -18,6 +23,7 @@ import {
   _getInfoList
 } from '@/utils/mixin'
 
+const canShowBtnGroup = ['/store/shop/detail']
 
 export default {
   props: {},
@@ -34,10 +40,16 @@ export default {
   filters: {},
   data(){
     return {
+      canShowBtnGroup,
     }
   },
   methods: {
-    ...mapActions(['GetShopOneById', 'GetShopSearchOneById', 'GetBottomItemById']),
+    ...mapActions(['GetShopOneById', 'GetShopSearchOneById', 'GetBottomItemById',]),
+    ...mapActions(
+      {
+        'UpdateShopOneStatusByParams': 'GetShopOneById'
+      }
+    ),
     fetchData(){
       const _obj = {
         '店铺管理_店铺管理': {
@@ -53,7 +65,27 @@ export default {
           }
         },
       }
-      const obj = this.$route.query.c ? _obj[`${this.$route.query.l}_${this.$route.query.f}_${this.$route.query.c}`] : _obj[`${this.$route.query.l}_${this.$route.query.f}`]
+      const obj = _obj[`${this.$route.query.l}_${this.$route.query.f}`]
+      this[obj.action].call(this, {...obj.params})
+    },
+
+    handleClickSubmit(status){
+      let {list: [info]} = this.infoObj
+      let _temp = {}
+      info.list.map(k => {
+        _temp[k.field] = k.value
+      })
+      const _obj = {
+        '店铺管理_店铺管理': {
+          action: 'UpdateShopOneStatusByParams',
+          params: {
+            id: this.$route.query.id,
+            status,
+            ..._temp
+          }
+        }
+      }
+      const obj = _obj[`${this.$route.query.l}_${this.$route.query.f}`]
       this[obj.action].call(this, {...obj.params})
     }
   },

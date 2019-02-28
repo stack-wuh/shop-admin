@@ -19,13 +19,14 @@
                         :active-value="1"
                         :inactive-value="0"
                         active-text="已开启"
-                        inactive-text="已关闭">
+                        inactive-text="已关闭"
+                        @change="UpdateClassifyByParams({id: scope.row.id})">
                       </el-switch>
                   </template>
                 </el-table-column>
                 <el-table-column align="center" label="操作">
                   <template slot-scope="scope">
-                    <el-button type="danger" size="mini" @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, form: scope.row})">编辑</el-button>
+                    <el-button type="danger" size="mini" @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, type: 'update', form: scope.row})">编辑</el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -44,14 +45,15 @@
                 :active-value="1"
                 :inactive-value="0"
                 active-text="已开启"
-                inactive-text="已关闭">
+                inactive-text="已关闭"
+                @change="UpdateClassifyByParams({id: scope.row.id})">
               </el-switch>
             </template>
           </el-table-column>
           <el-table-column align="center" label="操作">
             <template slot-scope="scope">
-              <el-button size="small" type="primary" @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, form: scope.row})">添加</el-button>
-              <el-button size="small" type="success" @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, form: scope.row})">编辑</el-button>
+              <el-button size="small" type="primary" @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, type: 'add', form: {...scope.row, name:''}})">添加</el-button>
+              <el-button size="small" type="success" @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, type: 'update', form: scope.row})">编辑</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -83,6 +85,9 @@ export default {
     MySchema,
   },
   computed: {
+    ...mapState({
+      list: state => state.Website.list
+    }),
     getTitle(){
       return this.panelList[this.currPanelIndex]['name']
     }
@@ -92,20 +97,17 @@ export default {
     return {
       panelList,
       currPanelIndex: 0,
-
-      list: [],
     }
   },
   methods: {
     ...mapMutations(['SET_DIALOG_INFO']),
-    ...mapActions(['GetClassifyByParentId']),
+    ...mapActions(['GetClassifyByParentId', 'UpdateClassifyByParams']),
     panelClick(e){
       this.currPanelIndex = e.index
+      this.GetClassifyByParentId(e.index + 1)
     },
     fetchData(){
-      this.GetClassifyByParentId().then(res => {
-        this.list = res.data
-      })
+      this.GetClassifyByParentId()
     }
   },
   created(){

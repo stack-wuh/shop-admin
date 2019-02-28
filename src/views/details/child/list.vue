@@ -4,6 +4,9 @@
     <ul class="list-box">
       <li v-if="!item.isShowLabel" v-for="(item, index) in list" :key="index" class="list-item">
         <span  class="list-item__label">{{item.label}}</span>
+        <template v-if="item.type === 'input'">
+          <el-input v-model="item.value" :placeholder='"请编辑" + item.label' :style="item.style" />
+        </template>
         <span v-if="item.type === 'default' || item.type === undefined"
           class="list-item__value"
           :class="[{'list-item__value--active' : $attrs[item.value]}]"
@@ -78,6 +81,7 @@ export default {
     .list-item{
       @include flex($dir: row, $align: center);
       min-height: 30px;
+      max-height: auto;
       margin-bottom: 15px;
     }
     .list-item__label {

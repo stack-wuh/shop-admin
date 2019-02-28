@@ -24,8 +24,9 @@ export default {
 <style lang="scss" scoped>
 .avatar-wrapper{
   &-box{
-    max-width: 200px;
+    width: 300px;
     max-height: 180px;
+    overflow: hidden;
     &__image{
       width: inherit;
     }

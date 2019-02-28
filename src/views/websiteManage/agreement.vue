@@ -3,8 +3,9 @@
     <my-schema :panelList="[{name: '协议管理'}]" >
       <el-button @click="handleClick" slot="right" v-if="type == 'paper'" type="primary">编辑</el-button>
       <el-button @click="handleClickBtnSubmit" slot="right" v-if="type == 'editor'" type="primary">保存</el-button>
-      <article id="editor" v-if="type == 'editor' && this.info.content"></article>
-      <span v-else>暂无详情</span>
+      <article id="editor" v-if="type == 'editor' && info.content"></article>
+      <span v-if="type == 'paper' && info.content" v-html="info.content"></span>
+      <span v-if="type == 'paper' && !info.content">暂无详情</span>
     </my-schema>
   </section>
 </template>
@@ -29,12 +30,12 @@ export default {
         content: ''
       },
       info: {
-        content: 'Hello world'
+        content: ''
       }
     }
   },
   methods: {
-    ...mapActions(['SetAgreementByContent', ]),
+    ...mapActions(['SetAgreementByContent', 'GetAgreementContent']),
     handleClickBtnSubmit(){
       this.SetAgreementByContent(this.form.content).then(res => {
         this.type = 'paper'
@@ -70,7 +71,11 @@ export default {
       this.type == 'editor' && this.editorInit()
     }
   },
-  created(){},
+  created(){
+    this.GetAgreementContent().then(res => {
+      this.info = res.data
+    })
+  },
   mixins:[]
 }
 </script>
