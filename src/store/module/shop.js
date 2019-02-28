@@ -25,8 +25,8 @@ const actions = {
   async GetShopInfo({commit, rootState}, params){
     const response = await getShopInfo({...params, ...rootState.search})
     commit('SET_SHOP_STORE', response.data)
-    Promise.resolve(response)
-    return response
+    // Promise.resolve(response)
+    // return response
   },
 
   /**

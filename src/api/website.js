@@ -46,13 +46,10 @@ export const setBottomItemInfoByParams = (params) =>
     params
   })
 
-export const getNoticeListByStatus = (status) =>
+export const getNoticeListByStatus = () =>
   request({
     method: 'post',
     url: '/web/checkAn.do',
-    data: {
-      status
-    }
   })
 
 export const getClassifyByParentId = (id) =>
@@ -71,6 +68,12 @@ export const getIntegralListByStatus = () =>
     data: {
       status
     }
+  })
+
+export const getAgreementContent = () =>
+  request({
+    method: 'get',
+    url: '/web/getAgreementManager.do'
   })
 
 export const setAgreementByContent = (content) =>
@@ -118,5 +121,51 @@ export const getNewsList = (belongId) =>
     url: '/web/checkNewsManager.do',
     data: {
       belongId
+    }
+  })
+
+
+export const postNoticeListByParams = (data) =>
+  request({
+    method: 'post',
+    url: '/web/addAn.do',
+    data
+  })
+
+export const delNoticeById = id =>
+  request({
+    method: 'post',
+    url: '/web/deleteAn.do',
+    data: {
+      id
+    }
+  })
+
+
+export const updateClassifyByParams = ({
+  name,
+  id,
+  funcId
+}) =>
+  request({
+    method: 'post',
+    url: '/web/addCategory.do',
+    data: {
+      name,
+      id,
+      funcId
+    }
+  })
+
+export const setClassifyStatusById = ({
+  id,
+  name
+}) =>
+  request({
+    method: 'post',
+    url: '/web/updateCategory.do',
+    data:{
+      id,
+      name
     }
   })

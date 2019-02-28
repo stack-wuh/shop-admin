@@ -12,7 +12,13 @@ import {
   getNewsListByClassify,
   getConsumerInfo,
   getNewsList,
-  setConsumerStatus
+  setConsumerStatus,
+  postNoticeListByParams,
+  delNoticeById,
+  updateClassifyByParams,
+  setClassifyStatusById,
+  getAgreementContent,
+  getStoreInfoById
 } from '@/api/website'
 
 const state = {
@@ -39,8 +45,8 @@ const actions = {
    * @param  {[type]}         status [0: 广告位管理, 1: banner 管理]
    * @return {Promise}               [description]
    */
-  async GetWebBannerOrAd({commit}, status = 0){
-    const response  = await getWebBannerOrAd(status)
+  async GetWebBannerOrAd({commit}){
+    const response  = await getWebBannerOrAd()
     commit('SET_WEB_INFO', response.data)
     Promise.resolve(response.data)
     return response
@@ -98,17 +104,46 @@ const actions = {
   },
 
   /**
-   * [GetNoticeListByStatus 网站管理 -- 公告管理 -- 根据status获取列表]
+   * [GetNoticeListByStatus 网站管理 -- 公告管理 -- 获取公告列表]
    * @method GetNoticeListByStatus
    * @param  {[type]}              commit [description]
    * @param  {[type]}              status [description]
    * @return {Promise}                    [description]
    */
-  async GetNoticeListByStatus({commit}, status = 0) {
-    const response = await getNoticeListByStatus(status)
+  async GetNoticeListByStatus({commit}) {
+    const response = await getNoticeListByStatus()
+    commit('SET_WEB_LIST', response)
     return Promise.resolve(response)
   },
 
+  /**
+   * [PostNoticeListByParams 网站管理 -- 添加公告管理]
+   * @method PostNoticeListByParams
+   * @param  {[type]}               dispatch [description]
+   * @param  {[type]}               params   [description]
+   * @return {Promise}                       [description]
+   */
+  async PostNoticeListByParams({dispatch}, params) {
+    const response  = await postNoticeListByParams(params)
+    setTimeout(() => {
+      dispatch('GetNoticeListByStatus')
+      dispatch('ClearDialogInfoAsync')
+    }, 1500)
+  },
+
+  /**
+   * [DelNoticeById 网站管理 -- 根据id删除]
+   * @method DelNoticeById
+   * @param  {[type]}      dispatch [description]
+   * @param  {[type]}      id       [description]
+   * @return {Promise}              [description]
+   */
+  async DelNoticeById({dispatch}, id) {
+    const response = await delNoticeById(id)
+    setTimeout(() => {
+      dispatch('GetNoticeListByStatus')
+    }, 1000)
+  },
   /**
    * [GetClassifyByParentId 网站管理 -- 分类管理 -- 根据status 获取列表]
    * @method GetClassifyByParentId
@@ -118,7 +153,29 @@ const actions = {
    */
   async GetClassifyByParentId({commit}, status = 1) {
     const response = await getClassifyByParentId(status)
-    return Promise.resolve(response)
+    commit('SET_WEB_LIST', response)
+  },
+
+  /**
+   * [updateClassifyByParams 网站管理 -- 分类管理 -- 根据params添加分类]
+   * @method updateClassifyByParams
+   * @param  {[type]}               dispatch [description]
+   * @param  {[type]}               params   [description]
+   * @return {Promise}                       [description]
+   */
+  async UpdateClassifyByParams({dispatch}, params) {
+    let {type} = params
+    console.log(params)
+    let response  = null
+    if(type == 'add') {
+        response = await updateClassifyByParams(params)
+    }else {
+        response = await setClassifyStatusById(params)
+    }
+    setTimeout(() => {
+      dispatch('GetClassifyByParentId')
+      dispatch('ClearDialogInfoAsync')
+    }, 1500)
   },
 
   /**
@@ -130,6 +187,17 @@ const actions = {
   async GetIntegralListByStatus({commit}) {
     const response = await getIntegralListByStatus()
     commit('SET_WEB_LIST', response)
+  },
+
+  /**
+   * [GetAgreementContent 网站管理 -- 获取协议管理]
+   * @method GetAgreementContent
+   * @param  {[type]}            commit [description]
+   * @return {Promise}                  [description]
+   */
+  async GetAgreementContent({commit}) {
+    const response  = await getAgreementContent()
+    return Promise.resolve(response)
   },
 
   /**
@@ -192,7 +260,7 @@ const actions = {
     setTimeout(() => {
       dispatch('GetConsumerInfo')
     }, 1000)
-  }
+  },
 }
 
 const getters = {}

@@ -71,10 +71,11 @@ export const mutations = {
    * @param  {[type]}        params [description]
    */
   SET_DIALOG_INFO: (state, params) => {
+    console.log(params)
     let {isShowDialog} = params
     state.dialogInfo = {
       ...state.dialogInfo,
-      ...params
+      ...params,
     }
     if(!isShowDialog) {
       state.dialogInfo.form = {}
