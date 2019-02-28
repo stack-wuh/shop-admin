@@ -20,6 +20,9 @@
           <template v-if="item.type === 'input'">
             <el-input class="my-input__220" v-model="formObj.form[item.field]" :placeholder="'请编辑' + item.label" />
           </template>
+          <template v-if="item.type === 'password'">
+            <el-input class="my-input__220" type="password" v-model="formObj.form[item.field]" :placeholder="'请编辑' + item.label" />
+          </template>
           <template v-if="item.type === 'switch'">
             <el-switch
               :value="formObj.form[item.field]"
@@ -61,7 +64,11 @@ export default {
       visibleDialog: state => state.dialogInfo.isShowDialog,
       title: state => state.dialogInfo.title,
       temp_form: state => state.dialogInfo.form
-    })
+    }),
+    changePath(){
+      let {l, f, c} = this.$route.query
+      return c || f || l
+    }
   },
   filters: {},
   data(){
@@ -78,11 +85,14 @@ export default {
         ...this.formObj,
         form: this.temp_form
       }
+    },
+    changePath(){
+      this.getFormList()
     }
   },
   methods: {
     ...mapMutations(['SET_DIALOG_INFO', 'CLEAR_DIALOG_INFO', 'CLEAR_DIALOG_INFO']),
-    ...mapActions(['UpdateUserByParams', 'ClearDialogInfoAsync']),
+    ...mapActions(['UpdateUserByParams', 'ClearDialogInfoAsync', 'PostNoticeListByParams', 'UpdateClassifyByParams']),
     getFormList(){
       let {query: {l, f, c}} = this.$route
       let _obj = Form.find(k => (k.c ? (k.l === l && k.f === f) : (k.l === l && k.f === f && k.c === c)))
@@ -102,6 +112,14 @@ export default {
           let actions = {
             '账号管理_账号管理': {
               action: 'UpdateUserByParams',
+              params: {}
+            },
+            '网站管理_公告管理': {
+              action: 'PostNoticeListByParams',
+              params: {}
+            },
+            '网站管理_分类管理': {
+              action: 'UpdateClassifyByParams',
               params: {}
             }
           }
