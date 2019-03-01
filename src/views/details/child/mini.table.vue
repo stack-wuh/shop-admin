@@ -1,7 +1,7 @@
 <template>
   <section class="mini-table-wrapper">
     <section class="mini-table-area">
-      <my-table :list="[{}, {}, {}]" :params="tableParams"></my-table>
+      <my-table :list="list" :params="tableParams"></my-table>
     </section>
   </section>
 </template>
@@ -15,15 +15,18 @@ export default {
     MyTable,
   },
   computed: {
+    ...mapState({
+      info: state => state.info,
+      list: state => state.info && state.info.orderItemList
+
+    }),
     tableParams(){
-      return this.$route.query.f + this.$route.query.s
-    }
+      return this.$route.query.f + (this.$route.query.s ? this.$route.query.s : '__')
+    },
   },
   filters: {},
   data(){
-    return {
-      list: []
-    }
+    return {}
   },
   methods: {},
   created(){},

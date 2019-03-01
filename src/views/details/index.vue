@@ -44,7 +44,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['GetShopOneById', 'GetShopSearchOneById', 'GetBottomItemById',]),
+    ...mapActions(['GetShopOneById', 'GetShopSearchOneById', 'GetBottomItemById', 'GetOwnOrderById']),
     ...mapActions(
       {
         'UpdateShopOneStatusByParams': 'GetShopOneById'
@@ -64,6 +64,18 @@ export default {
             id: this.$route.query.id
           }
         },
+        '订单管理_自营订单': {
+          action: 'GetOwnOrderById',
+          params: {
+            id: this.$route.query.id
+          }
+        },
+        '订单管理_第三方订单': {
+          action: 'GetOwnOrderById',
+          params: {
+            id: this.$route.query.id
+          }
+        }
       }
       const obj = _obj[`${this.$route.query.l}_${this.$route.query.f}`]
       this[obj.action].call(this, {...obj.params})

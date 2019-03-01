@@ -43,8 +43,13 @@ export default {
       activeName: 'first'
     }
   },
-  methods: {},
-  created(){},
+  methods: {
+    ...mapActions(['GetUserDetailById', ])
+  },
+  created(){
+    let {query: {id}} = this.$route
+    this.GetUserDetailById(id)
+  },
   mixins:[_getInfoList, ]
 }
 </script>

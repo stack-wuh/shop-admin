@@ -10,7 +10,9 @@
         <span v-if="item.type === 'default' || item.type === undefined"
           class="list-item__value"
           :class="[{'list-item__value--active' : $attrs[item.value]}]"
-          >{{$attrs[item.value] || '暂无信息'}}</span>
+          >
+          {{ ($attrs && $attrs.product && $attrs.product[item.value]) || $attrs[item.value] || '暂无信息'}}
+        </span>
         <div class="list-item__right" :class="item.class">
           <slot v-if="item.type === 'slot'" name="right"></slot>
           <component :is="item.slot" v-if="item.name == 'right'" v-bind="{...$attrs, item}"></component>

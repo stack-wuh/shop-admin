@@ -581,16 +581,23 @@ const InfoList = [
         title: '订单信息',
         list: [
           {
-            label: '订单编号'
+            label: '订单编号',
+            type: 'default',
+            value: 'orderNo'
           },
           {
-            label: '订单状态'
+            label: '订单状态',
+            type: 'default',
+            value: 'orderStatus'
           },
           {
-            label: '付款时间'
+            label: '付款时间',
+            type: 'default',
+            value: 'paymentTime'
           },
           {
-            label: '发货时间'
+            label: '发货时间',
+            value: 'sendTime'
           },
           {
             label: '发票'
@@ -614,13 +621,19 @@ const InfoList = [
             label: '买家信息',
             slot: 'MyBuyer',
             type: 'slot',
-            name: 'right'
+            name: 'right',
+            props: {
+              name: 'buyRealName',
+              avatar: 'buyPic',
+              phone: 'buyUserName',
+            }
           },
           {
             label: '合计金额',
             slot: 'MyMoney',
             type: 'slot',
             name: 'right',
+            value: '',
           },
           {
             label: '订单内容',
@@ -630,9 +643,8 @@ const InfoList = [
           },
           {
             label: '备注',
-            type: 'solt',
-            name: 'right',
-            slot: 'MyPaper'
+            type: 'default',
+            value: 'remark'
           }
         ],
         slots: [],
@@ -661,7 +673,12 @@ const InfoList = [
             label: '卖家信息',
             slot: 'MyBuyer',
             name: 'right',
-            type: 'slot'
+            type: 'slot',
+            props: {
+              name: 'merchantName',
+              avatar: 'merchantPic',
+              phone: 'merchantPhone',
+            }
           }
         ],
       },
@@ -672,7 +689,12 @@ const InfoList = [
             label: '买家信息',
             slot: 'MyBuyer',
             name: 'right',
-            type: 'slot'
+            type: 'slot',
+            props: {
+              name: 'buyRealName',
+              avatar: 'buyPic',
+              phone: 'buyUserName',
+            }
           }
         ]
       },
@@ -680,10 +702,12 @@ const InfoList = [
         title: '订单信息',
         list: [
           {
-            label: '订单编号'
+            label: '订单编号',
+            value: 'orderNo',
           },
           {
-            label: '订单状态'
+            label: '订单状态',
+            value: 'orderStatus'
           },
           {
             label: '付款方式'
@@ -720,9 +744,8 @@ const InfoList = [
           },
           {
             label: '备注',
-            type: 'solt',
-            name: 'right',
-            slot: 'MyPaper'
+            type: 'default',
+            value: 'remark'
           }
         ],
       }
@@ -807,6 +830,7 @@ const InfoList = [
     list: [
       {
         title: '店铺佣金',
+        bind: 'info',
         list: [
           {
             label: '店铺佣金',
@@ -893,9 +917,11 @@ const InfoList = [
         list: [
           {
             label: '商品名称',
+            value: 'name'
           },
           {
             label: '商品类目',
+            value: 'features'
           },
           {
             label: '商品品牌',
@@ -905,6 +931,7 @@ const InfoList = [
           },
           {
             label: '商品材料',
+            value: 'materials',
           },
           {
             label: '商品用途',

@@ -1,9 +1,9 @@
 <template>
   <section class="buyer-wrapper">
     <div class="buyer-area">
-      <img :src="AvatarImg" alt="头像" class="buyer-avatar">
-      <span class="buyer-name">买家名称</span>
-      <span class="buyer-phone">18827372123</span>
+      <img :src="$attrs[$attrs.item.props.avatar]" alt="av" class="buyer-avatar">
+      <span class="buyer-name">{{$attrs[$attrs.item.props.name]}}</span>
+      <span class="buyer-phone">{{$attrs[$attrs.item.props.phone]}}</span>
     </div>
   </section>
 </template>

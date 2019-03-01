@@ -76,8 +76,13 @@ export default {
   data(){
     return {}
   },
-  methods: {},
-  created(){},
+  methods: {
+    ...mapActions(['GetCorporationDetailById'])
+  },
+  created(){
+    let {query: {id }} = this.$route
+    this.GetCorporationDetailById(id)
+  },
   mixins:[_getInfoList]
 }
 </script>
