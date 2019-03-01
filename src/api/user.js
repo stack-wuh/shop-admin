@@ -98,11 +98,17 @@ export const getUserDetailById = id =>
     }
   })
 
-export const getCorporationDetailById = id =>
+export const getCorporationDetailById = (
+  {
+    id,
+    status
+  }
+) =>
   request({
     method: 'post',
     url: '/BackendUser/checkCompanyCertId.do',
     data: {
-      id
+      id,
+      status
     }
   })

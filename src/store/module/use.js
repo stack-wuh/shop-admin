@@ -17,6 +17,7 @@ const state = {
   userInfo: {}, // 缓存用户信息
 
   list: [],
+  userManageInfo: {}, // 用户管理模块的消息缓存
 }
 
 const mutations = {
@@ -25,6 +26,9 @@ const mutations = {
     },
     SET_USER_LIST: (state, params) => {
       state.list = params
+    },
+    SET_USER_MANAGE_INFO: (state, params) => {
+      state.userManageInfo = params
     }
 }
 
@@ -119,9 +123,10 @@ const actions = {
    * @param  {[type]}          id       [description]
    * @return {Promise}                  [description]
    */
-  async GetUserDetailById({dispatch}, id) {
+  async GetUserDetailById({dispatch, commit}, id) {
     const response  = await getUserDetailById(id)
-    return Promise.resolve(response)
+    // return Promise.resolve(response)
+    commit('SET_USER_MANAGE_INFO', response.data)
   },
 
   /**
@@ -131,9 +136,9 @@ const actions = {
    * @param  {[type]}                 id       [description]
    * @return {Promise}                         [description]
    */
-  async GetCorporationDetailById({dispatch}, id) {
-    const response = await getCorporationDetailById(id)
-    return Promise.resolve(response)
+  async GetCorporationDetailById({dispatch, commit}, params) {
+    const response = await getCorporationDetailById(params)
+    commit('SET_USER_MANAGE_INFO', response.data)
   }
 }
 

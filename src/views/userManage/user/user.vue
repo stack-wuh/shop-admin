@@ -3,50 +3,51 @@
     <ul>
       <li class="user-comm-item">
         <span class="user-comm-item__label">头像</span>
-        <img src="" alt="avatar" class="user-comm-item__avatar">
+        <img :src="$attrs.headpic" alt="avatar" class="user-comm-item__avatar">
       </li>
       <li class="user-comm-item">
         <span class="user-comm-item__label">联系电话</span>
-        <span class="user-comm-item__value">123123123</span>
+        <span class="user-comm-item__value">{{$attrs.phone}}</span>
         <span class="user-comm-item__tips">已认证</span>
       </li>
       <li class="user-comm-item">
         <span class="user-comm-item__label">银行卡号</span>
-        <span class="user-comm-item__value">123123123</span>
-        <span class="user-comm-item__tips">已认证</span>
+        <span class="user-comm-item__value">{{$attrs.bankNo}}</span>
       </li>
       <li class="user-comm-item">
         <span class="user-comm-item__label">姓名</span>
-        <span class="user-comm-item__value">asd</span>
-        <span class="user-comm-item__tips">已认证</span>
+        <span class="user-comm-item__value">{{$attrs.realName}}</span>
+        <span class="user-comm-item__tips">{{STATE[$attrs.status]}}</span>
       </li>
       <li class="user-comm-item">
         <span class="user-comm-item__label">身份证号</span>
-        <span class="user-comm-item__value">123123123</span>
+        <span class="user-comm-item__value">{{$attrs.idno}}</span>
       </li>
       <li class="user-comm-item">
         <span class="user-comm-item__label">身份证正面</span>
-        <img src="" alt="logo" class="user-comm-item__card">
+        <img :src="$attrs.idpicUp" alt="logo" class="user-comm-item__card">
       </li>
       <li class="user-comm-item">
         <span class="user-comm-item__label">身份证反面</span>
-        <img src="" alt="logo" class="user-comm-item__card">
+        <img :src="$attrs.idpicDown" alt="logo" class="user-comm-item__card">
       </li>
     </ul>
   </section>
 </template>
 <script>
 import {mapState, mapActions, mapGetters, mapMutations} from 'vuex'
-export default {
-  props: {
+const STATE = ['未认证', '待审核', '审核未通过', '审核已通过']
 
-  },
+export default {
+  props: {},
   name: '',
   components: {},
   computed: {},
   filters: {},
   data(){
-    return {}
+    return {
+      STATE,
+    }
   },
   methods: {},
   created(){},
@@ -55,9 +56,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '@/assets/style/mixin.scss';
+@import '@/assets/style/color.scss';
 .user-comm-wrapper {
   padding: 20px;
-
+  .user-comm-item__avatar{
+    width: 120px;
+  }
   .user-comm-item {
     @include flex($dir: row);
     margin-bottom: 15px;
@@ -69,6 +73,12 @@ export default {
       &:after {
         content: ' : ';
       }
+    }
+    &__tips {
+      margin-left: 10px;
+      margin-top: 2px;
+      color: $base;
+      font-size: 12px;
     }
   }
 }

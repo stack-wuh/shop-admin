@@ -5,13 +5,15 @@
 
     <el-tabs v-model="activeName" type="card" class="my-tabs">
       <el-tab-pane label="基础信息" name="first">
-        <my-user-comm />
+        <my-user-comm v-bind="baseInfo" />
       </el-tab-pane>
       <el-tab-pane label="地址信息" name="second">
-        <my-table :list="[{}, {}, {}]" />
+        <my-table v-if="addressList.length" :list="addressList" />
+        <div class="my-tabs__item--unactive" v-else>暂无地址认证信息</div>
       </el-tab-pane>
       <el-tab-pane label="企业信息" name="third">
-        <my-user-index :crumbs="false" />
+        <my-user-index v-if="activeName === 'third' && corporationInfo" :crumbs="false" v-bind="corporationInfo" />
+        <div class="my-tabs__item--unactive" v-else>暂无企业认证信息</div>
       </el-tab-pane>
     </el-tabs>
   </section>
@@ -36,7 +38,13 @@ export default {
     MyTable,
     MyUserIndex
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      baseInfo: state => state.User.userManageInfo && state.User.userManageInfo.userDomain,
+      addressList: state => state.User.userManageInfo && state.User.userManageInfo.addressList,
+      corporationInfo: state => state.User.userManageInfo && state.User.userManageInfo.companyCertDomain
+    })
+  },
   filters: {},
   data(){
     return {
@@ -56,6 +64,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/mixin.scss';
 @import '@/assets/style/function.scss';
+@import '@/assets/style/color.scss';
 
 .user-wrapper {
   width: inherit;
@@ -64,6 +73,14 @@ export default {
   .my-tabs {
     margin: 0 20px;
     margin-top: 20px;
+
+    .my-tabs__item--unactive {
+      height: 300px;
+      text-align: center;
+      line-height: 300px;
+      color: $t-999;
+      font-size: 18px;
+    }
   }
 }
 </style>

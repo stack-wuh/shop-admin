@@ -1,56 +1,63 @@
 <template>
   <section class="user-corpor-wrapper">
     <my-crumbs v-if="crumbs" :list="infoObj.crumbsList">
-      <section slot="right">
-        <el-button type="success">通过</el-button>
-        <el-button type="danger">不通过</el-button>
+      <section v-if="getInfoObj.status == 0" slot="right">
+        <el-button @click="handleClickSubmit(0)" type="success">通过</el-button>
+        <el-button @click="handleClickSubmit(1)" type="danger">不通过</el-button>
       </section>
     </my-crumbs>
-
     <section class="user-corpor-paper">
       <ul class="user-corpor-paper__list">
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">提交时间</span>
-          <span class="user-corpor-paper__value">2018-02-12 10:25:00</span>
+          <span class="user-corpor-paper__value">{{getInfoObj.createTime}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">审核状态</span>
-          <span class="user-corpor-paper__value">待审核</span>
+          <span class="user-corpor-paper__value">{{STATE[getInfoObj.status]}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">公司名称</span>
-          <span class="user-corpor-paper__value">武汉市怀信广志信息科技有限公司</span>
+          <span class="user-corpor-paper__value">{{getInfoObj.companyName}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">公司电话</span>
-          <span class="user-corpor-paper__value">123123123123</span>
+          <span class="user-corpor-paper__value">{{getInfoObj.companyPhone}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">公司法人</span>
-          <span class="user-corpor-paper__value">李磊</span>
+          <span class="user-corpor-paper__value">{{getInfoObj.legalPerson}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">手机号</span>
-          <span class="user-corpor-paper__value">2018-02-12 10:25:00</span>
+          <span class="user-corpor-paper__value">{{getInfoObj.phone}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">税号</span>
-          <span class="user-corpor-paper__value">2018-02-12 10:25:00</span>
+          <span class="user-corpor-paper__value">{{getInfoObj.dutyNum}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">企业认证授权书</span>
-          <span class="user-corpor-paper__value user-corpor-paper__btn">点击查看</span>
+          <span @click="setDialogInfo({title: '企业认证授权书', url: getInfoObj.authorization})" class="user-corpor-paper__value user-corpor-paper__btn">点击查看</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">开户许可证</span>
-          <span class="user-corpor-paper__value user-corpor-paper__btn">点击查看</span>
+          <span @click="setDialogInfo({title: '开户许可证', url: getInfoObj.licence})" class="user-corpor-paper__value user-corpor-paper__btn">点击查看</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">营业执照</span>
-          <span class="user-corpor-paper__value user-corpor-paper__btn">点击查看</span>
+          <span @click="setDialogInfo({title: '营业执照', url: getInfoObj.permit})" class="user-corpor-paper__value user-corpor-paper__btn">点击查看</span>
         </li>
       </ul>
     </section>
+
+    <el-dialog
+      :visible.sync="dialogInfo.isShowDialog"
+      :title="dialogInfo.title">
+      <div class="my-dialog__view">
+        <img :src="dialogInfo.url" alt="logo" class="my-dialog__view--img">
+      </div>
+    </el-dialog>
   </section>
 </template>
 <script>
@@ -60,28 +67,62 @@ import {
   _getInfoList
 } from '@/utils/mixin'
 
+const  STATE = ['待审核', '审核未通过', '审核已通过']
+
 export default {
   props: {
     crumbs: {
       type: [Boolean, String],
       default: true
-    }
+    },
   },
   name: '',
   components: {
     MyCrumbs,
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      info: state => state.User.userManageInfo
+    }),
+    getAttrs(){
+      return this.$attrs
+    },
+    getInfoObj(){
+      return this.crumbs ? this.info : this.getAttrs
+    }
+  },
   filters: {},
   data(){
-    return {}
+    return {
+      STATE,
+      dialogInfo: {
+        isShowDialog: false,
+        title: '提示',
+        url: ''
+      }
+    }
   },
   methods: {
-    ...mapActions(['GetCorporationDetailById'])
+    ...mapActions(['GetCorporationDetailById']),
+    ...mapActions({
+      updateCorporationStatusById: 'GetCorporationDetailById'
+    }),
+
+    setDialogInfo(argus){
+      let isShowDialog = argus.url ? true : false
+      this.dialogInfo = {...argus, isShowDialog}
+    },
+    handleClickSubmit(status){
+      let {query: {id }} = this.$route
+      this.updateCorporationStatusById({id, status})
+      setTimeout(() => {
+        this.GetCorporationDetailById({id})
+      }, 1000)
+    }
   },
   created(){
     let {query: {id }} = this.$route
-    this.GetCorporationDetailById(id)
+    this.crumbs && this.GetCorporationDetailById({id})
   },
   mixins:[_getInfoList]
 }
@@ -132,6 +173,13 @@ export default {
           cursor: pointer;
         }
       }
+    }
+  }
+
+  .my-dialog__view {
+    @include flex($dir: row, $align: center, $justify: center);
+    .my-dialog__view--img {
+      width: 300px;
     }
   }
 }

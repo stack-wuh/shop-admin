@@ -284,32 +284,32 @@ export const table = [
     list: [
       {
         label: '省',
-        field: '',
+        field: 'province',
         type: 'default'
       },
       {
         label: '市',
-        field: '',
+        field: 'city',
         type: 'default'
       },
       {
         label: '区',
-        field: '',
+        field: 'area',
         type: 'default'
       },
       {
         label: '详细地址',
-        field: '',
+        field: 'address',
         type: 'default'
       },
       {
         label: '联系人',
-        field: '',
+        field: 'name',
         type: 'default'
       },
       {
         label: '联系电话',
-        field: '',
+        field: 'phone',
         type: 'default'
       }
     ]
@@ -428,7 +428,9 @@ export const table = [
       {
         label: '状态',
         field: 'status',
-        type: 'default'
+        type: 'statusrange',
+        order: ['未上架', '在售', '下架', '删除'],
+        state: ['primary', 'success', 'info', 'danger']
       },
       {
         label: '上传时间',
@@ -473,7 +475,7 @@ export const table = [
   {
     name: '订单管理',
     params: ['自营订单'],
-    type: '',
+    type: 'index',
     label: '序号',
     list: [
       {
@@ -533,12 +535,12 @@ export const table = [
       },
       {
         label: '买家名称',
-        field: '',
+        field: 'realName',
         type: 'default'
       },
       {
         label: '卖家名称',
-        field: '',
+        field: 'userName',
         type: 'default'
       },
       {
