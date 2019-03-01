@@ -473,7 +473,7 @@ export const table = [
   {
     name: '订单管理',
     params: ['自营订单'],
-    type: 'index',
+    type: '',
     label: '序号',
     list: [
       {
@@ -572,43 +572,43 @@ export const table = [
   },
   {
     name: '订单管理',
-    params: ['自营订单详情', '第三方订单详情'],
+    params: ['自营订单__', '第三方订单__'],
     type: 'index',
     label: '序号',
     list: [
       {
         label: '分类',
-        field: '',
+        field: 'categoryName',
         type: 'default'
       },
       {
         label: '商品名称',
-        field: '',
+        field: 'topName',
         type: 'default'
       },
       {
         label: '品名',
-        field: '',
+        field: 'productName',
         type: 'default'
       },
       {
         label: '材质',
-        field: '',
+        field: 'materials',
         type: 'default'
       },
       {
         label: '特性',
-        field: '',
+        field: 'features',
         type: 'default'
       },
       {
         label: '数量/单位',
-        field: '',
+        field: 'quantity',
         type: 'default'
       },
       {
         label: '地区',
-        field: '',
+        field: 'area',
         type: 'default'
       },
       {
@@ -681,7 +681,7 @@ export const table = [
       },
       {
         label: '姓名',
-        // field: 'realName',
+        field: 'realName',
         type: 'default',
       },
       {
