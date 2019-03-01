@@ -1,7 +1,7 @@
 <template>
   <section class="avatar-wrapper">
     <section class="avatar-wrapper-box">
-      <img :src="$attrs[$attrs.item.value]" alt="avatar" class="avatar-wrapper-box__image">
+      <img :src="$attrs[$attrs.item.value] || ($attrs.product && $attrs.product[$attrs.item.value])" alt="avatar" class="avatar-wrapper-box__image">
     </section>
   </section>
 </template>

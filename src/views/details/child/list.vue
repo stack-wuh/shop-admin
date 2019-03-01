@@ -13,6 +13,12 @@
           >
           {{ ($attrs && $attrs.product && $attrs.product[item.value]) || $attrs[item.value] || '暂无信息'}}
         </span>
+        <template v-if="item.type === 'defaultrange'">
+          <span
+            class="list-item__value"
+            :class="[{'list-item__value--active' : $attrs[item.value]}]"
+            >{{item.order[$attrs[item.value]] || '暂无详情'}}</span>
+        </template>
         <div class="list-item__right" :class="item.class">
           <slot v-if="item.type === 'slot'" name="right"></slot>
           <component :is="item.slot" v-if="item.name == 'right'" v-bind="{...$attrs, item}"></component>

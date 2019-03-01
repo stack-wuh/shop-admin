@@ -17,7 +17,7 @@ export default {
   computed: {
     ...mapState({
       info: state => state.info,
-      list: state => state.info && state.info.orderItemList
+      list: state => state.info && ( state.info.orderItemList || state.info.list)
 
     }),
     tableParams(){

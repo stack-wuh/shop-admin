@@ -2,7 +2,7 @@
   <section class="money-wrapper">
     <p class="money-area">
       <span class="money-currency">￥</span>
-      <span class="money-number">20123</span>
+      <span class="money-number">{{$attrs[$attrs.item.props.money]}}</span>
     </p>
   </section>
 </template>

@@ -600,17 +600,21 @@ const InfoList = [
             value: 'sendTime'
           },
           {
-            label: '发票'
+            label: '发票',
+            value: 'invoice'
           },
           {
-            label: '运费'
+            label: '运费',
+            value: 'postage'
           },
           {
-            label: '税点'
+            label: '税点',
+            value: 'taxPoint'
           },
           {
-            label: '税费'
-          }
+            label: '税费',
+            value: 'taxation'
+          },
         ],
         slots: [],
       },
@@ -707,34 +711,48 @@ const InfoList = [
           },
           {
             label: '订单状态',
-            value: 'orderStatus'
+            value: 'orderStatus',
           },
           {
-            label: '付款方式'
+            label: '付款方式',
+            value: 'paymentType',
+            type: 'defaultrange',
+            order: ['微信', '支付宝', '银联'],
           },
           {
-            label: '付款时间'
+            label: '付款时间',
+            value: 'paymentTime'
           },
           {
-            label: '发货时间'
+            label: '发货时间',
+            value: 'sendTime'
           },
           {
-            label: '发票'
+            label: '发票',
+            value: 'invoice',
+            type: 'defaultrange',
+            order: ['不开发票', '开发票']
           },
           {
-            label: '运费'
+            label: '运费',
+            value: 'postage'
           },
           {
-            label: '税点'
+            label: '税点',
+            value: 'taxPoint'
           },
           {
-            label: '税费'
+            label: '税费',
+            value: 'taxation'
           },
           {
             label: '合计金额',
             slot: 'MyMoney',
             type: 'slot',
             name: 'right',
+            props: {
+              money: 'allPrice'
+            },
           },
           {
             label: '订单内容',
@@ -921,21 +939,12 @@ const InfoList = [
           },
           {
             label: '商品类目',
-            value: 'features'
-          },
-          {
-            label: '商品品牌',
-          },
-          {
-            label: '商品类型',
+            value: 'productCate'
           },
           {
             label: '商品材料',
             value: 'materials',
           },
-          {
-            label: '商品用途',
-          }
         ]
       },
       {
@@ -943,9 +952,14 @@ const InfoList = [
         list: [
           {
             label: '商品图片',
+            type: 'slot',
+            name: 'right',
+            slot: 'MyAvatar',
+            value: 'mainImage'
           },
           {
             label: '商品简介',
+            value: 'subtitle'
           },
         ]
       },
@@ -966,10 +980,7 @@ const InfoList = [
         list: [
           {
             label: '商品介绍',
-            name: 'self',
-            type: 'slot',
-            slot: 'MyPaper',
-            isShowLabel: true,
+            value: 'subtitle'
           }
         ]
       },
@@ -982,6 +993,34 @@ const InfoList = [
             type: 'slot',
             slot: 'MyRowTable',
             isShowLabel: true,
+            props: {
+              rows: [
+                {
+                  name: '名称',
+                  field: 'name'
+                },
+                {
+                  name: '型号',
+                  field: ''
+                },
+                {
+                  name: '规格',
+                  field: ''
+                },
+                {
+                  name: '长度',
+                  field: ''
+                },
+                {
+                  name: '导体材质',
+                  field: ''
+                },
+                {
+                  name: '绝缘材质',
+                  field: ''
+                }
+              ]
+            }
           }
         ]
       }

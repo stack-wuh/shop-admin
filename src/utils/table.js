@@ -455,17 +455,17 @@ export const table = [
     list: [
       {
         label: '型号',
-        field: 'merchantName',
+        field: 'model',
         type: 'default'
       },
       {
         label: '颜色',
-        field: 'productName',
+        field: 'color',
         type: 'default'
       },
       {
         label: '价格',
-        field: 'productCode',
+        field: 'price',
         type: 'default'
       },
     ]
@@ -613,7 +613,7 @@ export const table = [
       },
       {
         label: '价格',
-        field: '',
+        field: 'price',
         type: 'default'
       }
     ]

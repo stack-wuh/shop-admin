@@ -1,9 +1,9 @@
 <template>
   <section class="row-table-wrapper">
     <table cellspacing="0">
-      <tr v-for="(item, index) in 5" :key="index">
-        <td class="td--align-right">名称: </td>
-        <td class="td--align-left td--text-gray">asd</td>
+      <tr v-for="(item, index) in list" :key="index">
+        <td class="td--align-right">{{item.name}}: </td>
+        <td class="td--align-left td--text-gray">{{item.info}}</td>
       </tr>
     </table>
   </section>
@@ -14,7 +14,11 @@ export default {
   props: {},
   name: '',
   components: {},
-  computed: {},
+  computed: {
+    list(){
+      return this.$attrs.productParameter
+    }
+  },
   filters: {},
   data(){
     return {}
