@@ -28,3 +28,15 @@ export const getOrderListByParams = ({
       currPageNo
     }
   })
+
+
+export const getOwnOrderById = ({
+  id,
+}) =>
+  request({
+    method: 'post',
+    url: '/BackendOrder/checkOrderListById.do',
+    data: {
+      id
+    }
+  })

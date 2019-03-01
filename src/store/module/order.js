@@ -1,5 +1,6 @@
 import {
-  getOrderListByParams
+  getOrderListByParams,
+  getOwnOrderById,
 } from '@/api/order'
 
 const state = {}
@@ -18,6 +19,16 @@ const actions = {
     const response = await getOrderListByParams({...params, ...rootState.search})
     commit('SET_SHOP_STORE', getters.FORMAT_ORDER_STATUS(response.data))
     return Promise.resolve(response)
+  },
+
+  /**
+   * [GetOwnOrderById 订单管理 -- 根据id获取订单管理详情]
+   * @method GetOwnOrderById
+   * @return {Promise}       [description]
+   */
+  async GetOwnOrderById({commit}, id){
+    const response = await getOwnOrderById(id)
+    commit('SET_SHOP_DETAIL', response.data)
   }
 }
 

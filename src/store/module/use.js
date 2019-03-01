@@ -4,7 +4,9 @@ import {
   getCorporationIndex,
   getUserManagerList,
   updateUserByParams,
-  deleteUserById
+  deleteUserById,
+  getUserDetailById,
+  getCorporationDetailById
 } from '@/api/user'
 import {
   $to,
@@ -108,6 +110,30 @@ const actions = {
   async DeleteUserById({dispatch}, id) {
     const response  = await deleteUserById(id)
     dispatch('GetUserManagerList')
+  },
+
+  /**
+   * [GetUserDetailById 用户管理 -- 个人管理 -- 根据id获取详情]
+   * @method GetUserDetailById
+   * @param  {[type]}          dispatch [description]
+   * @param  {[type]}          id       [description]
+   * @return {Promise}                  [description]
+   */
+  async GetUserDetailById({dispatch}, id) {
+    const response  = await getUserDetailById(id)
+    return Promise.resolve(response)
+  },
+
+  /**
+   * [GetCorporationDetailById 用户管理 -- 企业管理 -- 根据id获取详情]
+   * @method GetCorporationDetailById
+   * @param  {[type]}                 dispatch [description]
+   * @param  {[type]}                 id       [description]
+   * @return {Promise}                         [description]
+   */
+  async GetCorporationDetailById({dispatch}, id) {
+    const response = await getCorporationDetailById(id)
+    return Promise.resolve(response)
   }
 }
 

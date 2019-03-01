@@ -87,3 +87,22 @@ export const deleteUserById = (id) =>
       id
     }
   })
+
+
+export const getUserDetailById = id =>
+  request({
+    method: 'post',
+    url: '/BackendUser/checkUserId.do',
+    data: {
+      id
+    }
+  })
+
+export const getCorporationDetailById = id =>
+  request({
+    method: 'post',
+    url: '/BackendUser/checkCompanyCertId.do',
+    data: {
+      id
+    }
+  })
