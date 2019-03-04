@@ -693,7 +693,10 @@ export const table = [
       },
       {
         label: '操作',
-        type: 'setting',
+        // type: 'setting',
+        type: 'valid',
+        field: 'role',
+        rule: [0],
         list: [
           {
             text: '修改',

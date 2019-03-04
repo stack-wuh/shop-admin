@@ -38,6 +38,18 @@
               >{{btn.text}}</el-button>
           </template>
         </el-table-column>
+        <el-table-column :width="item.width" fixed="right" align="center" v-if="item.type === 'valid'" :label="item.label" :prop="item.field">
+          <template slot-scope="scope">
+            <el-button
+              v-if="item && item.list"
+              v-for="(btn, bid) in item.list"
+              type="text"
+              @click="btn.click({$router, $route, query: $route.query, btn, params: scope.row, infoObj})"
+              :disabled="item.rule.includes(scope.row[item.field])"
+              >{{btn.text}}
+            </el-button>
+          </template>
+        </el-table-column>
       </section>
     </el-table>
   </section>
