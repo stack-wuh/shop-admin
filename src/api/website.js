@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 export const getWebBannerOrAd = (
-  status
+  status = 0
 ) => request({
   url: '/web/checkAd.do',
   method: 'post',
