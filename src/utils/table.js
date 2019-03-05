@@ -28,7 +28,7 @@ export const table = [
       {
         label: '商家账号',
         type: 'default',
-        field: '',
+        field: 'phone',
       },
       {
         label: '时间',
@@ -250,8 +250,8 @@ export const table = [
       {
         label: '状态',
         field: 'status',
-        order: ['待审核', '审核未通过', '审核已通过'],
-        state: ['', 'danger', 'success'],
+        order: ['未认证', '待审核', '审核未通过', '审核已通过'],
+        state: ['info', 'primary', 'danger', 'success'],
         type: 'statusrange'
       },
       {
@@ -278,7 +278,7 @@ export const table = [
   },
   {
     name: '用户管理',
-    params: ['未通过', '已通过'],
+    params: ['审核未通过', '审核已通过', '待审核', '未认证'],
     type: 'index',
     label: '序号',
     list: [
@@ -378,14 +378,9 @@ export const table = [
       {
         label: '状态',
         field: 'status',
-        type: 'switch',
-        activeText: '通过',
-        inactiveText: '不通过',
-        activeColor: '',
-        inactiveColor: '',
-        activeValue: 1,
-        inactiveValue: 0,
-        change: handleSwitchChange
+        type: 'statusrange',
+        order: ['待审核', '审核未通过', '审核已通过', '已禁用'],
+        state: ['primary', 'danger', 'success', 'danger']
       },
       {
         label: '提交时间',

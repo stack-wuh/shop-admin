@@ -175,7 +175,7 @@ export const myForms = [
       {
         label: 'banner',
         type: 'uploadImg',
-        field: 'pic1',
+        field: 'pic',
       }
     ],
     form: {

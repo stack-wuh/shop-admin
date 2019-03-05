@@ -163,9 +163,8 @@ const actions = {
    * @param  {[type]}               params   [description]
    * @return {Promise}                       [description]
    */
-  async UpdateClassifyByParams({dispatch}, params) {
-    let {type} = params
-    console.log(params)
+  async UpdateClassifyByParams({dispatch, rootState}, params) {
+    let {type} = rootState.dialogInfo
     let response  = null
     if(type == 'add') {
         response = await updateClassifyByParams(params)
