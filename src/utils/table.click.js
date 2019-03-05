@@ -9,6 +9,8 @@ import {MessageBox} from 'element-ui'
  */
 const UserStatus = ['未认证', '待审核', '审核为通过', '审核已通过']
 const CorporationStatus = ['待审核', '审核为通过', '审核已通过']
+const StoreStatus = ['待审核', '审核未通过', '审核已通过', '已禁用']
+const GoodsStatus = ['已上架', '已下架', '未上架']
 export const handleJump2other = (args) => {
   let {crumbs: cls = [], index: cid = 0} = $store.state.schemaHeaderCurrent
   console.log(args)
@@ -21,8 +23,8 @@ export const handleJump2other = (args) => {
     [{l: '网站管理', f: '新闻中心'}, {...args, path: '/web/news/detail', query: {...args.query, c: cls[cid] && cls[cid].name || '风类服务', s: '详情'}}],
     [{l: '用户管理', f: '企业认证'}, {...args, path: '/user/corporation/detail', query: {...args.query, c: CorporationStatus[args.params.status], s: '详情'}}],
     [{l: '用户管理', f: '个人管理'}, {...args, path: '/user/user/detail', query: {...args.query, c: UserStatus[args.params.status], s: '详情'}}],
-    [{l: '店铺管理', f: '店铺管理'}, {...args, path: '/store/shop/detail', query: {...args.query, c: '未通过', s: '详情'}}],
-    [{l: '店铺管理', f: '商品查询'}, {...args, path: '/store/goods/detail', query: {...args.query, c: '未通过', s: '详情'}}],
+    [{l: '店铺管理', f: '店铺管理'}, {...args, path: '/store/shop/detail', query: {...args.query, c: StoreStatus[args.params.status], s: '详情'}}],
+    [{l: '店铺管理', f: '商品查询'}, {...args, path: '/store/goods/detail', query: {...args.query, c: GoodsStatus[args.params.status], s: '详情'}}],
   ])
   let action = [...map].filter(([k, v]) => k.l === args.query.l && k.f === args.query.f)
   action.forEach(([k, i]) => {
