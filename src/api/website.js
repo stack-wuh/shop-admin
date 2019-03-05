@@ -202,3 +202,10 @@ export const getNewsChildInfoById = id =>
       id
     }
   })
+
+export const updateScoerInfoByParams = data =>
+  request({
+    method: 'post',
+    url: '/web/updateSocerManager.do',
+    data
+  })

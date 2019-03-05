@@ -43,10 +43,13 @@ export default {
           uploadImgServer: window.uploadPath,
           uploadImgMaxSize: 3 * 1024 * 1024,
           uploadImgMaxLength: 5,
-          uploadFileName: 'file',
+          uploadFileName: 'multipartFile',
+          uploadImgParams: {
+            id: this.$route.query.id || 1
+          },
           uploadImgHooks: {
             customInsert: function (insertImg, result, editor) {
-              let {url} = result
+              let {data: url} = result
               insertImg(url)
             }
           },

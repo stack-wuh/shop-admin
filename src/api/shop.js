@@ -12,21 +12,24 @@ export function getShopInfo({
   spotGoodsStatus,
   currPageNo = 1
 }){
+  let data = {
+    status,
+    commitStartDate,
+    commitEndDate,
+    authenticationStartTime,
+    authenticationEndTime,
+    userName,
+    name,
+    processStatus,
+    spotGoodsStatus,
+    currPageNo
+  }
+  data.processStatus = data.processStatus == 0 ? '' : data.processStatus
+  data.spotGoodsStatus = data.spotGoodsStatus == 0 ? '' : data.spotGoodsStatus
   return request({
     method: 'post',
     url: '/backendMerchant/checkBackendMerchant.do?',
-    data: {
-      status,
-      commitStartDate,
-      commitEndDate,
-      authenticationStartTime,
-      authenticationEndTime,
-      userName,
-      name,
-      processStatus,
-      spotGoodsStatus,
-      currPageNo
-    }
+    data
   })
 }
 

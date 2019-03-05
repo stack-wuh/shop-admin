@@ -27,9 +27,10 @@ export default {
   },
   computed: {
     ...mapState({
-      list: state => state.list,
+      list: state => state.list || [],
       total: state => state.total,
-      currPageNo: state => state.currPageNo
+      currPageNo: state => state.currPageNo,
+      schemaHeaderCurrent: state => state.schemaHeaderCurrent
     }),
     changePath(){
       return this.$route.query
@@ -67,7 +68,8 @@ export default {
         '店铺管理_店铺管理': {
             action: 'GetShopInfo',
             params: {
-              status: params.index - 1  >= 0 ? params.index - 1 : ''
+              // status: params.index - 1  >= 0 ? params.index - 1 : ''
+              status: this.schemaHeaderCurrent.index - 1 >= 0 ? this.schemaHeaderCurrent.index - 1 : ''
             }
           },
         '店铺管理_商品查询': {

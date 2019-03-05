@@ -52,23 +52,6 @@ export const myForms = [
           }
         ]
       },
-      {
-        label: '状态',
-        type: 'switch',
-        field: 'status',
-        prop: '',
-        rules: [
-          {
-            required: true,
-            message: '请选择状态',
-            trigger: ['change']
-          }
-        ],
-        activeValue: 1,
-        inactiveValue: 0,
-        activeText: '已开启',
-        inactiveText: '已关闭',
-      }
     ],
     form: {
       name: '',

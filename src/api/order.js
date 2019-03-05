@@ -11,24 +11,27 @@ export const getOrderListByParams = ({
   spotGoodsStatus,
   merchantName,
   currPageNo = 1
-}) =>
-  request({
+}) => {
+  let data = {
+    orderStates,
+    startDate,
+    endDate,
+    orderNo,
+    realName,
+    gooodsStatus,
+    processStatus,
+    spotGoodsStatus,
+    merchantName,
+    currPageNo
+  }
+  data.processStatus = data.processStatus == 0 ? '' : data.processStatus
+  data.spotGoodsStatus = data.spotGoodsStatus == 0 ? '' : data.spotGoodsStatus
+  return  request({
     method: 'post',
     url: '/BackendOrder/checkOrderList.do',
-    data: {
-      orderStates,
-      startDate,
-      endDate,
-      orderNo,
-      realName,
-      gooodsStatus,
-      processStatus,
-      spotGoodsStatus,
-      merchantName,
-      currPageNo
-    }
+    data
   })
-
+}
 
 export const getOwnOrderById = ({
   id,

@@ -40,6 +40,7 @@ export default {
       this.SetAgreementByContent(this.form.content).then(res => {
         this.type = 'paper'
         this.form.content = ''
+        setTimeout(this.fetchData(), 1000)
       })
     },
     editorInit(){
@@ -51,12 +52,22 @@ export default {
           uploadImgServer: window.uploadPath,
           uploadImgMaxSize: 3 * 1024 * 1024,
           uploadImgMaxLength: 5,
-          uploadFileName: 'file',
+          uploadFileName: 'multipartFile',
+          uploadImgParams: {
+            id: this.$route.query.id || 1
+          },
           uploadImgHooks: {
             customInsert: function (insertImg, result, editor) {
-              let {url} = result
+              let {data: url} = result
               insertImg(url)
             }
+          },
+          customAlert: e => {
+            _g._toast({
+              type: 'error',
+              msg: e,
+              duration: 3
+            })
           },
           onchange: e => {
             this.form.content = e
@@ -69,12 +80,16 @@ export default {
     handleClick(){
       this.type = this.type == 'paper' ? 'editor' : 'paper'
       this.type == 'editor' && this.editorInit()
+    },
+
+    fetchData(){
+      this.GetAgreementContent().then(res => {
+        this.info = res.data
+      })
     }
   },
   created(){
-    this.GetAgreementContent().then(res => {
-      this.info = res.data
-    })
+    this.fetchData()
   },
   mixins:[]
 }

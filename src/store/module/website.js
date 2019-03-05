@@ -21,7 +21,8 @@ import {
   getStoreInfoById,
   delNewsListById,
   updateNewsListByParams,
-  getNewsChildInfoById
+  getNewsChildInfoById,
+  updateScoerInfoByParams
 } from '@/api/website'
 
 const state = {
@@ -48,8 +49,8 @@ const actions = {
    * @param  {[type]}         status [0: 广告位管理, 1: banner 管理]
    * @return {Promise}               [description]
    */
-  async GetWebBannerOrAd({commit}){
-    const response  = await getWebBannerOrAd()
+  async GetWebBannerOrAd({commit}, status){
+    const response  = await getWebBannerOrAd(status)
     commit('SET_WEB_INFO', response.data)
     Promise.resolve(response.data)
     return response
@@ -168,6 +169,7 @@ const actions = {
    */
   async UpdateClassifyByParams({dispatch, rootState}, params) {
     let {type} = rootState.dialogInfo
+    let status = rootState.schemaHeaderCurrent.index + 1
     let response  = null
     if(type == 'add') {
         response = await updateClassifyByParams(params)
@@ -175,13 +177,13 @@ const actions = {
         response = await setClassifyStatusById(params)
     }
     setTimeout(() => {
-      dispatch('GetClassifyByParentId')
+      dispatch('GetClassifyByParentId', status)
       dispatch('ClearDialogInfoAsync')
     }, 1500)
   },
 
   /**
-   * [GetIntegralListByStatus 网站管理 -- 获取积分列表]
+   * [GetIntegralListByStatus 网站管理 -- 积分管理 -- 获取积分列表]
    * @method GetIntegralListByStatus
    * @param  {[type]}                commit [description]
    * @return {Promise}                      [description]
@@ -305,6 +307,21 @@ const actions = {
   async GetNewsChildInfoById({commit}, id) {
     const response  = await getNewsChildInfoById(id)
     return Promise.resolve(response)
+  },
+
+  /**
+   * [UpdateScoerInfoByParams 网站管理 -- 积分管理 -- 更新一条积分信息]
+   * @method UpdateScoerInfoByParams
+   * @param  {[type]}                dispatch [description]
+   * @param  {[type]}                data     [description]
+   * @return {Promise}                        [description]
+   */
+  async UpdateScoerInfoByParams({dispatch}, data) {
+    const response  = await updateScoerInfoByParams(data)
+    setTimeout(() => {
+      dispatch('GetIntegralListByStatus')
+      dispatch('ClearDialogInfoAsync')
+    }, 1000)
   }
 }
 

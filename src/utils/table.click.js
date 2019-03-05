@@ -92,7 +92,8 @@ export const handleSwitchChangeWebIntegral = argus => {
  * @return {[type]}                       [description]
  */
 export const handleOpenDialogWithRows = argus => {
-  $store.commit('SET_DIALOG_INFO', {isShowDialog: true, form: argus.params, title: argus.query.c || argus.query.f || argus.query.l})
+  $store.commit('SET_DIALOG_INFO', {isShowDialog: true,
+    form: argus.params, title: argus.query.c || argus.query.f || argus.query.l})
 }
 
 /**

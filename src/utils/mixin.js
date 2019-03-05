@@ -209,7 +209,7 @@ const SearchList = [
       {
         label: '',
         type: 'buttongroup',
-        value: -1,
+        value: 3,
         field: 'timeState',
         list: [
           {

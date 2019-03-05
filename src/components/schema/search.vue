@@ -145,7 +145,7 @@ export default {
             commitEndDate: params.commitDate && params.commitDate[1],
             authenticationStartTime: params.checkDate && params.checkDate[0],
             authenticationEndTime: params.checkDate && params.checkDate[1],
-            status: this.status
+            status: this.status - 1 >= 0 ? this.status - 1 : ''
           }
         },
         '店铺管理_商品查询': {
@@ -188,7 +188,8 @@ export default {
             ...params,
             startDate: params.orderTime && params.orderTime[0],
             endDate: params.orderTime && params.orderTime[1],
-            status: this.status
+            gooodsStatus: this.status,
+            orderStates: 1
           }
         },
         '订单管理_第三方订单': {
@@ -197,7 +198,8 @@ export default {
             ...params,
             startDate: params.orderTime && params.orderTime[0],
             endDate: params.orderTime && params.orderTime[1],
-            status: this.status
+            gooodsStatus: this.status,
+            orderStates: 0
           }
         }
       }
