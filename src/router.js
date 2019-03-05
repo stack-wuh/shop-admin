@@ -52,6 +52,10 @@ export default new Router({
           component: () => import('@/views/websiteManage/partner')
         },
         {
+          path: '/web/news/detail',
+          component: () => import('@/views/websiteManage/detail/article')
+        },
+        {
           path: '/user/person',
           alias: ['/user/business', '/shop/index', '/shop/search', '/order/self', '/order/other', '/manage/travis'],
           component: () => import('@/views/focusManage/index')
@@ -67,7 +71,6 @@ export default new Router({
         },
         {
           path: '/web/article/detail',
-          alias: ['/web/news/detail'],
           component: () => import('@/views/websiteManage/detail')
         },
         {

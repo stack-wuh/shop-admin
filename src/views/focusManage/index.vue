@@ -2,7 +2,7 @@
   <section class="wrapper">
     <my-schema @panel-click="handlePanelChange" :panelList="panelList" :searchList="searchList" search>
       <my-table :list="list"></my-table>
-      <my-pagination :total="total" :currPageNo="currPageNo" />
+      <my-pagination @change="handlePageChange" :total="total" :currPageNo="currPageNo" />
     </my-schema>
   </section>
 </template>
@@ -46,9 +46,18 @@ export default {
   },
   methods: {
     ...mapActions(['GetShopInfo', 'GetShopSearchInfo', 'GetUserIndex', 'GetCorporationIndex', 'GetOrderListByParams']),
+
     handlePanelChange(e){
       this.fetchData(e)
     },
+
+    handlePageChange(e){
+      let params = {
+        currPageNo: e
+      }
+      this.fetchData(params)
+    },
+
     fetchData(params = {}){
       let search = {
         currPageNo: 1,
@@ -95,7 +104,7 @@ export default {
         }
       }
       let obj = _obj[`${this.query().l}_${this.query().f}`]
-      this[obj.action].call(null, {...obj.params, ...search})
+      this[obj.action].call(null, {...obj.params, ...search, ...params})
     }
   },
   created(){

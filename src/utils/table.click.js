@@ -107,6 +107,9 @@ export const handleClickDelById = argus => {
     },
     '网站管理_公告管理': {
       action: 'DelNoticeById'
+    },
+    '网站管理_新闻中心': {
+      action: 'DelNewsListById'
     }
   }
   let action = c ? actions[`${l}_${f}_${c}`] : actions[`${l}_${f}`]

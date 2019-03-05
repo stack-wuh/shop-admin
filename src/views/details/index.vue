@@ -44,7 +44,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['GetShopOneById', 'GetShopSearchOneById', 'GetBottomItemById', 'GetOwnOrderById']),
+    ...mapActions(['GetShopOneById', 'GetShopSearchOneById', 'GetBottomItemById', 'GetOwnOrderById', 'GetNewsChildInfoById']),
     ...mapActions(
       {
         'UpdateShopOneStatusByParams': 'GetShopOneById'
@@ -72,6 +72,12 @@ export default {
         },
         '订单管理_第三方订单': {
           action: 'GetOwnOrderById',
+          params: {
+            id: this.$route.query.id
+          }
+        },
+        '网站管理_新闻中心': {
+          action: 'GetNewsChildInfoById',
           params: {
             id: this.$route.query.id
           }

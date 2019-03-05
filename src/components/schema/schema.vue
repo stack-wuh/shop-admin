@@ -42,12 +42,17 @@ export default {
       return this.$route.path
     }
   },
-  watch: {},
+  watch: {
+    routePath(){
+      this.SET_SCHEMA_HEADER_CURRENT({index: 0})
+    }
+  },
   filters: {},
   data(){
     return {}
   },
   methods: {
+    ...mapMutations(['SET_SCHEMA_HEADER_CURRENT']),
     handleClick(e){
       this.$emit('panel-click', e)
     },

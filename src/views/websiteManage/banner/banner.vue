@@ -27,8 +27,17 @@ export default {
     Banner,
     Advertising,
   },
-  computed: {},
+  computed: {
+    changePath(){
+      return this.$route.query.f || this.$route.query.l
+    }
+  },
   filters: {},
+  watch: {
+    changePath(){
+      this.SET_SCHEMA_HEADER_CURRENT({index: 0})
+    }
+  },
   data(){
     return {
       panelList,
@@ -36,11 +45,14 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['SET_SCHEMA_HEADER_CURRENT']),
     panelClick(e){
       this.currIndex = e.index
     }
   },
-  created(){},
+  created(){
+    this.SET_SCHEMA_HEADER_CURRENT({index: 0})
+  },
   mixins:[]
 }
 </script>

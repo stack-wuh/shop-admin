@@ -18,7 +18,10 @@ import {
   updateClassifyByParams,
   setClassifyStatusById,
   getAgreementContent,
-  getStoreInfoById
+  getStoreInfoById,
+  delNewsListById,
+  updateNewsListByParams,
+  getNewsChildInfoById
 } from '@/api/website'
 
 const state = {
@@ -260,6 +263,49 @@ const actions = {
       dispatch('GetConsumerInfo')
     }, 1000)
   },
+
+  /**
+   * [DelNewsListById 网站管理 -- 新闻中心 -- 根据id删除内容]
+   * @method DelNewsListById
+   * @param  {[type]}        dispatch [description]
+   * @param  {[type]}        id       [description]
+   * @return {Promise}                [description]
+   */
+  async DelNewsListById({dispatch, rootState}, id) {
+    let belongId = rootState.schemaHeaderCurrent.index
+    const response  = await delNewsListById(id)
+    setTimeout(() => {
+      dispatch('GetNewsList', belongId)
+    }, 1000)
+  },
+
+  /**
+   * [UpdateNewsListByParams 网站管理 -- 新闻中心 -- 根据内容添加]
+   * @method UpdateNewsListByParams
+   * @param  {[type]}               dispatch [description]
+   * @param  {[type]}               data     [description]
+   * @return {Promise}                       [description]
+   */
+  async UpdateNewsListByParams({dispatch, rootState}, data) {
+    let belongId = rootState.schemaHeaderCurrent.index
+    const response  = await updateNewsListByParams(data)
+    setTimeout(() => {
+      dispatch('GetNewsList', belongId)
+      dispatch('ClearDialogInfoAsync')
+    }, 1000)
+  },
+
+  /**
+   * [GetNewsChildInfoById 网站管理 -- 新闻中心 -- 根据id获取详情]
+   * @method GetNewsChildInfoById
+   * @param  {[type]}             commit [description]
+   * @param  {[type]}             id     [description]
+   * @return {Promise}                   [description]
+   */
+  async GetNewsChildInfoById({commit}, id) {
+    const response  = await getNewsChildInfoById(id)
+    return Promise.resolve(response)
+  }
 }
 
 const getters = {}

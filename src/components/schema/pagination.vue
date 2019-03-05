@@ -6,7 +6,7 @@
       layout="total, prev, pager, next, jumper"
       :background="background"
       :current-page="currPageNo"
-      :current-change="handleClickPage"
+      @current-change="handleClickPage"
       ></el-pagination>
   </section>
 </template>
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     handleClickPage(e){
-      this.$emit('handleChangePage', e)
+      this.$emit('change', e)
     }
   },
   created(){},

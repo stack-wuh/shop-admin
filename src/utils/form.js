@@ -106,7 +106,7 @@ export const myForms = [
       {
         label: '标题',
         type: 'input',
-        field: 'title',
+        field: 'name',
         rules: [
           {
             required: true,
@@ -114,10 +114,17 @@ export const myForms = [
             trigger: 'blur'
           }
         ]
+      },
+      {
+        label: '内容',
+        type: 'textarea',
+        field: 'content',
+        rows: 3
       }
     ],
     form: {
-      title: '',
+      name: '',
+      content: ''
     }
   },
   {

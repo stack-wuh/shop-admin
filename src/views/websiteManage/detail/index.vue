@@ -4,7 +4,6 @@
       <el-button v-if="type == 'paper'" slot="right" type="success" @click="handleBtnClick">修改</el-button>
       <el-button v-if="type == 'editor'" slot="right" type="success" @click="handleBtnSubmit">保存</el-button>
     </my-crumbs>
-
     <section class="web-art__area">
       <section v-if="type == 'paper'">
         <div class="web-art__line">
@@ -106,7 +105,7 @@ export default {
         editor.txt.html(this.info.content)
       }, 200)
     },
-    
+
     fetchData(){
       this.GetBottomItemById(this.$route.query.id).then(res => {
         this.info = res.data

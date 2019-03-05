@@ -183,6 +183,7 @@ export const table = [
           },
           {
             text: '删除',
+            click: handleClickDelById
           }
         ]
       }

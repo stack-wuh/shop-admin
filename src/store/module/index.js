@@ -41,15 +41,15 @@ const actions = {
    * @return {Promise}                       [description]
    */
   async GetIndexStatistic({commit, rootState}, {
-    page = 1,
-    timeState = 0,
+    currPageNo,
+    timeState,
     startTime,
     endTime,
     orderCode,
     merchantName
   }){
     let response = await getIndexStatistic({
-      page,
+      currPageNo,
       timeState,
       startTime,
       endTime,

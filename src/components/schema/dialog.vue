@@ -68,7 +68,8 @@ export default {
     ...mapState({
       visibleDialog: state => state.dialogInfo.isShowDialog,
       title: state => state.dialogInfo.title,
-      temp_form: state => state.dialogInfo.form
+      temp_form: state => state.dialogInfo.form,
+      schemaHeaderCurrent: state => state.schemaHeaderCurrent
     }),
     changePath(){
       let {l, f, c} = this.$route.query
@@ -97,7 +98,7 @@ export default {
   },
   methods: {
     ...mapMutations(['SET_DIALOG_INFO', 'CLEAR_DIALOG_INFO', 'CLEAR_DIALOG_INFO']),
-    ...mapActions(['UpdateUserByParams', 'ClearDialogInfoAsync', 'PostNoticeListByParams', 'UpdateClassifyByParams']),
+    ...mapActions(['UpdateUserByParams', 'ClearDialogInfoAsync', 'PostNoticeListByParams', 'UpdateClassifyByParams', 'UpdateNewsListByParams']),
     getFormList(){
       let {query: {l, f, c}} = this.$route
       let _obj = Form.find(k => (k.c ? (k.l === l && k.f === f) : (k.l === l && k.f === f && k.c === c)))
@@ -133,6 +134,12 @@ export default {
             '网站管理_图片管理': {
               action: '',
               params: {}
+            },
+            '网站管理_新闻中心': {
+              action: 'UpdateNewsListByParams',
+              params: {
+                belongId: this.schemaHeaderCurrent.index 
+              }
             }
           }
           let action = c ? actions[`${l}_${f}_${c}`] : actions[`${l}_${f}`]

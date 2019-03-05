@@ -9,7 +9,7 @@ export function getIndexView(){
 
 
 export function getIndexStatistic({
-  timeState,
+  timeState = 3,
   startTime,
   endTime,
   orderCode,

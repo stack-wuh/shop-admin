@@ -169,3 +169,36 @@ export const setClassifyStatusById = ({
       name
     }
   })
+
+export const delNewsListById = id =>
+  request({
+    method: 'post',
+    url: '/web/deleteNewsManager.do',
+    params: {
+      id
+    }
+  })
+
+export const updateNewsListByParams = ({
+  belongId = 0,
+  name,
+  content
+}) =>
+  request({
+    method: 'post',
+    url: '/web/addNewsManager.do',
+    data: {
+      belongId,
+      name,
+      content
+    }
+  })
+
+export const getNewsChildInfoById = id =>
+  request({
+    method: 'post',
+    url: '/web/checkNewsManagerId.do',
+    data: {
+      id
+    }
+  })

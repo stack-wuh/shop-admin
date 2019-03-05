@@ -2,7 +2,7 @@
   <section class="wrapper">
     <my-schema search :panelList="panelList" :searchList="searchList">
       <my-table :list="list"></my-table>
-      <my-pagination :total="total" :currPageNo="currPageNo"></my-pagination>
+      <my-pagination @change="handlePageChange" :total="total" :currPageNo="currPageNo"></my-pagination>
     </my-schema>
   </section>
 </template>
@@ -36,7 +36,10 @@ export default {
     return {}
   },
   methods: {
-    ...mapActions(['GetIndexStatistic'])
+    ...mapActions(['GetIndexStatistic']),
+    handlePageChange(e){
+      this.GetIndexStatistic({currPageNo: e})
+    }
   },
 
   created(){
