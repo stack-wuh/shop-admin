@@ -6,7 +6,7 @@
         <el-table-column :width="item.width" align="center" v-if="item.type === 'default'" :label="item.label" :prop="item.field"></el-table-column>
         <el-table-column :width="item.width" align="center" v-if="item.type === 'image'" :label="item.label" :prop="item.field">
           <template slot-scope="scope">
-            <img :src="scope.row[item.field]" alt="logo">
+            <img :src="scope.row[item.field]" alt="logo" class="my-table__column--avatar">
           </template>
         </el-table-column>
         <el-table-column :width="item.width" align="center" v-if="item.type === 'switch'" :label="item.label" :prop="item.field">
@@ -102,5 +102,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
+.table-wrapper {
+  .my-table__column--avatar {
+      width: 90px;
+  }
+}
 </style>

@@ -37,8 +37,13 @@
               :action="uploadPath"
               class="avatar-uploader"
               :show-file-list="false"
+              name="multipartFile"
+              :data = "{
+                id: formObj.form.id || 1
+              }"
+              :on-success="e => {return hanleUploadSuccess(e, item)}"
               >
-                <img v-if="formObj.form[item.field]" :src="formObj.form[item.field]">
+                <img v-if="formObj.form[item.field]" :src="formObj.form[item.field]" style="width: 175px; height: 175px;" alt="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon" ></i>
             </el-upload>
           </template>
@@ -99,6 +104,9 @@ export default {
       this.formObj = _obj || {}
     },
 
+    hanleUploadSuccess(res, item){
+      this.formObj.form[item.field] = res.data
+    },
     /**
      * [handleClickSubmit 表单的提交事件]
      * @method handleClickSubmit
@@ -120,6 +128,10 @@ export default {
             },
             '网站管理_分类管理': {
               action: 'UpdateClassifyByParams',
+              params: {}
+            },
+            '网站管理_图片管理': {
+              action: '',
               params: {}
             }
           }
