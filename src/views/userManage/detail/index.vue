@@ -1,7 +1,7 @@
 <template>
   <section class="user-corpor-wrapper">
     <my-crumbs v-if="crumbs" :list="infoObj.crumbsList">
-      <section v-if="getInfoObj.status == 0" slot="right">
+      <section v-if="canShowButtnGroup.includes(getInfoObj.status)" slot="right">
         <el-button @click="handleClickSubmit(0)" type="success">通过</el-button>
         <el-button @click="handleClickSubmit(1)" type="danger">不通过</el-button>
       </section>
@@ -10,31 +10,31 @@
       <ul class="user-corpor-paper__list">
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">提交时间</span>
-          <span class="user-corpor-paper__value">{{getInfoObj.createTime}}</span>
+          <span class="user-corpor-paper__value">{{getInfoObj.createTime || '暂无详情'}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">审核状态</span>
-          <span class="user-corpor-paper__value">{{STATE[getInfoObj.status]}}</span>
+          <span class="user-corpor-paper__value">{{STATE[getInfoObj.status] || '暂无详情'}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">公司名称</span>
-          <span class="user-corpor-paper__value">{{getInfoObj.companyName}}</span>
+          <span class="user-corpor-paper__value">{{getInfoObj.companyName || '暂无详情'}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">公司电话</span>
-          <span class="user-corpor-paper__value">{{getInfoObj.companyPhone}}</span>
+          <span class="user-corpor-paper__value">{{getInfoObj.companyPhone || '暂无详情'}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">公司法人</span>
-          <span class="user-corpor-paper__value">{{getInfoObj.legalPerson}}</span>
+          <span class="user-corpor-paper__value">{{getInfoObj.legalPerson || '暂无详情'}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">手机号</span>
-          <span class="user-corpor-paper__value">{{getInfoObj.phone}}</span>
+          <span class="user-corpor-paper__value">{{getInfoObj.phone || '暂无详情'}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">税号</span>
-          <span class="user-corpor-paper__value">{{getInfoObj.dutyNum}}</span>
+          <span class="user-corpor-paper__value">{{getInfoObj.dutyNum || '暂无详情'}}</span>
         </li>
         <li class="user-corpor-paper__item">
           <span class="user-corpor-paper__label">企业认证授权书</span>
@@ -68,6 +68,7 @@ import {
 } from '@/utils/mixin'
 
 const  STATE = ['待审核', '审核未通过', '审核已通过']
+const canShowButtnGroup = [0, 1]
 
 export default {
   props: {
@@ -99,7 +100,8 @@ export default {
         isShowDialog: false,
         title: '提示',
         url: ''
-      }
+      },
+      canShowButtnGroup
     }
   },
   methods: {

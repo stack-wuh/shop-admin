@@ -16,20 +16,24 @@
       </li>
       <li class="user-comm-item">
         <span class="user-comm-item__label">姓名</span>
-        <span class="user-comm-item__value">{{$attrs.realName}}</span>
+        <span v-if="$attrs.status !== 0" class="user-comm-item__value">{{$attrs.realName}}</span>
+        <span v-else class="user-comm-item__value">--</span>
         <span class="user-comm-item__tips">{{STATE[$attrs.status]}}</span>
       </li>
       <li class="user-comm-item">
         <span class="user-comm-item__label">身份证号</span>
-        <span class="user-comm-item__value">{{$attrs.idno}}</span>
+        <span v-if="$attrs.status !== 0" class="user-comm-item__value">{{$attrs.idno}}</span>
+        <span v-else class="user-comm-item__value">--</span>
       </li>
       <li class="user-comm-item">
         <span class="user-comm-item__label">身份证正面</span>
-        <img :src="$attrs.idpicUp" alt="logo" class="user-comm-item__card">
+        <img v-if="$attrs.status !== 0" :src="$attrs.idpicUp" alt="logo" class="user-comm-item__card">
+        <span v-else class="user-comm-item__value">--</span>
       </li>
       <li class="user-comm-item">
         <span class="user-comm-item__label">身份证反面</span>
-        <img :src="$attrs.idpicDown" alt="logo" class="user-comm-item__card">
+        <img v-if="$attrs.status !== 0" :src="$attrs.idpicDown" alt="logo" class="user-comm-item__card">
+        <span v-else class="user-comm-item__value">--</span>
       </li>
     </ul>
   </section>

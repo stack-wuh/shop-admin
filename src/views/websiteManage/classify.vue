@@ -52,8 +52,12 @@
           </el-table-column>
           <el-table-column align="center" label="操作">
             <template slot-scope="scope">
-              <el-button size="small" type="primary" @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, type: 'add', form: {...scope.row, name:''}})">添加</el-button>
-              <el-button size="small" type="success" @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, type: 'update', form: scope.row})">编辑</el-button>
+              <el-button size="small" type="primary"
+                @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, type: 'add', form: {...scope.row, name:''}})"
+              >添加</el-button>
+              <el-button size="small" type="success"
+                @click="SET_DIALOG_INFO({isShowDialog: true, title: getTitle, type: 'update', form: scope.row})"
+              >编辑</el-button>
             </template>
           </el-table-column>
         </el-table>

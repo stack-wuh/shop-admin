@@ -4,13 +4,16 @@
       <section class="img-item" v-for="(item, index) in forms" :key="index">
         <span class="img-item__label">{{item.label}}</span>
         <div class="img-item__right">
-          <img :src="item.img" alt="img" class="margin-bm__15">
+          <img :src="item.img" alt="img" class="margin-bm__15 img-item__right--avatar">
           <el-upload
             :limit="1"
             :action="uploadPath"
-            name="file"
+            name="multipartFile"
             class="avatar-uploader"
             :show-file-list="false"
+            :data = "{
+              id: item.id
+            }"
             :on-success="(e) => {return handleSuccessImg(e, item)}"
             >
             <el-button type="primary" size="small">点击上传</el-button>
@@ -52,8 +55,8 @@ export default {
   },
   methods: {
     ...mapActions(['GetWebBannerOrAd']),
-    handleSuccessImg(argus){
-
+    handleSuccessImg(res, item){
+      item.img = res.data
     },
 
     /**
@@ -65,6 +68,7 @@ export default {
       this.GetWebBannerOrAd(0).then(res => {
         res.data.map((k, i) => {
           this.forms[i].img = k.pic
+          this.forms[i].id = k.id
         })
       })
     }
@@ -89,6 +93,10 @@ export default {
       }
       .img-item__right{
         @include flex;
+
+        &--avatar {
+            width: 300px;
+        }
       }
     }
   }
