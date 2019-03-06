@@ -33,7 +33,6 @@ service.interceptors.request.use(
     setTimeout(() => {
       loadingInstance.close()
     })
-    console.error(error)
     Promise.reject(error)
   }
 )

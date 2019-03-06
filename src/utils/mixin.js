@@ -118,7 +118,10 @@ const PanelList = [
         name: '全部'
       },
       {
-        name: '待发货'
+        name: '待付款'
+      },
+      {
+        name: '待发货',
       },
       {
         name: '已发货',
@@ -129,6 +132,9 @@ const PanelList = [
       {
         name: '已取消',
       },
+      {
+        name: '已关闭',
+      }
     ]
   },
   {

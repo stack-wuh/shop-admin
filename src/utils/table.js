@@ -501,10 +501,10 @@ export const table = [
       },
       {
         label: '订单状态',
-        field: 'reStatus',
+        field: 'status',
         type: 'statusrange',
-        order: ['已取消', '已删除', '未付款', '已付款', '已发货', '交易成功', '交易关闭'],
-        state: ['danger', 'danger', 'info', '', 'success', 'success', 'danger'],
+        order: ['待付款', '待发货', '已发货', '已完成', '已取消', '已关闭'],
+        state: ['info', 'primary', 'success', 'scuess', 'danger', 'danger'],
       },
       {
         label: '操作',
@@ -551,10 +551,10 @@ export const table = [
       },
       {
         label: '订单状态',
-        field: 'reStatus',
+        field: 'status',
         type: 'statusrange',
-        order: ['已取消', '已删除', '未付款', '已付款', '已发货', '交易成功', '交易关闭'],
-        state: ['danger', 'danger', 'info', '', 'success', 'success', 'danger'],
+        order: ['待付款', '待发货', '已发货', '已完成', '已取消', '已关闭'],
+        state: ['info', 'primary', 'success', 'success', 'danger', 'danger'],
       },
       {
         label: '操作',

@@ -16,7 +16,9 @@ const actions = {
    * @return {Promise}                   [description]
    */
   async GetOrderListByParams({commit, getters, rootState}, params){
-    const response = await getOrderListByParams({...params, ...rootState.search})
+    let gooodsStatus = rootState.schemaHeaderCurrent.index
+    gooodsStatus = gooodsStatus - 1 >= 0 ? gooodsStatus - 1 : ''
+    const response = await getOrderListByParams({...params, ...rootState.search, gooodsStatus})
     commit('SET_SHOP_STORE', getters.FORMAT_ORDER_STATUS(response.data))
     return Promise.resolve(response)
   },

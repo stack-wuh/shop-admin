@@ -47,8 +47,16 @@ export default {
   },
   methods: {
     ...mapActions(['GetShopInfo', 'GetShopSearchInfo', 'GetUserIndex', 'GetCorporationIndex', 'GetOrderListByParams']),
-
+    ...mapMutations(['CLEAR_SEARCH_FORM']),
     handlePanelChange(e){
+      this.searchList.map(k => {
+        if(k.type == 'default' || k.type == 'daterange'){
+          k.value = ''
+        }else if (k.type == 'button'){
+          k.value = false
+        }
+      })
+      this.CLEAR_SEARCH_FORM()
       this.fetchData(e)
     },
 
@@ -93,7 +101,7 @@ export default {
         '订单管理_自营订单': {
           action: 'GetOrderListByParams',
           params: {
-            gooodsStatus: params.index - 1 >= 0 ? params.index - 1 : '',
+            gooodsStatus: this.schemaHeaderCurrent.index - 1 >= 0 ? this.schemaHeaderCurrent.index - 1 : '',
             orderStates: 1
           }
         },

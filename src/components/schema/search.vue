@@ -188,8 +188,8 @@ export default {
             ...params,
             startDate: params.orderTime && params.orderTime[0],
             endDate: params.orderTime && params.orderTime[1],
-            gooodsStatus: this.status,
-            orderStates: 1
+            gooodsStatus: this.status - 1 >= 0 ? this.status - 1 : '',
+            orderStates: 1,
           }
         },
         '订单管理_第三方订单': {
