@@ -17,7 +17,8 @@ export const state = {
     title: '编辑内容', // dialog -- title
     isShowDialog: false, // dialog -- visible
 
-    form: {}
+    form: {},
+    type: 'post'
   }
 }
 
@@ -71,7 +72,6 @@ export const mutations = {
    * @param  {[type]}        params [description]
    */
   SET_DIALOG_INFO: (state, params) => {
-    console.log(params)
     let {isShowDialog} = params
     state.dialogInfo = {
       ...state.dialogInfo,
@@ -90,6 +90,7 @@ export const mutations = {
   CLEAR_DIALOG_INFO: state => {
     state.dialogInfo.form = {}
     state.dialogInfo.isShowDialog = false
+    state.dialogInfo.type = 'post'
   }
 }
 

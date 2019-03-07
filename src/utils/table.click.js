@@ -7,8 +7,8 @@ import {MessageBox} from 'element-ui'
  * @param  {[type]}         args [description]
  * @return {[type]}              [description]
  */
-const UserStatus = ['未认证', '待审核', '审核为通过', '审核已通过']
-const CorporationStatus = ['待审核', '审核为通过', '审核已通过']
+const UserStatus = ['未认证', '待审核', '审核未通过', '审核已通过']
+const CorporationStatus = ['待审核', '审核未通过', '审核已通过']
 const StoreStatus = ['待审核', '审核未通过', '审核已通过', '已禁用']
 const GoodsStatus = ['已上架', '已下架', '未上架']
 export const handleJump2other = (args) => {
@@ -92,7 +92,10 @@ export const handleSwitchChangeWebIntegral = argus => {
  * @return {[type]}                       [description]
  */
 export const handleOpenDialogWithRows = argus => {
-  $store.commit('SET_DIALOG_INFO', {isShowDialog: true,
+  let params = argus.params
+  let type = 'post'
+  if(params.id) type = 'update'
+  $store.commit('SET_DIALOG_INFO', {isShowDialog: true, type,
     form: argus.params, title: argus.query.c || argus.query.f || argus.query.l})
 }
 

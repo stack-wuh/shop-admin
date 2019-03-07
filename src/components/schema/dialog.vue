@@ -18,7 +18,7 @@
             <el-input class="my-input__220" type="textarea" :rows="item.rows" v-model="formObj.form[item.field]" :placeholder="'请编辑' + item.label" />
           </template>
           <template v-if="item.type === 'input'">
-            <el-input class="my-input__220" v-model="formObj.form[item.field]" :placeholder="'请编辑' + item.label" />
+            <el-input class="my-input__220" :disabled="inputCanEditor(item)"  v-model="formObj.form[item.field]" :placeholder="'请编辑' + item.label" />
           </template>
           <template v-if="item.type === 'password'">
             <el-input class="my-input__220" type="password" v-model="formObj.form[item.field]" :placeholder="'请编辑' + item.label" />
@@ -50,7 +50,7 @@
         </el-form-item>
       </el-form>
       <div class="" slot="footer">
-        <el-button type="danger" @click="SET_DIALOG_INFO({isShowDialog: false})">取消</el-button>
+        <el-button type="danger" @click="SET_DIALOG_INFO({isShowDialog: false, type: 'post'})">取消</el-button>
         <el-button type="primary" @click="handleClickSubmit">确定</el-button>
       </div>
     </el-dialog>
@@ -69,7 +69,8 @@ export default {
       visibleDialog: state => state.dialogInfo.isShowDialog,
       title: state => state.dialogInfo.title,
       temp_form: state => state.dialogInfo.form,
-      schemaHeaderCurrent: state => state.schemaHeaderCurrent
+      schemaHeaderCurrent: state => state.schemaHeaderCurrent,
+      type: state => state.dialogInfo.type
     }),
     changePath(){
       let {l, f, c} = this.$route.query
@@ -97,7 +98,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['SET_DIALOG_INFO', 'CLEAR_DIALOG_INFO', 'CLEAR_DIALOG_INFO']),
+    ...mapMutations(['SET_DIALOG_INFO', 'CLEAR_DIALOG_INFO']),
     ...mapActions([
       'UpdateUserByParams',
       'ClearDialogInfoAsync',
@@ -106,6 +107,12 @@ export default {
       'UpdateNewsListByParams',
       'UpdateScoerInfoByParams'
     ]),
+    inputCanEditor(item){
+      const _fields = ['name', 'realName', 'userName']
+      if(_fields.includes(item.field) && this.type === 'update')
+      return true
+    },
+
     getFormList(){
       let {query: {l, f, c}} = this.$route
       let _obj = Form.find(k => (k.c ? (k.l === l && k.f === f) : (k.l === l && k.f === f && k.c === c)))
