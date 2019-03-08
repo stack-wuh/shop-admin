@@ -162,7 +162,7 @@ export default {
             ...params,
             startDate: params.commitTime && params.commitTime[0],
             endDate: params.commitTime && params.commitTime[1],
-            status: this.status
+            status: this.status - 1 >= 0 ? this.status - 1 : ''
           }
         },
         '用户管理_企业认证': {
@@ -171,7 +171,7 @@ export default {
             ...params,
             startDate: params.commitTime && params.commitTime[0],
             endDate: params.commitTime && params.commitTime[1],
-            status: this.status
+            status: this.status - 1 >= 0 ? this.status - 1 : ''
           }
         },
         '首页_营收统计': {

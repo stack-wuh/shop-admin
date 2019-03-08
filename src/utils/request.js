@@ -11,7 +11,7 @@ const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL,
   timeout: 5 * 1000
 })
-
+    
 const options = {
   lock: true,
   text: 'wait a monment, please...',

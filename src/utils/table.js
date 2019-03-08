@@ -425,7 +425,7 @@ export const table = [
         label: '状态',
         field: 'status',
         type: 'statusrange',
-        order: ['未上架', '在售', '下架', '删除'],
+        order: ['已上架', '已下架', '未上架'],
         state: ['primary', 'success', 'info', 'danger']
       },
       {

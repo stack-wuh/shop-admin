@@ -37,6 +37,7 @@ export default {
   },
   methods: {
     ...mapActions(['GetIndexStatistic']),
+    
     handlePageChange(e){
       this.GetIndexStatistic({currPageNo: e})
     }
