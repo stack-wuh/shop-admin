@@ -500,6 +500,13 @@ export const _getSearchList = {
   },
   watch:{
     $route(){
+      this.searchList.map(k => {
+        if(k.type == 'button') {
+          k.value = false
+        }else if (k.type == 'default' || k.type == 'daterange') {
+          k.value = ''
+        }
+      })
       this.__getSearchList()
     }
   },

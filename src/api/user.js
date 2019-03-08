@@ -37,7 +37,7 @@ export function getCorporationIndex({
   startDate,
   endDate,
   status,
-  userName,
+  username,
   companyName,
   currPageNo = 1
 }){
@@ -48,7 +48,7 @@ export function getCorporationIndex({
       startDate,
       endDate,
       status,
-      userName,
+      username,
       companyName,
       currPageNo
     }

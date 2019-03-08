@@ -62,7 +62,7 @@ export default {
   },
   created(){
     this.$bus.$on('confirm', (e) => {
-      console.log(e)
+
     })
   },
   mixins:[]
