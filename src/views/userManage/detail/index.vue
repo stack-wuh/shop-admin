@@ -182,6 +182,7 @@ export default {
     @include flex($dir: row, $align: center, $justify: center);
     .my-dialog__view--img {
       width: 300px;
+      min-height: 300px;
     }
   }
 }
